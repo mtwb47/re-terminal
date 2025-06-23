@@ -57,12 +57,18 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #64dd78; /* This is an approximate green color from your image */
+  text-decoration: none;
 
   /* Waiting for a better times... */
   /* &:has(code) {
     text-decoration-color: var(--accent);
   } */
+}
+
+a:hover {
+  color: #ffffff; /* White color on hover */
+  text-decoration: underline; /* Optional: Adds an underline back on hover */
 }
 
 img {
