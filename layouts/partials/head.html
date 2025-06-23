@@ -13,6 +13,8 @@
 
 {{ template "_internal/google_analytics.html" . }}
 
+<script defer src="https://stats.thelinuxcast.org/script.js" data-website-id="f44d192e-a9cb-44ae-915b-8d67353c9b46"></script>
+
 {{ $defaultStylesTemplate := resources.Get "css/style.scss" }}
 {{ $defaultStyles := $defaultStylesTemplate | resources.ExecuteAsTemplate "main.scss" .}}
 <!-- Local Theme Variables -->
