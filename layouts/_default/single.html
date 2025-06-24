@@ -48,6 +48,10 @@
     {{- end -}}
   </div>
 
+  {{ if eq .Type $.Site.Params.contentTypeName }}
+    {{ partial "posts_pagination.html" . }}
+  {{ end }}
+
 <script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
 <hyvor-talk-comments
 	website-id="13540"
