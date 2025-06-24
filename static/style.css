@@ -1,8 +1,3 @@
-a:hover {
-  color: #ffffff; /* White color on hover */
-  text-decoration: underline; /* Optional: Adds an underline back on hover */
-}
-
 :root {
   --article-link-color: #64dd78;
 }
