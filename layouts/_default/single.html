@@ -50,18 +50,10 @@
   
   <br>
   <br>
-  <hr>
-  <br>
 
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
   {{ end }}
-
-<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-<hyvor-talk-comments
-	website-id="13540"
-	page-id="{{ .Permalink }}"
-></hyvor-talk-comments>
 
   {{ if not (.Params.hideComments | default false) }}
     {{ partial "comments.html" . }}
