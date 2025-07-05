@@ -4,42 +4,30 @@
 
 .calls {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  width: 100%;
+  justify-content: center;   /* center the two links */
+  gap: 2rem;                 /* space between them */
   margin: 2rem 0;
 }
 
 .calls a {
-  display: inline-flex;
-  align-items: center;
+  display: flex;             /* icon + text side by side */
+  align-items: center;       /* vertical-center them */
+  gap: 0.5em;                /* space between icon & text */
   text-decoration: none;
   color: inherit;
 }
 
-.calls img {
-  /* only height, let width scale to preserve the logo’s proportions */
-  height: 1em;
-  width: auto;
-
-  flex-shrink: 0;
-  vertical-align: middle;
-  margin-right: 0.5em;
-}
-
-.calls h5 {
-  display: inline-block;
-  margin: 0;
-  font-size: 1rem;
+.calls a h5 {
+  margin: 0;                 /* kill default margins */
+  font-size: 1rem;           /* whatever size your body text is */
+  line-height: 1;            /* exactly 1em tall */
   font-weight: 500;
-
-  /* match the icon’s container height for perfect centering */
-  height: 1.5em;
-  line-height: 1.5em;
 }
 
-/* debug backgrounds—comment out when you’re happy */
-// .calls img { background: rgba(255,0,0,0.2); }
-// .calls h5  { background: rgba(0,255,0,0.2); }
+.calls img {
+  height: 1em;               /* match the text’s x-height */
+  width: auto;               /* preserve aspect ratio */
+  flex-shrink: 0;            /* don’t let it shrink below that */
+  vertical-align: middle;    /* safety for non-flex UAs */
+}
 
