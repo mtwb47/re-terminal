@@ -2,32 +2,33 @@
    color: #64dd78;
 }
 
-
 .calls {
   display: flex;
-  justify-content: center;  /* center children horizontally */
-  align-items: center;      /* center them vertically */
-  gap: 1rem;                /* space between each link */
-  margin: 2rem 0;           /* optional vertical spacing around the block */
+  justify-content: center;  /* center the whole group */
+  align-items: center;      /* align all links to the same baseline */
+  gap: 2rem;                /* space between Mastodon and RSS links */
+  width: 100%;
+  margin: 2rem 0;
 }
 
 .calls a {
-  display: flex;            /* let us align the image and text nicely */
-  align-items: center;
-  text-decoration: none;    /* remove underline */
-  color: inherit;           /* inherit your theme’s text color */
+  display: flex;            /* icon + text side by side */
+  align-items: center;      /* vertically center icon with text */
+  text-decoration: none;
+  color: inherit;
 }
 
 .calls img {
-  display: block;
-  width: 24px;               /* adjust as needed */
-  height: 24px;
-  margin-right: 0.5rem;     /* small gap between icon and text */
+  width: 1.5em;             /* uniform icon size */
+  height: 1.5em;
+  flex-shrink: 0;           /* don’t let them shrink if viewport is narrow */
+  margin-right: 0.5em;
 }
 
 .calls h5 {
-  margin: 0;                /* reset default margins */
-  font-size: 1rem;          /* tweak to match your heading scale */
-  font-weight: 500;         /* or whatever your theme uses */
+  display: inline-block;    /* prevent full-width block behavior */
+  margin: 0;                /* kill the default h5 margins */
+  font-size: 1rem;
+  font-weight: 500;
 }
 
