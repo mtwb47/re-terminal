@@ -47,7 +47,13 @@
       </div>
     {{- end -}}
   </div>
-  
+
+  <div class="calls">
+    
+  <a href="https://polymaths.social/@thelinuxcast"><img src="https://mtwb.blog/assets/mastodon.png"><h5>Follow Me on Mastodon</h5></a>
+  <a href="Subscribe With RSS"><img src="https://mtwb.blog/assets/rss.png"><h5>Follow With RSS</h5></a>
+    
+  </div>
 
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
@@ -60,13 +66,5 @@
   {{ if not (.Params.hideComments | default false) }}
     {{ partial "comments.html" . }}
   {{ end }}
-
-  <div class="calls">
-    
-  <a href="https://polymaths.social/@thelinuxcast"><img src="/assets/mastodon.png"><h5>Follow Me on Mastodon</h5></a>
-  <a href="Subscribe With RSS"><img src="/assets/rss.png"><h5>Follow With RSS</h5></a>
-    
-  </div>
-
 </article>
 {{ end }}
