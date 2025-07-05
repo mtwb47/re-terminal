@@ -48,7 +48,7 @@
 
 /* RSS-only margin tweak */
 .calls img.rss-icon {
-  height: 1em !important;
+  height: 0.8em !important;
   width: auto !important,
 }
 
