@@ -45,6 +45,6 @@
 /* === RSS-only tweak === */
 /* After adding class="rss-icon" to your RSS <img>, this nudges it up: */
 .calls img.rss-icon {
-  transform: translateY(-0.1em);
+  transform: translateY(-0.2em);
 }
 
