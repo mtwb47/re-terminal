@@ -4,31 +4,35 @@
 
 .calls {
   display: flex;
-  justify-content: center;  /* center the whole group */
-  align-items: center;      /* align all links to the same baseline */
-  gap: 2rem;                /* space between Mastodon and RSS links */
+  justify-content: center;  /* center the two links */
+  align-items: center;      /* baseline-align them in the same flex line */
+  gap: 2rem;                /* space between Mastodon and RSS */
   width: 100%;
-  margin: 2rem 0;
+  margin: 2rem 0;           /* vertical spacing above/below */
 }
 
 .calls a {
-  display: flex;            /* icon + text side by side */
-  align-items: center;      /* vertically center icon with text */
-  text-decoration: none;
-  color: inherit;
+  display: flex;            /* icon + text side-by-side */
+  align-items: center;      /* center icon vertically with the text */
+  text-decoration: none;    /* no underline */
+  color: inherit;           /* match your theme’s font color */
 }
 
 .calls img {
-  width: 1.5em;             /* uniform icon size */
+  width: 1.5em;             /* uniform icon dimensions */
   height: 1.5em;
-  flex-shrink: 0;           /* don’t let them shrink if viewport is narrow */
-  margin-right: 0.5em;
+  flex-shrink: 0;           /* prevent shrinking on narrow viewports */
+  vertical-align: middle;   /* safeguard against baseline shifts */
 }
 
 .calls h5 {
-  display: inline-block;    /* prevent full-width block behavior */
-  margin: 0;                /* kill the default h5 margins */
-  font-size: 1rem;
-  font-weight: 500;
+  margin: 0;                /* remove default h5 margins */
+  font-size: 1rem;          /* adjust to match your type scale */
+  line-height: 1.5em;       /* exactly the icon’s height for perfect centering */
+  font-weight: 500;         /* or whatever weight your theme uses */
 }
+
+/* Optional debugging helpers—uncomment to see element boundaries */
+.calls img { background: rgba(255,0,0,0.2); }
+.calls h5  { background: rgba(0,255,0,0.2); }
 
