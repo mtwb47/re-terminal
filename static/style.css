@@ -23,6 +23,10 @@
   color: inherit;
 }
 
+.calls a:hover {
+  color: #64dd78;
+}
+
 .calls img {
   width: 1.5em;
   height: 1.5em;
