@@ -5,29 +5,42 @@
 .calls {
   display: flex;
   justify-content: center;   /* center the two links */
-  gap: 2rem;                 /* space between them */
+  align-items: center;       /* line-up their boxes in the middle */
+  gap: 2rem;                 /* space between Mastodon & RSS */
+  width: 100%;
   margin: 2rem 0;
 }
 
 .calls a {
-  display: flex;             /* icon + text side by side */
-  align-items: center;       /* vertical-center them */
-  gap: 0.5em;                /* space between icon & text */
+  /* make each link only as big as its content, and allow flex centering */
+  display: inline-flex;
+  align-items: center;
   text-decoration: none;
   color: inherit;
 }
 
-.calls a h5 {
-  margin: 0;                 /* kill default margins */
-  font-size: 1rem;           /* whatever size your body text is */
-  line-height: 1;            /* exactly 1em tall */
+.calls img {
+  width: 1.5em;
+  height: 1.5em;
+  flex-shrink: 0;
+  object-fit: contain;        /* guard against weird intrinsic padding */
+  vertical-align: middle;     /* extra baseline safeguard */
+}
+
+.calls h5 {
+  /* force the heading into the exact same line-box as the icon */
+  display: inline-block !important;
+  height: 1.5em !important;
+  line-height: 1.5em !important;
+
+  margin: 0 !important;
+  font-size: 1rem;
   font-weight: 500;
 }
 
-.calls img {
-  height: 1em;               /* match the text’s x-height */
-  width: auto;               /* preserve aspect ratio */
-  flex-shrink: 0;            /* don’t let it shrink below that */
-  vertical-align: middle;    /* safety for non-flex UAs */
+/* === RSS-only tweak === */
+/* After adding class="rss-icon" to your RSS <img>, this nudges it up: */
+.calls img.rss-icon {
+  transform: translateY(-0.1em);
 }
 
