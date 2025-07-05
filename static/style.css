@@ -2,6 +2,10 @@
    color: #64dd78;
 }
 
+.post-content a:hover{
+   color: #ffffff;
+}
+
 .calls {
   display: flex;
   justify-content: center;   /* center the two links */
