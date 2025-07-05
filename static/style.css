@@ -2,7 +2,32 @@
    color: #64dd78;
 }
 
+
 .calls {
- text-align: center;
- display: inline;
+  display: flex;
+  justify-content: center;  /* center children horizontally */
+  align-items: center;      /* center them vertically */
+  gap: 1rem;                /* space between each link */
+  margin: 2rem 0;           /* optional vertical spacing around the block */
 }
+
+.calls a {
+  display: flex;            /* let us align the image and text nicely */
+  align-items: center;
+  text-decoration: none;    /* remove underline */
+  color: inherit;           /* inherit your theme’s text color */
+}
+
+.calls img {
+  display: block;
+  width: 24px;               /* adjust as needed */
+  height: 24px;
+  margin-right: 0.5rem;     /* small gap between icon and text */
+}
+
+.calls h5 {
+  margin: 0;                /* reset default margins */
+  font-size: 1rem;          /* tweak to match your heading scale */
+  font-weight: 500;         /* or whatever your theme uses */
+}
+
