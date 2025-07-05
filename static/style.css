@@ -46,9 +46,9 @@
   font-weight: 500;
 }
 
-/* === RSS-only tweak === */
-/* After adding class="rss-icon" to your RSS <img>, this nudges it up: */
+/* RSS-only margin tweak */
 .calls img.rss-icon {
-  transform: translateY(-0.04em);
+  height: 1em !important;
+  width: auto !important,
 }
 
