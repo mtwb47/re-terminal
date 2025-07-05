@@ -4,46 +4,42 @@
 
 .calls {
   display: flex;
-  justify-content: center;   /* center the two links */
-  align-items: center;       /* line-up their boxes in the middle */
-  gap: 2rem;                 /* space between Mastodon & RSS */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   width: 100%;
   margin: 2rem 0;
 }
 
 .calls a {
-  /* make each link only as big as its content, and allow flex centering */
   display: inline-flex;
   align-items: center;
   text-decoration: none;
   color: inherit;
-
-  /* debug only—see their exact box: */
-/*   background: rgba(0,0,255,0.1); */
 }
 
 .calls img {
-  width: 1.5em;
-  height: 1.5em;
-  flex-shrink: 0;
-  object-fit: contain;        /* guard against weird intrinsic padding */
-  vertical-align: middle;     /* extra baseline safeguard */
+  /* only height, let width scale to preserve the logo’s proportions */
+  height: 1em;
+  width: auto;
 
-  /* debug only—see image box: */
-/*   background: rgba(255,0,0,0.2); */
+  flex-shrink: 0;
+  vertical-align: middle;
+  margin-right: 0.5em;
 }
 
 .calls h5 {
-  /* force the heading into the exact same line-box as the icon */
-  display: inline-block !important;
-  height: 1.5em !important;
-  line-height: 1.5em !important;
-
-  margin: 0 !important;
+  display: inline-block;
+  margin: 0;
   font-size: 1rem;
   font-weight: 500;
 
-  /* debug only—see text box: */
-/*   background: rgba(0,255,0,0.2); */
+  /* match the icon’s container height for perfect centering */
+  height: 1.5em;
+  line-height: 1.5em;
 }
+
+/* debug backgrounds—comment out when you’re happy */
+// .calls img { background: rgba(255,0,0,0.2); }
+// .calls h5  { background: rgba(0,255,0,0.2); }
 
