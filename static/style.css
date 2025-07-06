@@ -1,14 +1,14 @@
 :root {
   --background: #282828;
-  --accent: #d65d9e;
+  --accent: #d65d0e;
 }
 
 .post-title a{
-  color: #d65d03;
+  color: #d65d0e;
 }
 
 .post-meta a{
-  color: #b16286;
+  color: #d65d0e;
 }
 
 .post-tags a{
@@ -16,11 +16,11 @@
 }
 
 .post-content a{
-   color: #d65d03;
+   color: #d65d0e;
 }
 
 .post-content a:hover{
-   color: #ffffff;
+   color: #fbf1c7;
 }
 
 .calls {
