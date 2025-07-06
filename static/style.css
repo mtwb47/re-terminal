@@ -1,15 +1,22 @@
 :root {
-
   --background: #282828;
-
+  --accent: #d65d9e;
 }
 
 .post-title a{
   color: #d65d03;
 }
 
+.post-meta a{
+  color: #b16286;
+}
+
+.post-tags a{
+  color: #bdae93;
+}
+
 .post-content a{
-   color: #64dd78;
+   color: #d65d03;
 }
 
 .post-content a:hover{
