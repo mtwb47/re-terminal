@@ -75,4 +75,5 @@
 
 .navigation-menu ul {
   text-align: right;
+  justify-content: flex-end;
 }
