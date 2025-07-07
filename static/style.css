@@ -75,7 +75,7 @@
 
 .navigation-menu ul {
   display: flex;
-  justify-content: flex-end;  /* push all items to the right */
+  justify-content: center;  /* push all items to the right */
   list-style: none;
   margin: 0;
   padding: 0;
