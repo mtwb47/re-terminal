@@ -76,4 +76,18 @@
 .navigation-menu ul {
   text-align: right;
   justify-content: flex-end;
+  background-color: #d65d0e;   /* your box color */
+  display: inline-flex;        /* shrink‐wrap to its contents */
+  list-style: none;            /* remove bullets */
+  margin: 0;                   /* reset any default UL margins */
+  padding: 0.5rem 1rem;        /* space inside the box */
+}
+
+.navigation-menu li + li {
+  margin-left: 1rem;
+}
+
+.navigation-menu a {
+  color: #282828;
+  text-decoration: none;
 }
