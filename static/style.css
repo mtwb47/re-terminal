@@ -100,4 +100,6 @@
 
 .logo {
   justify-content: center;
+  background: #282828;
+  border: none;
 }
