@@ -72,3 +72,7 @@
   height: 0.8em !important;
   width: auto !important,
 }
+
+.navigation-meny {
+  text-align: right;
+}
