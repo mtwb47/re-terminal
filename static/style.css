@@ -76,6 +76,9 @@
 .navigation-menu ul {
   text-align: right;
   justify-content: flex-end;
+}
+
+.navigation-menu {
   background-color: #d65d0e;   /* your box color */
   display: inline-flex;        /* shrink‐wrap to its contents */
   list-style: none;            /* remove bullets */
