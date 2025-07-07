@@ -73,12 +73,12 @@
   width: auto !important;
 }
 
-.navigation-menu ul {
+.navigation-menu {
   text-align: right;
   justify-content: flex-end;
 }
 
-.navigation-menu {
+.navigation-menu ul {
   background-color: #d65d0e;   /* your box color */
   display: inline-flex;        /* shrink‐wrap to its contents */
   list-style: none;            /* remove bullets */
