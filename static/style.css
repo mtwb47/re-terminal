@@ -98,3 +98,6 @@
   color: #ffffff;               /* link color */
 }
 
+.logo {
+  justify-content: center;
+}
