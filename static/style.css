@@ -73,24 +73,24 @@
   width: auto !important;
 }
 
-.navigation-menu {
-  text-align: right;
-  justify-content: flex-end;
-}
-
 .navigation-menu ul {
-  background-color: #d65d0e;   /* your box color */
-  display: inline-flex;        /* shrink‐wrap to its contents */
-  list-style: none;            /* remove bullets */
-  margin: 0;                   /* reset any default UL margins */
-  padding: 0.5rem 1rem;        /* space inside the box */
+  display: flex;
+  justify-content: flex-end;  /* push all items to the right */
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.navigation-menu li + li {
-  margin-left: 1rem;
+.navigation-menu li {
+  background-color: #d65d0e;  /* orange box */
+  border-radius: 4px;         /* rounded corners (optional) */
+  margin-left: 1rem;          /* space between boxes */
 }
 
-.navigation-menu a {
-  color: #282828;
+.navigation-menu li a {
+  display: block;             
+  padding: 0.5rem 1rem;       /* vertical/horizontal padding */
+  color: white;               /* link color */
   text-decoration: none;
 }
+
