@@ -70,9 +70,9 @@
 /* RSS-only margin tweak */
 .calls img.rss-icon {
   height: 0.8em !important;
-  width: auto !important,
+  width: auto !important;
 }
 
-.navigation-menu {
+.navigation-menu ul {
   text-align: right;
 }
