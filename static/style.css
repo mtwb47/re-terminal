@@ -4,6 +4,10 @@
 }
 
 .post-title a{
+  color: #f2e5bc;
+}
+
+.post-title a:hover{
   color: #d65d0e;
 }
 
