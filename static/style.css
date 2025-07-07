@@ -99,9 +99,13 @@
 }
 
 .logo {
-  display: flex;
-  justify-content: center;
   background: #282828;
   border: none;
+}
+
+.logo img {
+  display: flex;
+  justify-content: center;
+  width: 50%;
 }
 
