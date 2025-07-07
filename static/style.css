@@ -83,14 +83,18 @@
 
 .navigation-menu li {
   background-color: #d65d0e;  /* orange box */
-  border-radius: 4px;         /* rounded corners (optional) */
+ /* border-radius: 4px;          rounded corners (optional) */
   margin-left: 1rem;          /* space between boxes */
 }
 
 .navigation-menu li a {
-  display: block;             
-  padding: 0.5rem 1rem;       /* vertical/horizontal padding */
-  color: white;               /* link color */
+  display: block;
+  padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
+  color: #282828;               /* link color */
   text-decoration: none;
+}
+
+.navigation-menu li a:hover {
+  color: #ffffff;               /* link color */
 }
 
