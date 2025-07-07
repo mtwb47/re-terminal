@@ -71,7 +71,7 @@
 .calls img.rss-icon {
   height: 0.8em !important;
   width: auto !important;
-  margin: 0px 0px 0px 3px;
+  padding: 5px;
 }
 
 .navigation-menu ul {
