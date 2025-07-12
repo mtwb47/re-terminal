@@ -73,6 +73,13 @@
   width: auto !important;
 }
 
+/* Email-only margin tweak */
+.calls img.email-icon {
+  height: 1em !important;
+  width: auto !important;
+}
+
+
 .navigation-menu ul {
   display: flex;
   justify-content: center;  /* push all items to the right */
