@@ -75,7 +75,7 @@
 
 /* Email-only margin tweak */
 .calls img.email-icon {
-  height: 1em !important;
+  height: 0.9em !important;
   width: auto !important;
 }
 
