@@ -1,0 +1,6 @@
+<details {{ with .Get "class" }}class="{{ . }}"{{ end }}>
+  <summary>{{ .Get "title" | safeHTML }}</summary>
+  <div class="content">
+    {{ .Inner | markdownify }}
+  </div>
+</details>
