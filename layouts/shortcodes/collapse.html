@@ -1,6 +1,10 @@
-<details {{ with .Get "class" }}class="{{ . }}"{{ end }}>
+<details
+  {{ if .Get "open" }}open{{ end }}
+  {{ with .Get "class" }}class="{{ . }}"{{ end }}
+>
   <summary>{{ .Get "title" | safeHTML }}</summary>
   <div class="content">
     {{ .Inner | markdownify }}
   </div>
 </details>
+
