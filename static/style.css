@@ -115,3 +115,33 @@
   margin: auto;
 }
 
+/* Style summary like h3 */
+details summary {
+  font-size: 1.17em;       /* same as <h3> */
+  font-weight: bold;
+  margin: 1em 0;
+  cursor: pointer;
+}
+
+/* Optional: remove default triangle and use your own */
+details summary::-webkit-details-marker {
+  display: none;
+}
+details summary::before {
+  content: "► ";
+  display: inline-block;
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+details[open] summary::before {
+  transform: rotate(90deg);
+}
+
+/* Inner content styling */
+details .content {
+  padding: 0.5em 1em;
+  border-left: 2px solid #ccc;
+  margin-bottom: 1em;
+}
+
+
