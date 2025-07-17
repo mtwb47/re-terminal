@@ -149,7 +149,6 @@ details[open] summary::before {
 /* Style the collapsible content block */
 details .content {
   padding: 0.5em 1em;
-  border-left: 2px solid #ccc;
   margin-bottom: 1em;
 }
 
