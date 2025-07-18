@@ -115,6 +115,13 @@
   margin: auto;
 }
 
+.myfoot {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
 /* Make summary look like an h3 */
 details summary {
   font-size: 1.4em; /* Matches <h3> */
@@ -156,4 +163,6 @@ details .content {
 details {
   margin-bottom: 1em;
 }
+
+
 
