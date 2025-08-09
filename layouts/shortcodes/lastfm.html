@@ -1,83 +1,51 @@
-{{- $cfg    := .Site.Params.lastfm | default dict -}}
-{{- $user   := .Get "user" | default (index $cfg "user") -}}
-{{- $api    := (getenv "LASTFM_API_KEY") | default (index $cfg "apiKey") -}}
-{{- $period := .Get "period" | default "overall" -}}
-{{- $base   := "https://ws.audioscrobbler.com/2.0/" -}}
-{{- $ok     := and $user $api -}}
+{{- $recent    := site.Data.lastfm.recent    | default dict -}}
+{{- $toptracks := site.Data.lastfm.toptracks | default dict -}}
+{{- $topartists:= site.Data.lastfm.topartists| default dict -}}
+{{- $userinfo  := site.Data.lastfm.userinfo  | default dict -}}
 
 <div class="lastfm">
-  {{- if not $ok -}}
-    <p><em>Last.fm not configured. Set <code>[params.lastfm]</code> and/or <code>LASTFM_API_KEY</code>.</em></p>
-  {{- else -}}
 
-  {{- $cacheKey := printf "lastfm-%s-%s-%s" $user $period (now.Format "2006-01-02") -}}
-  {{- $opts := dict "key" $cacheKey -}}
-
-  {{/* 1) Most recent scrobble */}}
   <h3>Most recent scrobble</h3>
-  {{- $recentURL := printf "%s?method=user.getrecenttracks&user=%s&limit=1&api_key=%s&format=json" $base $user $api -}}
-  {{- with resources.GetRemote $recentURL $opts -}}
-    {{- $recent := . | transform.Unmarshal -}}
-    {{- $rtracks := index $recent "recenttracks" | default dict -}}
-    {{- $rlist := index $rtracks "track" | default (slice) -}}
-    {{- if gt (len $rlist) 0 -}}
-      {{- $track := index $rlist 0 -}}
-      {{- $tname := index $track "name" -}}
-      {{- $turl  := index $track "url" -}}
-      {{- $tartist := index (index $track "artist") "#text" -}}
-      {{- $talbum  := index (index $track "album") "#text" -}}
-      {{- $now := index (index $track "@attr") "nowplaying" -}}
-      {{- $when := index (index $track "date") "#text" -}}
-      <p>
-        <strong>{{ if $turl }}<a href="{{ $turl }}">{{ $tname }}</a>{{ else }}{{ $tname }}{{ end }}</strong>
-        — {{ $tartist }}{{ with $talbum }} <em>({{ . }})</em>{{ end }}
-        {{ if eq $now "true" }} · <span>now playing</span>{{ else if $when }} · <span>{{ $when }}</span>{{ end }}
-      </p>
-    {{- else -}}<p>No recent tracks.</p>{{- end -}}
-  {{- else -}}<p>Couldn’t load recent tracks.</p>{{- end }}
+  {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $rlist) 0 -}}
+    {{- $t := index $rlist 0 -}}
+    {{- $name := index $t "name" -}}
+    {{- $url  := index $t "url" -}}
+    {{- $artist := index (index $t "artist") "#text" -}}
+    {{- $album  := index (index $t "album") "#text" -}}
+    {{- $now := index (index $t "@attr") "nowplaying" -}}
+    {{- $when := index (index $t "date") "#text" -}}
+    <p><strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
+       — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
+       {{ if eq $now "true" }} · now playing{{ else if $when }} · {{ $when }}{{ end }}
+    </p>
+  {{- else -}}<p>No recent tracks.</p>{{- end }}
 
-  {{/* 2) Top 10 tracks */}}
-  <h3>Top 10 tracks ({{ $period }})</h3>
-  {{- $topTracksURL := printf "%s?method=user.gettoptracks&user=%s&period=%s&limit=10&api_key=%s&format=json" $base $user $period $api -}}
-  {{- with resources.GetRemote $topTracksURL $opts -}}
-    {{- $tdata := . | transform.Unmarshal -}}
-    {{- $tracks := index (index $tdata "toptracks" | default dict) "track" | default (slice) -}}
-    {{- if gt (len $tracks) 0 -}}
-      <ol>
-        {{- range $tracks -}}
-          {{- $nm := index . "name" -}}
-          {{- $url := index . "url" -}}
-          <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} — {{ index (index . "artist") "name" }} ({{ index . "playcount" }})</li>
-        {{- end -}}
-      </ol>
-    {{- else -}}<p>No top tracks.</p>{{- end -}}
-  {{- else -}}<p>Couldn’t load top tracks.</p>{{- end }}
+  <h3>Top 10 tracks (overall)</h3>
+  {{- $tracks := index (index $toptracks "toptracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $tracks) 0 -}}
+    <ol>
+      {{- range $tracks -}}
+        {{- $nm := index . "name" -}}
+        {{- $url := index . "url" -}}
+        <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} — {{ index (index . "artist") "name" }} ({{ index . "playcount" }})</li>
+      {{- end -}}
+    </ol>
+  {{- else -}}<p>No top tracks.</p>{{- end }}
 
-  {{/* 3) Top 10 artists */}}
-  <h3>Top 10 artists ({{ $period }})</h3>
-  {{- $topArtistsURL := printf "%s?method=user.gettopartists&user=%s&period=%s&limit=10&api_key=%s&format=json" $base $user $period $api -}}
-  {{- with resources.GetRemote $topArtistsURL $opts -}}
-    {{- $adata := . | transform.Unmarshal -}}
-    {{- $artists := index (index $adata "topartists" | default dict) "artist" | default (slice) -}}
-    {{- if gt (len $artists) 0 -}}
-      <ol>
-        {{- range $artists -}}
-          {{- $nm := index . "name" -}}
-          {{- $url := index . "url" -}}
-          <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} ({{ index . "playcount" }})</li>
-        {{- end -}}
-      </ol>
-    {{- else -}}<p>No top artists.</p>{{- end -}}
-  {{- else -}}<p>Couldn’t load top artists.</p>{{- end }}
+  <h3>Top 10 artists (overall)</h3>
+  {{- $artists := index (index $topartists "topartists" | default dict) "artist" | default (slice) -}}
+  {{- if gt (len $artists) 0 -}}
+    <ol>
+      {{- range $artists -}}
+        {{- $nm := index . "name" -}}
+        {{- $url := index . "url" -}}
+        <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} ({{ index . "playcount" }})</li>
+      {{- end -}}
+    </ol>
+  {{- else -}}<p>No top artists.</p>{{- end }}
 
-  {{/* 4) Total scrobbles */}}
   <h3>Total scrobbles</h3>
-  {{- $infoURL := printf "%s?method=user.getinfo&user=%s&api_key=%s&format=json" $base $user $api -}}
-  {{- with resources.GetRemote $infoURL $opts -}}
-    {{- $idata := . | transform.Unmarshal -}}
-    {{- $u := index $idata "user" | default dict -}}
-    <p>{{ index $u "playcount" }}</p>
-  {{- else -}}<p>Couldn’t load user info.</p>{{- end }}
-
-  {{- end -}}
+  {{- $u := index $userinfo "user" | default dict -}}
+  <p>{{ index $u "playcount" | default "0" }}</p>
 </div>
