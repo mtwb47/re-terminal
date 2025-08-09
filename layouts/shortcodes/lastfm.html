@@ -1,0 +1,75 @@
+{{- $user := .Get "user" | default .Site.Params.lastfm.user -}}
+{{- $api  := (os.Getenv "LASTFM_API_KEY") | default .Site.Params.lastfm.apiKey -}}
+{{- if not $user -}}<p>Last.fm not configured: missing user.</p>{{- end -}}
+{{- if and $user (not $api) -}}<p>Last.fm not configured: set LASTFM_API_KEY.</p>{{- end -}}
+{{- if and $user $api -}}
+
+{{- $base   := "https://ws.audioscrobbler.com/2.0/" -}}
+{{- $period := .Get "period" | default "overall" -}}
+
+{{/* Cache key rolls daily so you’re not hammering the API */}}
+{{- $cacheKey := printf "lastfm-%s-%s" $user (now.Format "2006-01-02") -}}
+{{- $opts := dict "key" $cacheKey -}}
+
+<div class="lastfm">
+
+  <h3>Most recent scrobble</h3>
+  {{- $recentURL := printf "%s?method=user.getrecenttracks&user=%s&limit=1&api_key=%s&format=json" $base $user $api -}}
+  {{- with resources.GetRemote $recentURL $opts -}}
+    {{- $recent := . | transform.Unmarshal -}}
+    {{- $rtracks := index $recent "recenttracks" -}}
+    {{- $rlist := index $rtracks "track" -}}
+    {{- $track := index $rlist 0 -}}
+    {{- $tname := index $track "name" -}}
+    {{- $tartist := index (index $track "artist") "#text" -}}
+    {{- $talbum := index (index $track "album") "#text" -}}
+    {{- $now := index (index $track "@attr") "nowplaying" -}}
+    {{- $when := index (index $track "date") "#text" -}}
+    <p>
+      <strong>{{ $tname }}</strong> — {{ $tartist }}{{ with $talbum }} <em>({{ . }})</em>{{ end }}
+      {{ if eq $now "true" }} · <span>now playing</span>{{ else if $when }} · <span>{{ $when }}</span>{{ end }}
+    </p>
+  {{- else -}}
+    <p>Couldn’t load recent tracks.</p>
+  {{- end }}
+
+  <h3>Top 10 tracks ({{ $period }})</h3>
+  {{- $topTracksURL := printf "%s?method=user.gettoptracks&user=%s&period=%s&limit=10&api_key=%s&format=json" $base $user $period $api -}}
+  {{- with resources.GetRemote $topTracksURL $opts -}}
+    {{- $tdata := . | transform.Unmarshal -}}
+    {{- $tracks := index (index $tdata "toptracks") "track" -}}
+    <ol>
+      {{- range $tracks -}}
+        <li>{{ index . "name" }} — {{ index (index . "artist") "name" }} ({{ index . "playcount" }})</li>
+      {{- end -}}
+    </ol>
+  {{- else -}}
+    <p>Couldn’t load top tracks.</p>
+  {{- end }}
+
+  <h3>Top 10 artists ({{ $period }})</h3>
+  {{- $topArtistsURL := printf "%s?method=user.gettopartists&user=%s&period=%s&limit=10&api_key=%s&format=json" $base $user $period $api -}}
+  {{- with resources.GetRemote $topArtistsURL $opts -}}
+    {{- $adata := . | transform.Unmarshal -}}
+    {{- $artists := index (index $adata "topartists") "artist" -}}
+    <ol>
+      {{- range $artists -}}
+        <li>{{ index . "name" }} ({{ index . "playcount" }})</li>
+      {{- end -}}
+    </ol>
+  {{- else -}}
+    <p>Couldn’t load top artists.</p>
+  {{- end }}
+
+  <h3>Total scrobbles</h3>
+  {{- $infoURL := printf "%s?method=user.getinfo&user=%s&api_key=%s&format=json" $base $user $api -}}
+  {{- with resources.GetRemote $infoURL $opts -}}
+    {{- $idata := . | transform.Unmarshal -}}
+    {{- $u := index $idata "user" -}}
+    <p>{{ index $u "playcount" }}</p>
+  {{- else -}}
+    <p>Couldn’t load user info.</p>
+  {{- end }}
+
+</div>
+{{- end -}}
