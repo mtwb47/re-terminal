@@ -1,5 +1,6 @@
-{{- $user := .Get "user" | default .Site.Params.lastfm.user -}}
-{{- $api  := (os.Getenv "LASTFM_API_KEY") | default .Site.Params.lastfm.apiKey -}}
+{{- $cfg  := site.Params.lastfm | default dict -}}
+{{- $user := .Get "user" | default (index $cfg "user") -}}
+{{- $api  := (getenv "LASTFM_API_KEY") | default (index $cfg "apiKey") -}}
 
 <div class="lastfm">
   <p>Shortcode loaded.</p>
