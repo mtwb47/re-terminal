@@ -182,8 +182,11 @@ details {
   margin-bottom: 1em;
 }
 
+/* Style LastFM on the Now Page */
 .lastfm h3 { margin-top: 1.25rem; }
 .lastfm ol { padding-left: 1.25rem; }
-.lastfm li { margin: 0.15rem 0; }
-.lastfm p  { margin: 0.25rem 0 0.75rem; }
-.lastfm em { opacity: 0.8; }
+.lastfm li { margin: .15rem 0; display: list-item; }
+.lastfm .badge { display:inline-block; margin-left:.35rem; padding:0 .5em; border-radius:.75em; font-size:.85em; opacity:.9; border:1px solid currentColor; }
+.lastfm .lastfm-updated { opacity:.7; font-size:.9em; margin-bottom:.25rem; }
+.lastfm em { opacity:.8; }
+

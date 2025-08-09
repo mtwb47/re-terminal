@@ -1,10 +1,16 @@
-{{- $recent    := site.Data.lastfm.recent    | default dict -}}
-{{- $toptracks := site.Data.lastfm.toptracks | default dict -}}
-{{- $topartists:= site.Data.lastfm.topartists| default dict -}}
-{{- $userinfo  := site.Data.lastfm.userinfo  | default dict -}}
+{{- $recent      := site.Data.lastfm.recent      | default dict -}}
+{{- $top_overall := site.Data.lastfm.toptracks   | default dict -}}
+{{- $art_overall := site.Data.lastfm.topartists  | default dict -}}
+{{- $top_7day    := site.Data.lastfm.toptracks_7day   | default dict -}}
+{{- $art_7day    := site.Data.lastfm.topartists_7day  | default dict -}}
+{{- $userinfo    := site.Data.lastfm.userinfo    | default dict -}}
 
 <div class="lastfm">
 
+  <!-- Last updated stamp (build time) -->
+  <p class="lastfm-updated">Updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
+
+  <!-- Most recent scrobble -->
   <h3>Most recent scrobble</h3>
   {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $rlist) 0 -}}
@@ -15,36 +21,80 @@
     {{- $album  := index (index $t "album") "#text" -}}
     {{- $now := index (index $t "@attr") "nowplaying" -}}
     {{- $when := index (index $t "date") "#text" -}}
-    <p><strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
-       — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
-       {{ if eq $now "true" }} · now playing{{ else if $when }} · {{ $when }}{{ end }}
+    <p>
+      <strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
+      — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
+      {{ if eq $now "true" }} · <span class="now">now playing</span>{{ else if $when }} · <span class="when">{{ $when }}</span>{{ end }}
     </p>
   {{- else -}}<p>No recent tracks.</p>{{- end }}
 
-  <h3>Top 10 tracks (overall)</h3>
-  {{- $tracks := index (index $toptracks "toptracks" | default dict) "track" | default (slice) -}}
-  {{- if gt (len $tracks) 0 -}}
-    <ol>
-      {{- range $tracks -}}
+  <!-- Top tracks: Overall -->
+  <h3>Top 10 tracks — Overall</h3>
+  {{- $tracks_overall := index (index $top_overall "toptracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $tracks_overall) 0 -}}
+    <ol class="lastfm-list">
+      {{- range $tracks_overall -}}
         {{- $nm := index . "name" -}}
         {{- $url := index . "url" -}}
-        <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} — {{ index (index . "artist") "name" }} ({{ index . "playcount" }})</li>
+        <li>
+          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
+          — {{ index (index . "artist") "name" }}
+          <span class="badge" title="plays">{{ index . "playcount" }}</span>
+        </li>
       {{- end -}}
     </ol>
   {{- else -}}<p>No top tracks.</p>{{- end }}
 
-  <h3>Top 10 artists (overall)</h3>
-  {{- $artists := index (index $topartists "topartists" | default dict) "artist" | default (slice) -}}
-  {{- if gt (len $artists) 0 -}}
-    <ol>
-      {{- range $artists -}}
+  <!-- Top tracks: Past 7 days (optional) -->
+  {{- $tracks_7 := index (index $top_7day "toptracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $tracks_7) 0 -}}
+    <h3>Top 10 tracks — Past 7 days</h3>
+    <ol class="lastfm-list">
+      {{- range $tracks_7 -}}
         {{- $nm := index . "name" -}}
         {{- $url := index . "url" -}}
-        <li>{{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }} ({{ index . "playcount" }})</li>
+        <li>
+          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
+          — {{ index (index . "artist") "name" }}
+          <span class="badge" title="plays">{{ index . "playcount" }}</span>
+        </li>
+      {{- end -}}
+    </ol>
+  {{- end }}
+
+  <!-- Top artists: Overall -->
+  <h3>Top 10 artists — Overall</h3>
+  {{- $artists_overall := index (index $art_overall "topartists" | default dict) "artist" | default (slice) -}}
+  {{- if gt (len $artists_overall) 0 -}}
+    <ol class="lastfm-list">
+      {{- range $artists_overall -}}
+        {{- $nm := index . "name" -}}
+        {{- $url := index . "url" -}}
+        <li>
+          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
+          <span class="badge" title="plays">{{ index . "playcount" }}</span>
+        </li>
       {{- end -}}
     </ol>
   {{- else -}}<p>No top artists.</p>{{- end }}
 
+  <!-- Top artists: Past 7 days (optional) -->
+  {{- $artists_7 := index (index $art_7day "topartists" | default dict) "artist" | default (slice) -}}
+  {{- if gt (len $artists_7) 0 -}}
+    <h3>Top 10 artists — Past 7 days</h3>
+    <ol class="lastfm-list">
+      {{- range $artists_7 -}}
+        {{- $nm := index . "name" -}}
+        {{- $url := index . "url" -}}
+        <li>
+          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
+          <span class="badge" title="plays">{{ index . "playcount" }}</span>
+        </li>
+      {{- end -}}
+    </ol>
+  {{- end }}
+
+  <!-- Total scrobbles -->
   <h3>Total scrobbles</h3>
   {{- $u := index $userinfo "user" | default dict -}}
   <p>{{ index $u "playcount" | default "0" }}</p>
