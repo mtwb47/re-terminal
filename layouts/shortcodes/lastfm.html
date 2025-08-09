@@ -1,1 +1,10 @@
-<div>pong from shortcode</div>
+<!-- layouts/shortcodes/lastfm.html -->
+{{- $cfg  := .Site.Params.lastfm | default dict -}}
+{{- $user := .Get "user" | default (index $cfg "user") -}}
+{{- $api  := (getenv "LASTFM_API_KEY") | default (index $cfg "apiKey") -}}
+
+<div class="lastfm">
+  <p>Shortcode loaded.</p>
+  <p>User: <code>{{ $user }}</code></p>
+  <p>API key present: <code>{{ if $api }}yes{{ else }}no{{ end }}</code></p>
+</div>
