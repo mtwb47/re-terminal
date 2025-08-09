@@ -11,7 +11,7 @@
   <p class="lastfm-updated">Updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
 
   <!-- Most recent scrobble -->
-  <h3>Most recent scrobble</h3>
+  <h4>Most recent scrobble</h4>
   {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $rlist) 0 -}}
     {{- $t := index $rlist 0 -}}
@@ -29,7 +29,7 @@
   {{- else -}}<p>No recent tracks.</p>{{- end }}
 
   <!-- Top tracks: Overall -->
-  <h3>Top 10 tracks — Overall</h3>
+  <h4>Top 10 tracks — Overall</h4>
   {{- $tracks_overall := index (index $top_overall "toptracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $tracks_overall) 0 -}}
     <ol class="lastfm-list">
@@ -48,7 +48,7 @@
   <!-- Top tracks: Past 7 days (optional) -->
   {{- $tracks_7 := index (index $top_7day "toptracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $tracks_7) 0 -}}
-    <h3>Top 10 tracks — Past 7 days</h3>
+    <h4>Top 10 tracks — Past 7 days</h4>
     <ol class="lastfm-list">
       {{- range $tracks_7 -}}
         {{- $nm := index . "name" -}}
@@ -63,7 +63,7 @@
   {{- end }}
 
   <!-- Top artists: Overall -->
-  <h3>Top 10 artists — Overall</h3>
+  <h4>Top 10 artists — Overall</h4>
   {{- $artists_overall := index (index $art_overall "topartists" | default dict) "artist" | default (slice) -}}
   {{- if gt (len $artists_overall) 0 -}}
     <ol class="lastfm-list">
@@ -81,7 +81,7 @@
   <!-- Top artists: Past 7 days (optional) -->
   {{- $artists_7 := index (index $art_7day "topartists" | default dict) "artist" | default (slice) -}}
   {{- if gt (len $artists_7) 0 -}}
-    <h3>Top 10 artists — Past 7 days</h3>
+    <h4>Top 10 artists — Past 7 days</h4>
     <ol class="lastfm-list">
       {{- range $artists_7 -}}
         {{- $nm := index . "name" -}}
@@ -95,7 +95,7 @@
   {{- end }}
 
   <!-- Total scrobbles -->
-  <h3>Total scrobbles</h3>
+  <h4>Total scrobbles</h4>
   {{- $u := index $userinfo "user" | default dict -}}
   <p>{{ index $u "playcount" | default "0" }}</p>
 </div>
