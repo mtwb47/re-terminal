@@ -7,6 +7,9 @@
 
 <div class="lastfm">
 
+  <!-- Last updated stamp (build time) -->
+  <p class="lastfm-updated">Updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
+
   <!-- Most recent scrobble -->
   <h4>Most recent scrobble</h4>
   {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
@@ -95,8 +98,4 @@
   <h4>Total scrobbles</h4>
   {{- $u := index $userinfo "user" | default dict -}}
   <p>{{ index $u "playcount" | default "0" }}</p>
-
-  <!-- Last updated stamp (build time) -->
-  <p class="lastfm-updated">Updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
-
 </div>
