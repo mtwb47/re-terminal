@@ -1,4 +1,12 @@
+{{- $posts := where site.RegularPages "Type" "posts" -}}
+{{- $totalWords := 0 -}}
+{{- range $posts -}}
+  {{- $totalWords = add $totalWords .WordCount -}}
+{{- end -}}
+
 <div class="wordcount-stats">
   <h3>📊 Blog Statistics</h3>
-  <p>Statistics will be displayed here when the external script functionality is restored.</p>
+  <p><strong>Total posts:</strong> {{ len $posts }}</p>
+  <p><strong>Total words:</strong> {{ $totalWords }}</p>
+  <p><strong>Average words per post:</strong> {{ if gt (len $posts) 0 }}{{ div $totalWords (len $posts) }}{{ else }}0{{ end }}</p>
 </div>
