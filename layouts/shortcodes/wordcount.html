@@ -1,5 +1,5 @@
 {{- $scriptPath := "content/word-count.sh" -}}
-{{- $cmd := printf "cd %s && bash %s" .Site.WorkingDir $scriptPath -}}
+{{- $cmd := printf "bash %s" $scriptPath -}}
 {{- $result := os.Exec "bash" "-c" $cmd -}}
 
 {{- if $result.Err -}}
