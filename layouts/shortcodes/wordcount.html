@@ -1,14 +1,4 @@
-{{- $scriptPath := "content/word-count.sh" -}}
-{{- $cmd := printf "bash %s" $scriptPath -}}
-{{- $result := os.Exec "bash" "-c" $cmd -}}
-
-{{- if $result.Err -}}
-<div class="wordcount-error">
-  <p><strong>Word Count Error:</strong> {{ $result.Err }}</p>
-</div>
-{{- else -}}
 <div class="wordcount-stats">
   <h3>📊 Blog Statistics</h3>
-  <pre>{{ $result.Output | safeHTML }}</pre>
+  <p>Statistics will be displayed here when the external script functionality is restored.</p>
 </div>
-{{- end -}}
