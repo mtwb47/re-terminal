@@ -190,3 +190,18 @@ details {
 .lastfm .lastfm-updated { opacity:.7; font-size:.9em; margin-bottom:.25rem; }
 .lastfm em { opacity:.8; }
 
+
+a.read-more,
+a.read-more:hover,
+a.read-more:active {
+  display: inline-flex;
+  border: none;
+  color: var(--accent);
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 20px 0;
+  max-width: 100%;
+  text-align: right;
+}
+
