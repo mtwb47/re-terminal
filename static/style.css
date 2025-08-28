@@ -217,7 +217,6 @@ a.read-more:active {
   background-color: #282828;  /* orange box */
  /* border-radius: 4px;          rounded corners (optional) */
   margin-left: 1rem;          /* space between boxes */
-  text-transform: capitalize;
 }
 
 .new-menu li a {
@@ -225,6 +224,7 @@ a.read-more:active {
   padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
   color: #ffffff;               /* link color */
   text-decoration: none;
+  text-transform: capitalize;
 }
 
 .new-menu li a:hover {
