@@ -183,32 +183,94 @@ a.read-more:active {
   text-align: right;
 }
 
-.new-menu ul {
+/* Desktop menu styles */
+.new-menu .menu-items {
   display: flex;
-  justify-content: center;  /* push all items to the right */
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .new-menu li {
-  background-color: #282828;  /* orange box */
- /* border-radius: 4px;          rounded corners (optional) */
-  margin-left: 1rem;          /* space between boxes */
+  background-color: #282828;
+  margin-left: 1rem;
   font-family: "Anton", sans-serif;
   font-size: 1.3em; 
 }
 
 .new-menu li a {
   display: block;
-  padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
-  color: #ebdbb2;               /* link color */
+  padding: 0.3rem 0.8rem;
+  color: #ebdbb2;
   text-decoration: none;
 }
 
 .new-menu li a:hover {
-  background-color: #d65d0e;               /* link color */
+  background-color: #d65d0e;
   color: #282828;
+}
+
+/* Hamburger button - hidden by default */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+}
+
+.hamburger {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #ebdbb2;
+  transition: all 0.3s ease;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+  
+  .new-menu .menu-items {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #282828;
+    border-top: 1px solid #d65d0e;
+    z-index: 1000;
+  }
+  
+  .new-menu .menu-items.active {
+    display: flex;
+  }
+  
+  .new-menu {
+    position: relative;
+  }
+  
+  .new-menu li {
+    margin: 0;
+    border-bottom: 1px solid #404040;
+  }
+  
+  .new-menu li:last-child {
+    border-bottom: none;
+  }
+  
+  .new-menu li a {
+    padding: 1rem;
+    text-align: center;
+  }
 }
 
 .myfoot ul {
