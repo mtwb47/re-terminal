@@ -36,7 +36,7 @@
 
     & > *:not(:first-child) {
       &::before {
-        content: "-";
+        content: "::";
         display: inline-block;
         margin: 0 8px;
       }
@@ -44,7 +44,7 @@
   }
 
   &-title {
-    --border: 3px dotted var(--accent);
+    --border: 3px solid var(--accent);
     position: relative;
     color: var(--accent);
     margin: 0 0 15px;
@@ -52,7 +52,7 @@
     border-bottom: var(--border);
 
     &:after {
-      content: '|';
+      content: '';
       position: absolute;
       bottom: 2px;
       display: block;
