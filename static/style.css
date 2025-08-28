@@ -217,6 +217,7 @@ a.read-more:active {
   background-color: #282828;  /* orange box */
  /* border-radius: 4px;          rounded corners (optional) */
   margin-left: 1rem;          /* space between boxes */
+  font-family: "Bowlby One SC"
 }
 
 .new-menu li a {
