@@ -246,7 +246,7 @@ a.read-more:active {
     left: 0;
     right: 0;
     background-color: #282828;
-/*    border-top: 1px solid #d65d0e; */
+    border-top: 1px solid #d65d0e; 
     z-index: 1000;
   }
   
