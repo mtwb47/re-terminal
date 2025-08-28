@@ -1,0 +1,27 @@
+{{- $recent      := site.Data.lastfm.recent      | default dict -}}
+{{- $top_overall := site.Data.lastfm.toptracks   | default dict -}}
+{{- $art_overall := site.Data.lastfm.topartists  | default dict -}}
+{{- $top_7day    := site.Data.lastfm.toptracks_7day   | default dict -}}
+{{- $art_7day    := site.Data.lastfm.topartists_7day  | default dict -}}
+{{- $userinfo    := site.Data.lastfm.userinfo    | default dict -}}
+
+<div class="lastfm">
+
+  <!-- Most recent scrobble -->
+  <h4>Most recent scrobble</h4>
+  {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $rlist) 0 -}}
+    {{- $t := index $rlist 0 -}}
+    {{- $name := index $t "name" -}}
+    {{- $url  := index $t "url" -}}
+    {{- $artist := index (index $t "artist") "#text" -}}
+    {{- $album  := index (index $t "album") "#text" -}}
+    {{- $now := index (index $t "@attr") "nowplaying" -}}
+    {{- $when := index (index $t "date") "#text" -}}
+    <p>
+      <strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
+      — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
+      {{ if eq $now "true" }} · <span class="now">now playing</span>{{ else if $when }} · <span class="when">{{ $when }}</span>{{ end }}
+    </p>
+  {{- else -}}<p>No recent tracks.</p>{{- end }}
+
