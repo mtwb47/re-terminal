@@ -52,7 +52,7 @@
     border-bottom: var(--border);
 
     &:after {
-      content: '';
+      content: '|';
       position: absolute;
       bottom: 2px;
       display: block;
