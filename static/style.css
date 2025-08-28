@@ -1,10 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+
 :root {
   --background: #282828;
   --accent: #d65d0e;
-}
-
-body {
- font-family: "Bowlby One SC", sans-serif;
 }
 
 .post-title a{
