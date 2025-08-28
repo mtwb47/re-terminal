@@ -226,11 +226,12 @@ a.read-more:active {
 .new-menu li a {
   display: block;
   padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
-  color: #ffffff;               /* link color */
+  color: #ebdbb2;               /* link color */
   text-decoration: none;
 }
 
 .new-menu li a:hover {
   background-color: #d65d0e;               /* link color */
+  color: #282828;
 }
 
