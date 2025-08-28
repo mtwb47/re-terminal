@@ -117,30 +117,6 @@
   margin: auto;
 }
 
-.myfoot ul {
-  display: flex;
-  justify-content: center;  /* push all items to the right */
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.myfoot li {
-  background-color: #d65d0e;  /* orange box */
- /* border-radius: 4px;          rounded corners (optional) */
-  margin-left: 1rem;          /* space between boxes */
-}
-
-.myfoot li a {
-  display: block;
-  padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
-  color: #282828;               /* link color */
-  text-decoration: none;
-}
-
-.myfoot li a:hover {
-  color: #ffffff;               /* link color */
-}
 
 /* Make summary look like an h3 */
 details summary {
@@ -231,6 +207,34 @@ a.read-more:active {
 }
 
 .new-menu li a:hover {
+  background-color: #d65d0e;               /* link color */
+  color: #282828;
+}
+
+.myfoot ul {
+  display: flex;
+  justify-content: center;  /* push all items to the right */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.myfoot li {
+  background-color: #282828;  /* orange box */
+ /* border-radius: 4px;          rounded corners (optional) */
+  margin-left: 1rem;          /* space between boxes */
+  font-family: "Anton", sans-serif;
+  font-size: 1.3em; 
+}
+
+.myfoot li a {
+  display: block;
+  padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
+  color: #ebdbb2;               /* link color */
+  text-decoration: none;
+}
+
+.myfoot li a:hover {
   background-color: #d65d0e;               /* link color */
   color: #282828;
 }
