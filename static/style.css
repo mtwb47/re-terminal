@@ -205,7 +205,7 @@ a.read-more:active {
   text-align: right;
 }
 
-new-menu ul {
+.new-menu ul {
   display: flex;
   justify-content: center;  /* push all items to the right */
   list-style: none;
@@ -213,21 +213,20 @@ new-menu ul {
   padding: 0;
 }
 
-new-menu li {
+.new-menu li {
   background-color: #d65d0e;  /* orange box */
  /* border-radius: 4px;          rounded corners (optional) */
   margin-left: 1rem;          /* space between boxes */
-  text-transform: capitalize;
-  }
+}
 
-new-menu li a {
+.new-menu li a {
   display: block;
   padding: 0.3rem 0.8rem;       /* vertical/horizontal padding */
   color: #282828;               /* link color */
   text-decoration: none;
 }
 
-new-menu li a:hover {
+.new-menu li a:hover {
   color: #ffffff;               /* link color */
 }
 
