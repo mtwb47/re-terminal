@@ -44,12 +44,11 @@
   }
 
   &-title {
-    --border: 3px solid var(--accent);
+    --border: 2px solid var(--accent);
     position: relative;
     color: var(--accent);
     margin: 0 0 15px;
     padding-bottom: 15px;
-    border-bottom: var(--border);
 
     &:after {
       content: '';
