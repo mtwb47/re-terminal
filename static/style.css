@@ -230,6 +230,6 @@ a.read-more:active {
 }
 
 .new-menu li a:hover {
-  color: #ffffff;               /* link color */
+  background-color: #d65d0e;               /* link color */
 }
 
