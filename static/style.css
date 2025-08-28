@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bowlby+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 :root {
   --background: #282828;
@@ -219,7 +219,7 @@ a.read-more:active {
   background-color: #282828;  /* orange box */
  /* border-radius: 4px;          rounded corners (optional) */
   margin-left: 1rem;          /* space between boxes */
-  font-family: "Bowlby One SC", sans-serif;
+  font-family: "Anton", sans-serif;
   font-size: 1.3em; 
 }
 
