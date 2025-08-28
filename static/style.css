@@ -3,6 +3,10 @@
   --accent: #d65d0e;
 }
 
+body {
+ font-family: "Bowlby One SC", sans-serif;
+}
+
 .post-title a{
   color: #ffffff;
 }
