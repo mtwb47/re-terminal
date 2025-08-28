@@ -8,7 +8,7 @@
 <div class="lastfm">
 
   <!-- Most recent scrobble -->
-  <h4>Most recent scrobble</h4>
+  <h5>What I'm Listening to</h5>
   {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $rlist) 0 -}}
     {{- $t := index $rlist 0 -}}
