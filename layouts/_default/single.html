@@ -55,7 +55,7 @@
     {{ partial "posts_pagination.html" . }}
   {{ end }}
 
-    {{- if ne (.Param "commentCounter") false -}}
+    {{- if ne (.Param "callout") false -}}
     {{ partial "callout.html" }}
     {{- end -}]
   {{ if not (.Params.hideComments | default false) }}
