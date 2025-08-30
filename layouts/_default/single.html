@@ -16,7 +16,7 @@
       <span class="post-author">{{ . }}</span>
     {{- end -}}
     <!-- comments counter -->
-    {{- if and (.Param "commentCounter") (eq (.Param "commentCounter") false) -}} 
+    {{- if ne (.Param "commentCounter") false -}}
     {{ partial "comments_counter.html" . }}
     {{- end -}}
 
