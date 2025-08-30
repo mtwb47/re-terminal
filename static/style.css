@@ -338,13 +338,13 @@ a.read-more:active {
 
 /* Dropdown Menu CSS */
 
-/* Dropdown Button - styled to match other menu items */
+/* Dropdown Button - styled exactly like other menu links */
 .dropbtn {
-  background-color: #282828;
+  background: none;
   color: #ebdbb2;
   padding: 0.3rem 0.8rem;
-  font-size: 1.3em;
-  font-family: "Anton", sans-serif;
+  font-size: inherit;
+  font-family: inherit;
   border: none;
   cursor: pointer;
   display: block;
@@ -359,10 +359,9 @@ a.read-more:active {
   color: #282828;
 }
 
-/* The container <li> - needed to position the dropdown content */
+/* The container <li> - styled exactly like other menu items */
 .dropdown {
   position: relative;
-  display: block;
   background-color: #282828;
   margin-left: 1rem;
   font-family: "Anton", sans-serif;

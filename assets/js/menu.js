@@ -99,44 +99,49 @@ if (menuToggle && menuItems) {
   });
 }
 
-/* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  const dropdown = document.getElementById("myDropdown");
-  const dropdownParent = dropdown.closest('.dropdown');
+// Handle dropdown toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdownToggle = document.getElementById('dropdown-toggle');
+  const dropdown = document.getElementById('myDropdown');
   
-  // Check if we're on mobile
-  const isMobile = window.innerWidth <= 768;
-  
-  if (isMobile) {
-    // On mobile, toggle the parent dropdown's show class
-    dropdownParent.classList.toggle("show");
-  } else {
-    // On desktop, use the original behavior
-    dropdown.classList.toggle("show");
+  if (dropdownToggle && dropdown) {
+    dropdownToggle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      
+      const dropdownParent = dropdown.closest('.dropdown');
+      
+      // Check if we're on mobile
+      const isMobile = window.innerWidth <= 768;
+      
+      if (isMobile) {
+        // On mobile, toggle the parent dropdown's show class
+        if (dropdownParent) {
+          dropdownParent.classList.toggle("show");
+        }
+      } else {
+        // On desktop, toggle the dropdown content
+        dropdown.classList.toggle("show");
+      }
+    });
   }
-}
+});
 
 // Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    // Close desktop dropdowns
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
+document.addEventListener('click', function(event) {
+  // Check if the click was on the dropdown button or inside the dropdown
+  const isDropdownButton = event.target.matches('.dropbtn');
+  const isInsideDropdown = event.target.closest('.dropdown');
+  
+  if (!isDropdownButton && !isInsideDropdown) {
+    // Close all dropdowns
+    const dropdowns = document.querySelectorAll('.dropdown-content');
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
     
-    // Close mobile dropdowns
-    var mobileDropdowns = document.getElementsByClassName("dropdown");
-    for (i = 0; i < mobileDropdowns.length; i++) {
-      var openMobileDropdown = mobileDropdowns[i];
-      if (openMobileDropdown.classList.contains('show')) {
-        openMobileDropdown.classList.remove('show');
-      }
-    }
+    const mobileDropdowns = document.querySelectorAll('.dropdown');
+    mobileDropdowns.forEach(dropdown => {
+      dropdown.classList.remove('show');
+    });
   }
-}
+});
