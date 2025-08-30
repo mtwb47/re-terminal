@@ -282,12 +282,15 @@ a.read-more:active {
     text-align: center;
     font-size: 1.3em;
     width: 100%;
-    background: none;
+    background: transparent;
     outline: none;
+    font-family: "Anton", sans-serif;
+    margin: 0;
+    border: none;
   }
   
   .dropbtn:focus, .dropbtn:active {
-    background: none;
+    background: transparent;
     color: #ebdbb2;
     outline: none;
   }
@@ -354,20 +357,19 @@ a.read-more:active {
 
 /* Dropdown Button - styled exactly like other menu links */
 .dropbtn {
-  background: none;
+  background: transparent;
   color: #ebdbb2;
   padding: 0.3rem 0.8rem;
-  font-size: inherit;
-  font-family: inherit;
+  font-size: 1.3em;
+  font-family: "Anton", sans-serif;
   border: none;
   cursor: pointer;
   display: block;
   text-decoration: none;
-  width: 100%;
+  width: auto;
   text-align: left;
   outline: none;
-  line-height: normal;
-  vertical-align: baseline;
+  margin: 0;
 }
 
 /* Dropdown button on hover & focus */
