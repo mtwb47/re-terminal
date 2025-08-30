@@ -48,11 +48,11 @@
     {{- end -}}
   </div>
 
-  {{ partial "callout.html" }}
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
   {{ end }}
 
+  {{ partial "callout.html" }}
   {{ if not (.Params.hideComments | default false) }}
     {{ partial "comments.html" . }}
   {{ end }}
