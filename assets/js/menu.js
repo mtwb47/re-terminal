@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (dropdownToggle && dropdown) {
     dropdownToggle.addEventListener('click', function(event) {
+      event.preventDefault();
       event.stopPropagation();
       
       const dropdownParent = dropdown.closest('.dropdown');
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         dropdown.classList.toggle("show");
       }
       
-      // Remove focus to prevent button staying highlighted
+      // Remove focus to prevent link staying highlighted
       this.blur();
     });
   }
