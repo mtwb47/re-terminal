@@ -1,32 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
 :root {
-  --background: #282828;
+  /* Dark theme (Gruvbox Dark) */
+  --bg-primary: #282828;
+  --bg-secondary: #282828;
+  --bg-tertiary: #404040;
+  --text-primary: #ebdbb2;
+  --text-secondary: #bdae93;
+  --text-link: #d65d0e;
   --accent: #d65d0e;
+  --accent-hover: #d65d0e;
+  --border: #d65d0e;
+  --menu-bg: #282828;
+  --menu-text: #ebdbb2;
+  --dropdown-bg: #404040;
+}
+
+[data-theme="light"] {
+  /* Light theme (Gruvbox Light) */
+  --bg-primary: #fbf1c7;
+  --bg-secondary: #f9f5d7;
+  --bg-tertiary: #ebdbb2;
+  --text-primary: #3c3836;
+  --text-secondary: #504945;
+  --text-link: #af3a03;
+  --accent: #af3a03;
+  --accent-hover: #9d0006;
+  --border: #af3a03;
+  --menu-bg: #ebdbb2;
+  --menu-text: #3c3836;
+  --dropdown-bg: #d5c4a1;
 }
 
 .post-title a{
-  color: #ebdbb2;
+  color: var(--text-primary);
 }
 
 .post-title a:hover{
-  color: #d65d0e;
+  color: var(--accent);
 }
 
 .post-meta a{
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .post-tags a{
-  color: #bdae93;
+  color: var(--text-secondary);
 }
 
 .post-content a{
-   color: #d65d0e;
+   color: var(--text-link);
 }
 
 .post-content a:hover{
-   color: #fbf1c7;
+   color: var(--accent-hover);
 }
 
 .calls {
@@ -193,7 +220,7 @@ a.read-more:active {
 }
 
 .new-menu li {
-  background-color: #282828;
+  background-color: var(--menu-bg);
   margin-left: 1rem;
   font-family: "Anton", sans-serif;
   font-size: 1.3em; 
@@ -202,13 +229,13 @@ a.read-more:active {
 .new-menu li a {
   display: block;
   padding: 0.3rem 0.8rem;
-  color: #ebdbb2;
+  color: var(--menu-text);
   text-decoration: none;
 }
 
 .new-menu li a:hover {
-  background-color: #d65d0e;
-  color: #282828;
+  background-color: var(--accent);
+  color: var(--bg-primary);
 }
 
 /* Hamburger button - hidden by default */
@@ -228,7 +255,7 @@ a.read-more:active {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: #ebdbb2;
+  background-color: var(--menu-text);
   transition: all 0.3s ease;
 }
 
@@ -245,8 +272,8 @@ a.read-more:active {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: #282828;
-    border-top: 1px solid #d65d0e; 
+    background-color: var(--menu-bg);
+    border-top: 1px solid var(--border); 
     z-index: 1000;
   }
   
@@ -282,7 +309,7 @@ a.read-more:active {
     box-shadow: none;
     border: none;
     width: 100%;
-    background-color: #404040;
+    background-color: var(--dropdown-bg);
     overflow: hidden;
     max-height: 0;
     opacity: 0;
@@ -345,7 +372,7 @@ a.read-more:active {
 /* The dropdown container <li> - styled exactly like other menu items */
 .dropdown {
   position: relative;
-  background-color: #282828;
+  background-color: var(--menu-bg);
   margin-left: 1rem;
   font-family: "Anton", sans-serif;
   font-size: 1.3em;
@@ -356,20 +383,20 @@ a.read-more:active {
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  background-color: #282828;
+  background-color: var(--menu-bg);
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1000;
   top: 100%;
   left: 0;
-  border: 1px solid #d65d0e;
+  border: 1px solid var(--border);
   transform: translateY(-10px);
   transition: all 0.3s ease;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: #ebdbb2;
+  color: var(--menu-text);
   padding: 0.3rem 0.8rem;
   text-decoration: none;
   display: block;
@@ -380,8 +407,8 @@ a.read-more:active {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: #d65d0e;
-  color: #282828;
+  background-color: var(--accent);
+  color: var(--bg-primary);
 }
 
 /* Show the dropdown menu */
@@ -389,4 +416,50 @@ a.read-more:active {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--accent);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+  z-index: 1001;
+  outline: none;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle.light .theme-icon {
+  transform: rotate(180deg);
+}
+
+/* Hide theme toggle on mobile */
+@media (max-width: 768px) {
+  .theme-toggle {
+    display: none;
+  }
 }
