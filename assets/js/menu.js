@@ -70,6 +70,11 @@ if (menuToggle && menuItems) {
   document.addEventListener('click', (e) => {
     if (!menuToggle.contains(e.target) && !menuItems.contains(e.target)) {
       menuItems.classList.remove('active');
+      
+      // Close any open dropdowns when mobile menu closes
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+      
       const hamburgers = menuToggle.querySelectorAll('.hamburger');
       hamburgers.forEach((line) => {
         line.style.transform = '';
@@ -81,6 +86,11 @@ if (menuToggle && menuItems) {
   // Close mobile menu on window resize
   window.addEventListener('resize', () => {
     menuItems.classList.remove('active');
+    
+    // Close any open dropdowns when resizing
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => dropdown.classList.remove('show'));
+    
     const hamburgers = menuToggle.querySelectorAll('.hamburger');
     hamburgers.forEach((line) => {
       line.style.transform = '';
@@ -92,18 +102,40 @@ if (menuToggle && menuItems) {
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
+  const dropdown = document.getElementById("myDropdown");
+  const dropdownParent = dropdown.closest('.dropdown');
+  
+  // Check if we're on mobile
+  const isMobile = window.innerWidth <= 768;
+  
+  if (isMobile) {
+    // On mobile, toggle the parent dropdown's show class
+    dropdownParent.classList.toggle("show");
+  } else {
+    // On desktop, use the original behavior
+    dropdown.classList.toggle("show");
+  }
 }
 
 // Close the dropdown menu if the user clicks outside of it
 window.onclick = function(event) {
   if (!event.target.matches('.dropbtn')) {
+    // Close desktop dropdowns
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
       if (openDropdown.classList.contains('show')) {
         openDropdown.classList.remove('show');
+      }
+    }
+    
+    // Close mobile dropdowns
+    var mobileDropdowns = document.getElementsByClassName("dropdown");
+    for (i = 0; i < mobileDropdowns.length; i++) {
+      var openMobileDropdown = mobileDropdowns[i];
+      if (openMobileDropdown.classList.contains('show')) {
+        openMobileDropdown.classList.remove('show');
       }
     }
   }
