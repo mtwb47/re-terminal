@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+/* Base theme styles */
+body {
+  background-color: #282828 !important;
+  color: #ebdbb2 !important;
+}
+
 :root {
   /* Dark theme (Gruvbox Dark) */
   --bg-primary: #282828;
@@ -470,6 +476,11 @@ a.read-more:active {
 }
 
 /* Light theme overrides */
+[data-theme="light"] body {
+  background-color: #fbf1c7 !important;
+  color: #282828 !important;
+}
+
 [data-theme="light"] .post-title a {
   color: #3c3836;
 }
