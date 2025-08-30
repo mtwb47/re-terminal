@@ -11,10 +11,10 @@ document.addEventListener('DOMContentLoaded', function() {
   if (themeToggle && themeIcon) {
     if (currentTheme === 'light') {
       themeToggle.classList.add('light');
-      themeIcon.textContent = '☀️';
+      themeIcon.textContent = '◑';
     } else {
       themeToggle.classList.remove('light');
-      themeIcon.textContent = '🌙';
+      themeIcon.textContent = '◐';
     }
     
     // Theme toggle click handler
@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', function() {
       // Update button appearance
       if (newTheme === 'light') {
         themeToggle.classList.add('light');
-        themeIcon.textContent = '☀️';
+        themeIcon.textContent = '◑';
       } else {
         themeToggle.classList.remove('light');
-        themeIcon.textContent = '🌙';
+        themeIcon.textContent = '◐';
       }
     });
   }

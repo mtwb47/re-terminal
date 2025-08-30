@@ -548,3 +548,7 @@ a.read-more:active {
 [data-theme="light"] .new-menu .menu-items .dropdown-content {
   background-color: #d5c4a1;
 }
+
+[data-theme="light"] .logo {
+  background: #fbf1c7;
+}
