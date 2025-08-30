@@ -281,6 +281,20 @@ a.read-more:active {
     padding: 1rem;
     text-align: center;
     font-size: 1.3em;
+    width: 100%;
+    background: none;
+    outline: none;
+  }
+  
+  .dropbtn:focus, .dropbtn:active {
+    background: none;
+    color: #ebdbb2;
+    outline: none;
+  }
+  
+  .dropbtn:hover {
+    background-color: #d65d0e;
+    color: #282828;
   }
   
   .dropdown-content {
@@ -351,12 +365,23 @@ a.read-more:active {
   text-decoration: none;
   width: 100%;
   text-align: left;
+  outline: none;
+  line-height: normal;
+  vertical-align: baseline;
 }
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:hover {
   background-color: #d65d0e;
   color: #282828;
+}
+
+/* Remove focus outline and active state styling */
+.dropbtn:focus, .dropbtn:active {
+  background: none;
+  color: #ebdbb2;
+  outline: none;
+  box-shadow: none;
 }
 
 /* The container <li> - styled exactly like other menu items */

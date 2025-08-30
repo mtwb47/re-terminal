@@ -122,6 +122,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // On desktop, toggle the dropdown content
         dropdown.classList.toggle("show");
       }
+      
+      // Remove focus to prevent button staying highlighted
+      this.blur();
     });
   }
 });
