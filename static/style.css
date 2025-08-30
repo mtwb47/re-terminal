@@ -33,27 +33,27 @@
 }
 
 .post-title a{
-  color: var(--text-primary);
+  color: #ebdbb2;
 }
 
 .post-title a:hover{
-  color: var(--accent);
+  color: #d65d0e;
 }
 
 .post-meta a{
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .post-tags a{
-  color: var(--text-secondary);
+  color: #bdae93;
 }
 
 .post-content a{
-   color: var(--text-link);
+   color: #d65d0e;
 }
 
 .post-content a:hover{
-   color: var(--accent-hover);
+   color: #fbf1c7;
 }
 
 .calls {
@@ -220,7 +220,7 @@ a.read-more:active {
 }
 
 .new-menu li {
-  background-color: var(--menu-bg);
+  background-color: #282828;
   margin-left: 1rem;
   font-family: "Anton", sans-serif;
   font-size: 1.3em; 
@@ -229,13 +229,13 @@ a.read-more:active {
 .new-menu li a {
   display: block;
   padding: 0.3rem 0.8rem;
-  color: var(--menu-text);
+  color: #ebdbb2;
   text-decoration: none;
 }
 
 .new-menu li a:hover {
-  background-color: var(--accent);
-  color: var(--bg-primary);
+  background-color: #d65d0e;
+  color: #282828;
 }
 
 /* Hamburger button - hidden by default */
@@ -255,7 +255,7 @@ a.read-more:active {
   display: block;
   width: 25px;
   height: 3px;
-  background-color: var(--menu-text);
+  background-color: #ebdbb2;
   transition: all 0.3s ease;
 }
 
@@ -272,8 +272,8 @@ a.read-more:active {
     top: 100%;
     left: 0;
     right: 0;
-    background-color: var(--menu-bg);
-    border-top: 1px solid var(--border); 
+    background-color: #282828;
+    border-top: 1px solid #d65d0e; 
     z-index: 1000;
   }
   
@@ -309,7 +309,7 @@ a.read-more:active {
     box-shadow: none;
     border: none;
     width: 100%;
-    background-color: var(--dropdown-bg);
+    background-color: #404040;
     overflow: hidden;
     max-height: 0;
     opacity: 0;
@@ -372,7 +372,7 @@ a.read-more:active {
 /* The dropdown container <li> - styled exactly like other menu items */
 .dropdown {
   position: relative;
-  background-color: var(--menu-bg);
+  background-color: #282828;
   margin-left: 1rem;
   font-family: "Anton", sans-serif;
   font-size: 1.3em;
@@ -383,20 +383,20 @@ a.read-more:active {
   opacity: 0;
   visibility: hidden;
   position: absolute;
-  background-color: var(--menu-bg);
+  background-color: #282828;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1000;
   top: 100%;
   left: 0;
-  border: 1px solid var(--border);
+  border: 1px solid #d65d0e;
   transform: translateY(-10px);
   transition: all 0.3s ease;
 }
 
 /* Links inside the dropdown */
 .dropdown-content a {
-  color: var(--menu-text);
+  color: #ebdbb2;
   padding: 0.3rem 0.8rem;
   text-decoration: none;
   display: block;
@@ -407,8 +407,8 @@ a.read-more:active {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: var(--accent);
-  color: var(--bg-primary);
+  background-color: #d65d0e;
+  color: #282828;
 }
 
 /* Show the dropdown menu */
@@ -423,8 +423,8 @@ a.read-more:active {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: var(--accent);
-  color: var(--bg-primary);
+  background: #d65d0e;
+  color: #282828;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -438,6 +438,11 @@ a.read-more:active {
   transition: all 0.3s ease;
   z-index: 1001;
   outline: none;
+}
+
+[data-theme="light"] .theme-toggle {
+  background: #af3a03;
+  color: #fbf1c7;
 }
 
 .theme-toggle:hover {
@@ -462,4 +467,73 @@ a.read-more:active {
   .theme-toggle {
     display: none;
   }
+}
+
+/* Light theme overrides */
+[data-theme="light"] .post-title a {
+  color: #3c3836;
+}
+
+[data-theme="light"] .post-title a:hover {
+  color: #af3a03;
+}
+
+[data-theme="light"] .post-meta a {
+  color: #504945;
+}
+
+[data-theme="light"] .post-tags a {
+  color: #665c54;
+}
+
+[data-theme="light"] .post-content a {
+  color: #af3a03;
+}
+
+[data-theme="light"] .post-content a:hover {
+  color: #9d0006;
+}
+
+[data-theme="light"] .new-menu li {
+  background-color: #ebdbb2;
+}
+
+[data-theme="light"] .new-menu li a {
+  color: #3c3836;
+}
+
+[data-theme="light"] .new-menu li a:hover {
+  background-color: #af3a03;
+  color: #fbf1c7;
+}
+
+[data-theme="light"] .hamburger {
+  background-color: #3c3836;
+}
+
+[data-theme="light"] .new-menu .menu-items {
+  background-color: #ebdbb2;
+  border-top: 1px solid #af3a03;
+}
+
+[data-theme="light"] .dropdown {
+  background-color: #ebdbb2;
+}
+
+[data-theme="light"] .dropdown-content {
+  background-color: #ebdbb2;
+  border: 1px solid #af3a03;
+}
+
+[data-theme="light"] .dropdown-content a {
+  color: #3c3836;
+}
+
+[data-theme="light"] .dropdown-content a:hover {
+  background-color: #af3a03;
+  color: #fbf1c7;
+}
+
+[data-theme="light"] .new-menu .menu-items .dropdown-content {
+  background-color: #d5c4a1;
 }
