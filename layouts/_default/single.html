@@ -48,12 +48,6 @@
     {{- end -}}
   </div>
 
-  <div class="calls">
-    
-  <a href="mailto:email@thelinuxcast.org"><img src="https://mtwb.blog/assets/email.png" class="email-icon"><h5>Email Me</h5></a> <a href="https://polymaths.social/@thelinuxcast"><img src="https://mtwb.blog/assets/mastodon.png"><h5>Follow Me on Mastodon</h5></a> <a href="https://mtwb.blog/rss"><img src="https://mtwb.blog/assets/rss.png" class="rss-icon"><h5>   Follow With RSS</h5></a>
-    
-  </div>
-
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
   {{ end }}
@@ -61,7 +55,7 @@
   <br>
   <br>
   <br>
-
+  {{ partial "callout.html" }}
   {{ if not (.Params.hideComments | default false) }}
     {{ partial "comments.html" . }}
   {{ end }}
