@@ -12,11 +12,12 @@
   {{- $years = $years | append $year -}}
 {{- end -}}
 {{- $years = sort $years "value" "desc" -}}
+{{- $currentYear := now.Format "2006" -}}
 
 <div class="archives">
   {{- range $year := $years -}}
     {{- $yearPosts := index $postsByYear $year -}}
-    <details class="year-section" open>
+    <details class="year-section"{{ if eq $year $currentYear }} open{{ end }}>
       <summary>{{ $year }} ({{ len $yearPosts }} posts)</summary>
       <div class="content">
         <ul class="post-list">
