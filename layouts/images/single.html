@@ -28,12 +28,19 @@
   <div class="image-container">
     {{ if .Params.image }}
       <figure class="image-figure">
-        <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" class="featured-image">
+        <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" class="featured-image lightbox-trigger" onclick="openLightbox(this)">
         {{ if .Params.imageCaption }}
           <figcaption class="image-caption">{{ .Params.imageCaption | markdownify }}</figcaption>
         {{ end }}
       </figure>
     {{ end }}
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img">
+    <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
   <div class="post-content">
@@ -51,4 +58,48 @@
     {{ partial "comments.html" . }}
   {{ end }}
 </article>
+
+<script>
+function openLightbox(img) {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  
+  lightbox.style.display = 'block';
+  lightboxImg.src = img.src;
+  lightboxImg.alt = img.alt;
+  
+  // Get caption from the figcaption element
+  const figcaption = img.parentElement.querySelector('.image-caption');
+  if (figcaption) {
+    lightboxCaption.innerHTML = figcaption.innerHTML;
+    lightboxCaption.style.display = 'block';
+  } else {
+    lightboxCaption.style.display = 'none';
+  }
+  
+  // Prevent body scroll when lightbox is open
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  const lightbox = document.getElementById('lightbox');
+  lightbox.style.display = 'none';
+  
+  // Restore body scroll
+  document.body.style.overflow = 'auto';
+}
+
+// Close lightbox with Escape key
+document.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    closeLightbox();
+  }
+});
+
+// Prevent lightbox from closing when clicking on the image
+document.getElementById('lightbox-img').addEventListener('click', function(event) {
+  event.stopPropagation();
+});
+</script>
 {{ end }}

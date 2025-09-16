@@ -15,6 +15,7 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease;
+        cursor: pointer;
         
         &:hover {
           transform: scale(1.02);
@@ -24,8 +25,8 @@
       .image-caption {
         margin-top: 1rem;
         font-style: italic;
-        color: var(--accent);
-        background-color: var(--background);
+        color: #d65d0e;
+        background-color: #282828;
         font-size: 0.9rem;
         text-align: center;
       }
@@ -99,8 +100,8 @@
       .image-caption-preview {
         margin-top: 0.5rem;
         font-style: italic;
-        color: var(--accent);
-        background-color: var(--background);
+        color: #d65d0e;
+        background-color: #282828;
         font-size: 0.85rem;
         text-align: center;
       }
@@ -132,6 +133,87 @@
       }
     }
   }
+}
+
+// Light theme adjustments
+[data-theme="light"] {
+  .image-post {
+    .image-container {
+      .image-figure {
+        .image-caption {
+          color: #af3a03;
+          background-color: #fbf1c7;
+        }
+      }
+    }
+  }
+  
+  .images-grid {
+    .image-post-preview {
+      .image-preview {
+        .image-caption-preview {
+          color: #af3a03;
+          background-color: #fbf1c7;
+        }
+      }
+    }
+  }
+}
+
+// Lightbox styles
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  cursor: pointer;
+}
+
+.lightbox-content {
+  display: block;
+  margin: auto;
+  max-width: 90%;
+  max-height: 90%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 8px;
+  cursor: default;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 1001;
+  
+  &:hover {
+    color: #d65d0e;
+  }
+}
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-style: italic;
+  font-size: 1rem;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 4px;
+  max-width: 80%;
 }
 
 // Dark mode adjustments
