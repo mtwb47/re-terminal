@@ -339,7 +339,7 @@ a.read-more:active {
   }
   
   .dropdown.show .dropdown-content {
-    max-height: 200px;
+    max-height: none;
     opacity: 1;
     visibility: visible;
   }
