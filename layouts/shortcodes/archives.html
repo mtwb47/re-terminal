@@ -14,19 +14,20 @@
 {{- $years = sort $years "value" "desc" -}}
 
 <div class="archives">
-  <h2>Archives</h2>
   {{- range $year := $years -}}
     {{- $yearPosts := index $postsByYear $year -}}
-    <div class="year-section">
-      <h3>{{ $year }}</h3>
-      <ul class="post-list">
-        {{- range $yearPosts -}}
-          <li>
-            <span class="post-date">{{ .Date.Format "Jan 2" }}</span>
-            <a href="{{ .Permalink }}" class="post-link">{{ .Title }}</a>
-          </li>
-        {{- end -}}
-      </ul>
-    </div>
+    <details class="year-section" open>
+      <summary>{{ $year }} ({{ len $yearPosts }} posts)</summary>
+      <div class="content">
+        <ul class="post-list">
+          {{- range $yearPosts -}}
+            <li>
+              <span class="post-date">{{ .Date.Format "Jan 2" }}</span>
+              <a href="{{ .Permalink }}" class="post-link">{{ .Title }}</a>
+            </li>
+          {{- end -}}
+        </ul>
+      </div>
+    </details>
   {{- end -}}
 </div>

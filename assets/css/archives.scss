@@ -1,20 +1,25 @@
 .archives {
   margin: 2rem 0;
-
-  h2 {
-    margin-bottom: 1.5rem;
-    border-bottom: 2px solid var(--accent);
-    padding-bottom: 0.5rem;
-  }
 }
 
 .year-section {
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 
-  h3 {
-    margin-bottom: 1rem;
-    color: var(--accent);
+  summary {
+    cursor: pointer;
     font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0;
+    
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  .content {
+    margin-top: 1rem;
   }
 }
 
@@ -26,8 +31,8 @@
   li {
     display: flex;
     align-items: baseline;
-    margin-bottom: 0.5rem;
-    padding: 0.25rem 0;
+    margin-bottom: 0.25rem;
+    padding: 0.1rem 0;
   }
 }
 
