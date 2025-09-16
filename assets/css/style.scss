@@ -24,3 +24,4 @@ $centerTheme: {{ if $.Site.Params.CenterTheme }}center{{ else }}flex-start{{ end
 @import "code";
 @import "terms";
 @import "gist";
+@import "archives";
