@@ -28,7 +28,12 @@
   <div class="image-container">
     {{ if .Params.image }}
       <figure class="image-figure">
-        <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" class="featured-image lightbox-trigger" onclick="openLightbox(this)">
+        {{ $image := resources.Get .Params.image }}
+        {{ if $image }}
+          <img src="{{ $image.RelPermalink }}" alt="{{ .Params.imageAlt | default .Title }}" class="featured-image lightbox-trigger" onclick="openLightbox(this)">
+        {{ else }}
+          <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" class="featured-image lightbox-trigger" onclick="openLightbox(this)">
+        {{ end }}
         {{ if .Params.imageCaption }}
           <figcaption class="image-caption">{{ .Params.imageCaption | markdownify }}</figcaption>
         {{ end }}
