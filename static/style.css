@@ -140,16 +140,20 @@ body {
   color: #ffffff;               /* link color */
 }
 
+
 .logo {
-  background: #282828;
-  border: none;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0;
 }
 
-.logo img {
-  display: block;
-  margin: auto;
+.logo .matts {
+    color: #2563eb; /* Blue color */
 }
 
+.logo .blog {
+    color: #dc2626; /* Red color */
+}
 
 /* Make summary look like an h3 */
 details summary {
