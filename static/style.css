@@ -145,10 +145,12 @@ body {
     font-size: 2.5rem;
     font-weight: bold;
     margin: 0;
+    background-color: #282828;
 }
 
 .logo .matts {
     color: #2563eb; /* Blue color */
+
 }
 
 .logo .blog {
