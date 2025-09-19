@@ -147,6 +147,10 @@ body {
     margin: 0;
     background-color: #282828;
     font-family: "Anton", sans-serif;
+    text-align: center;
+    padding: 20px 0;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .logo .matts {
