@@ -146,8 +146,8 @@ body {
     background-color: #282828;
     font-family: "Anton", sans-serif;
     padding: 20px 0;
-    text-align: center;
-    display: block; /* Ensure it's a block element */
+    justify-content: center;
+    align-items: center; 
 }
 
 .logo .matts {
