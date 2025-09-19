@@ -141,21 +141,23 @@ body {
 }
 
 .logo {
-    font-size: 6em; /* Moved font-size here since both spans use the same size */
     font-weight: bold;
     margin: 0;
     background-color: #282828;
     font-family: "Anton", sans-serif;
     padding: 20px 0;
-    text-align: center; /* This should work now */
+    text-align: center;
+    display: block; /* Ensure it's a block element */
 }
 
 .logo .matts {
     color: #2563eb; /* Blue color */
+    font-size: 6em;
 }
 
 .logo .blog {
     color: #dc2626; /* Red color */
+    font-size: 6em;
 }
 /* Make summary look like an h3 */
 details summary {
