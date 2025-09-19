@@ -152,11 +152,12 @@ body {
 
 .logo .matts {
     color: #2563eb; /* Blue color */
-
+    font-size: 4em; 
 }
 
 .logo .blog {
     color: #dc2626; /* Red color */
+    font-size: 4em; 
 }
 
 /* Make summary look like an h3 */
