@@ -114,7 +114,6 @@ body {
   width: auto !important;
 }
 
-
 .navigation-menu ul {
   display: flex;
   justify-content: center;  /* push all items to the right */
@@ -161,6 +160,21 @@ body {
     font-size: 6em;
     letter-spacing: 0.15em;
 }
+
+.logo .matts:hover {
+    color: #d65d0e; /* Blue color */
+    font-size: 6em;
+    letter-spacing: 0.15em;
+}
+
+.logo .blog:hover {
+    color: #fbf1c7; /* Red color */
+    font-size: 6em;
+    letter-spacing: 0.15em;
+}
+
+
+
 /* Make summary look like an h3 */
 details summary {
   font-size: 1.4em; /* Matches <h3> */
