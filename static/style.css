@@ -147,17 +147,16 @@ body {
     margin: 0;
     background-color: #282828;
     font-family: "Anton", sans-serif;
-    font-size: 4em; 
 }
 
 .logo .matts {
     color: #2563eb; /* Blue color */
-    font-size: 4em; 
+    font-size: 6em; 
 }
 
 .logo .blog {
     color: #dc2626; /* Red color */
-    font-size: 4em; 
+    font-size: 6em; 
 }
 
 /* Make summary look like an h3 */
