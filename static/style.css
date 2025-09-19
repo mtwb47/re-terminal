@@ -147,21 +147,18 @@ body {
     margin: 0;
     background-color: #282828;
     font-family: "Anton", sans-serif;
-    text-align: center;
     padding: 20px 0;
 }
 
 .logo .matts {
     color: #2563eb; /* Blue color */
-    text-align: center;
-    padding: 20px 0;
+    padding: 5px 30px 0 0;
     font-size: 6em; 
 }
 
 .logo .blog {
     color: #dc2626; /* Red color */
-    text-align: center;
-    padding: 100px 0;
+    padding: 5px 0;
     font-size: 6em; 
 }
 
