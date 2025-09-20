@@ -139,25 +139,35 @@ body {
 
 .logo {
     font-weight: bold;
-    margin: 0;
+    margin: 0 !important;
     background-color: #282828;
     font-family: "Anton", sans-serif;
     padding: 0px 0;
     text-align: center;
     width: 100%;
-    line-height: 0.7;
+    line-height: 0.5;
+    margin-top: -0.2em;
+    margin-bottom: -0.2em;
 }
 
 .logo .matts {
     color: #fbf1c7; /* Blue color */
     font-size: 6em;
     letter-spacing: 0.15em;
+    display: inline-block;
+    line-height: 0.8;
+    margin: 0;
+    padding: 0;
 }
 
 .logo .blog {
     color: #d65d0e; /* Red color */
     font-size: 6em;
     letter-spacing: 0.15em;
+    display: inline-block;
+    line-height: 0.8;
+    margin: 0;
+    padding: 0;
 }
 
 a:hover .logo .matts {
