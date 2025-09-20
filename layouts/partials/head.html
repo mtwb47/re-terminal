@@ -1,50 +1,25 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Font preloading for better performance -->
+<!-- Critical font loading to prevent flash -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.gstatic.com/s/anton/v25/1Ptgg87LROyAm3Kz-C8.woff2" as="font" type="font/woff2" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
-<!-- Prevent font flash with CSS -->
+<!-- Inline critical font CSS with blocking behavior -->
 <style>
+  @font-face {
+    font-family: 'Anton';
+    font-style: normal;
+    font-weight: 400;
+    font-display: block;
+    src: url(https://fonts.gstatic.com/s/anton/v25/1Ptgg87LROyAm3Kz-C8.woff2) format('woff2');
+  }
+
   .logo {
     font-family: "Anton", sans-serif;
-    font-display: swap;
-  }
-
-  /* Hide logo elements until font loads to prevent flash */
-  .logo .matts, .logo .blog {
-    visibility: hidden;
-  }
-
-  /* Show when font is loaded */
-  .fonts-loaded .logo .matts,
-  .fonts-loaded .logo .blog {
-    visibility: visible;
   }
 </style>
-
-<!-- Font loading detection -->
-<script>
-  // Check if font is already loaded
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function() {
-      document.documentElement.classList.add('fonts-loaded');
-    });
-  } else {
-    // Fallback for older browsers
-    setTimeout(function() {
-      document.documentElement.classList.add('fonts-loaded');
-    }, 100);
-  }
-
-  // Also add class immediately if font might already be cached
-  if (document.fonts && document.fonts.check && document.fonts.check('1em Anton')) {
-    document.documentElement.classList.add('fonts-loaded');
-  }
-</script>
 <meta name="description" content="{{ if .IsHome }}{{ $.Site.Params.Subtitle }}{{ else if .Description}}{{ .Description | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
 <meta name="keywords" content="{{ with .Params.Keywords }}{{ delimit . ", " }}{{ else }}{{ $.Site.Params.Keywords }}{{ end }}" />
 {{ if .Params.noindex }}
