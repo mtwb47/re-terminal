@@ -4,60 +4,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeIcon = document.querySelector('.theme-icon');
   const logoImg = document.getElementById('logo-img');
 
-  // Site-wide cursor following animation for non-mobile devices
-  let cursorListenersAdded = false;
-
-  function handleMouseMove(e) {
-    document.body.style.setProperty('--cursor-x', e.clientX + 'px');
-    document.body.style.setProperty('--cursor-y', e.clientY + 'px');
-  }
-
-  function handleMouseEnter() {
-    document.body.classList.add('cursor-active');
-  }
-
-  function handleMouseLeave() {
-    document.body.classList.remove('cursor-active');
-  }
-
-  function initCursorFollower() {
-    if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)').matches) {
-      if (!cursorListenersAdded) {
-        document.addEventListener('mousemove', handleMouseMove);
-        document.addEventListener('mouseenter', handleMouseEnter);
-        document.addEventListener('mouseleave', handleMouseLeave);
-        cursorListenersAdded = true;
-
-        // Force activation if mouse is already over the page
-        setTimeout(() => {
-          document.body.classList.add('cursor-active');
-        }, 100);
-      }
-    } else {
-      if (cursorListenersAdded) {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseenter', handleMouseEnter);
-        document.removeEventListener('mouseleave', handleMouseLeave);
-        document.body.classList.remove('cursor-active');
-        cursorListenersAdded = false;
-      }
-    }
-  }
-
-  // Initialize immediately
-  initCursorFollower();
-
-  // Re-initialize on various events to ensure it works after page navigation
-  window.addEventListener('resize', initCursorFollower);
-  window.addEventListener('load', initCursorFollower);
-  window.addEventListener('pageshow', initCursorFollower);
-
-  // Also listen for visibility changes (when tab becomes active)
-  document.addEventListener('visibilitychange', function() {
-    if (!document.hidden) {
-      setTimeout(initCursorFollower, 50);
-    }
-  });
   
   // Function to update logo based on theme
   function updateLogo(theme) {
