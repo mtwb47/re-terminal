@@ -585,3 +585,19 @@ a.read-more:active {
 [data-theme="light"] .logo {
   background: #fbf1c7;
 }
+
+[data-theme="light"] .logo .matts {
+  color: #282828;
+}
+
+[data-theme="light"] .logo .blog {
+  color: #d65d0e;
+}
+
+[data-theme="light"] a:hover .logo .matts {
+  color: #d65d0e;
+}
+
+[data-theme="light"] a:hover .logo .blog {
+  color: #282828;
+}
