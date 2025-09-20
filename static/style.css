@@ -151,11 +151,11 @@ body {
     position: relative;
 }
 
-/* Cursor-following animation for non-mobile devices */
+/* Site-wide cursor-following animation for non-mobile devices */
 @media (hover: hover) and (pointer: fine) {
-    .logo::before {
+    body::before {
         content: '';
-        position: absolute;
+        position: fixed;
         width: 60px;
         height: 60px;
         background: radial-gradient(circle, rgba(214, 93, 14, 0.4) 0%, rgba(214, 93, 14, 0.1) 50%, transparent 70%);
@@ -163,19 +163,14 @@ body {
         pointer-events: none;
         opacity: 0;
         transition: opacity 0.3s ease;
-        z-index: 1;
+        z-index: 9999;
         left: var(--cursor-x, 50%);
         top: var(--cursor-y, 50%);
         transform: translate(-50%, -50%);
     }
 
-    .logo:hover::before {
+    body.cursor-active::before {
         opacity: 1;
-    }
-
-    .logo .matts, .logo .blog {
-        position: relative;
-        z-index: 2;
     }
 }
 
@@ -633,7 +628,7 @@ a.read-more:active {
 
 /* Light theme cursor follower */
 @media (hover: hover) and (pointer: fine) {
-  [data-theme="light"] .logo::before {
+  [data-theme="light"] body::before {
     background: radial-gradient(circle, rgba(175, 58, 3, 0.4) 0%, rgba(175, 58, 3, 0.1) 50%, transparent 70%);
   }
 }

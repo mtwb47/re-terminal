@@ -4,16 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeIcon = document.querySelector('.theme-icon');
   const logoImg = document.getElementById('logo-img');
 
-  // Logo cursor following animation for non-mobile devices
-  const logo = document.querySelector('.logo');
-  if (logo && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-    logo.addEventListener('mousemove', function(e) {
-      const rect = logo.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  // Site-wide cursor following animation for non-mobile devices
+  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    document.addEventListener('mousemove', function(e) {
+      document.body.style.setProperty('--cursor-x', e.clientX + 'px');
+      document.body.style.setProperty('--cursor-y', e.clientY + 'px');
+    });
 
-      logo.style.setProperty('--cursor-x', x + 'px');
-      logo.style.setProperty('--cursor-y', y + 'px');
+    document.addEventListener('mouseenter', function() {
+      document.body.classList.add('cursor-active');
+    });
+
+    document.addEventListener('mouseleave', function() {
+      document.body.classList.remove('cursor-active');
     });
   }
   
