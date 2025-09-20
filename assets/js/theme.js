@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const logoImg = document.getElementById('logo-img');
 
   // Site-wide cursor following animation for non-mobile devices
-  if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)').matches) {
     document.addEventListener('mousemove', function(e) {
       document.body.style.setProperty('--cursor-x', e.clientX + 'px');
       document.body.style.setProperty('--cursor-y', e.clientY + 'px');
