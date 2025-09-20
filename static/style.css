@@ -206,6 +206,40 @@ a:hover .logo .blog {
     letter-spacing: 0.12em;
 }
 
+/* Responsive logo font sizes */
+@media (max-width: 1200px) {
+    .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
+        font-size: 5em;
+    }
+}
+
+@media (max-width: 992px) {
+    .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
+        font-size: 4em;
+    }
+}
+
+@media (max-width: 768px) {
+    .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
+        font-size: 3em;
+        letter-spacing: 0.08em;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
+        font-size: 2.5em;
+        letter-spacing: 0.06em;
+    }
+}
+
+@media (max-width: 400px) {
+    .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
+        font-size: 2em;
+        letter-spacing: 0.04em;
+    }
+}
+
 
 
 /* Make summary look like an h3 */
