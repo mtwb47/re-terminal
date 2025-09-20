@@ -5,20 +5,43 @@ document.addEventListener('DOMContentLoaded', function() {
   const logoImg = document.getElementById('logo-img');
 
   // Site-wide cursor following animation for non-mobile devices
-  if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)').matches) {
-    document.addEventListener('mousemove', function(e) {
-      document.body.style.setProperty('--cursor-x', e.clientX + 'px');
-      document.body.style.setProperty('--cursor-y', e.clientY + 'px');
-    });
+  let cursorListenersAdded = false;
 
-    document.addEventListener('mouseenter', function() {
-      document.body.classList.add('cursor-active');
-    });
-
-    document.addEventListener('mouseleave', function() {
-      document.body.classList.remove('cursor-active');
-    });
+  function handleMouseMove(e) {
+    document.body.style.setProperty('--cursor-x', e.clientX + 'px');
+    document.body.style.setProperty('--cursor-y', e.clientY + 'px');
   }
+
+  function handleMouseEnter() {
+    document.body.classList.add('cursor-active');
+  }
+
+  function handleMouseLeave() {
+    document.body.classList.remove('cursor-active');
+  }
+
+  function initCursorFollower() {
+    if (window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 769px)').matches) {
+      if (!cursorListenersAdded) {
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseenter', handleMouseEnter);
+        document.addEventListener('mouseleave', handleMouseLeave);
+        cursorListenersAdded = true;
+      }
+    } else {
+      if (cursorListenersAdded) {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseenter', handleMouseEnter);
+        document.removeEventListener('mouseleave', handleMouseLeave);
+        document.body.classList.remove('cursor-active');
+        cursorListenersAdded = false;
+      }
+    }
+  }
+
+  // Initialize immediately and also on resize in case window size changes
+  initCursorFollower();
+  window.addEventListener('resize', initCursorFollower);
   
   // Function to update logo based on theme
   function updateLogo(theme) {
