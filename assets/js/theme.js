@@ -3,6 +3,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.querySelector('.theme-icon');
   const logoImg = document.getElementById('logo-img');
+
+  // Logo cursor following animation for non-mobile devices
+  const logo = document.querySelector('.logo');
+  if (logo && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    logo.addEventListener('mousemove', function(e) {
+      const rect = logo.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      logo.style.setProperty('--cursor-x', x + 'px');
+      logo.style.setProperty('--cursor-y', y + 'px');
+    });
+  }
   
   // Function to update logo based on theme
   function updateLogo(theme) {
