@@ -153,7 +153,7 @@ body {
 .logo .matts {
     color: #fbf1c7; /* Blue color */
     font-size: 6em;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.11em;
     display: inline-block;
     line-height: 0.8;
     margin: 0;
@@ -163,7 +163,7 @@ body {
 .logo .blog {
     color: #d65d0e; /* Red color */
     font-size: 6em;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.11em;
     display: inline-block;
     line-height: 0.8;
     margin: 0;
