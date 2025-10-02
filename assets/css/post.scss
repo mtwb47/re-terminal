@@ -170,6 +170,12 @@ figure:has(.post-cover) {
   .post-title {
     padding: 15px 20px; // Add back side padding for the text
     margin: 0 -20px; // Extend title to full width for border
+
+    // Make sure the border spans the full width regardless of padding
+    &:after {
+      left: 20px; // Offset for the negative margin
+      width: 100%;
+    }
   }
 
   .post-meta {
