@@ -165,6 +165,12 @@ figure:has(.post-cover) {
   .post-title {
     padding: 15px 20px;
     margin: 0;
+
+    // Contain the border within the background
+    &:after {
+      width: calc(100% - 40px); // Account for left/right padding
+      margin-left: 0;
+    }
   }
 
   .post-meta {
