@@ -43,14 +43,6 @@
     </div>
   {{ end }}
 
-  {{- if .Params.link_url -}}
-    <div class="link-post-button">
-      <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener" class="button">
-        🔗 Visit External Link
-      </a>
-    </div>
-  {{- end -}}
-
   <div class="post-content">
     {{- with .Content -}}
       <div>
@@ -58,6 +50,14 @@
       </div>
     {{- end -}}
   </div>
+
+  {{- if .Params.link_url -}}
+    <div class="link-post-button">
+      <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener" class="button">
+        🔗 Visit External Link
+      </a>
+    </div>
+  {{- end -}}
 
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
