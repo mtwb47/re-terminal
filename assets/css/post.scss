@@ -155,8 +155,13 @@ figure:has(.post-cover) {
 .link-post {
   background-color: var(--link-post-background);
   border-radius: 8px;
-  padding: 20px;
+  padding: 15px 20px;
   margin: 20px 0;
+
+  // Override the existing post padding to avoid double padding
+  &.post {
+    padding: 15px 20px;
+  }
 
   .post-link-url {
     display: block;
