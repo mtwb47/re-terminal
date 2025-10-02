@@ -9,7 +9,7 @@
       <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}">
         <h1 class="post-title">
           {{ if eq .Type "links" }}
-            <a href="{{ .Params.url | default .Permalink | safeURL }}">🔗 {{ .Title | markdownify }}</a>
+            <a href="{{ .Params.link_url | default .Permalink | safeURL }}">🔗 {{ .Title | markdownify }}</a>
           {{ else }}
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
           {{ end }}
@@ -23,8 +23,8 @@
           {{- with .Params.Author -}}
             <span class="post-author">{{- . -}}</span>
           {{- end -}}
-          {{- if and (eq .Type "links") .Params.url -}}
-            <span class="post-link-url">→ <a href="{{ .Params.url | safeURL }}" target="_blank" rel="noopener">{{ .Params.url }}</a></span>
+          {{- if and (eq .Type "links") .Params.link_url -}}
+            <span class="post-link-url">→ <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>
           {{- end -}}
           <!-- comments counter -->
           {{ partial "comments_counter.html" . }}

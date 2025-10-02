@@ -13,5 +13,5 @@ readingTime = false
 hideComments = false
 color = "" #color from the theme settings
 type = "links"
-url = "" # The external URL for the link post
+link_url = "" # The external URL for the link post
 +++
