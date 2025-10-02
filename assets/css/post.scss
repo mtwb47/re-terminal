@@ -153,50 +153,48 @@ figure:has(.post-cover) {
 
 // Link post styling
 .link-post {
-  // Remove background from the main container
+  background-color: var(--link-post-background);
+  border-radius: 8px;
+  margin: 20px 0;
+
+  // Override the existing post styling
   &.post {
-    padding: 20px 0; // Keep normal post padding
+    padding: 15px 20px 20px 20px;
+    margin: 20px 0;
   }
 
-  // Apply background only to title and content area
+  // Ensure no gaps in background
   .post-title,
   .post-meta,
   .post-tags,
   .post-content {
-    background-color: var(--link-post-background);
-    padding: 15px 20px;
-    margin-left: 0;
-    margin-right: 0;
+    background: none; // Remove individual backgrounds
+    padding-left: 0;
+    padding-right: 0;
   }
 
-  // Connect the background sections
   .post-title {
-    border-radius: 8px 8px 0 0;
-    margin-bottom: 0;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
   }
 
   .post-meta {
-    border-radius: 0;
-    padding-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
   }
 
   .post-tags {
-    border-radius: 0;
-    padding-top: 0;
-    margin-bottom: 0;
+    margin-bottom: 20px;
   }
 
   .post-content {
-    border-radius: 0 0 8px 8px;
-    padding-top: 0;
+    margin-top: 0;
   }
 
+  // Style the link URL inline with other metadata
   .post-link-url {
-    display: block;
+    display: inline;
     font-size: 0.9rem;
     opacity: 0.8;
-    margin-top: 5px;
 
     a {
       text-decoration: none;
@@ -205,6 +203,13 @@ figure:has(.post-cover) {
       &:hover {
         text-decoration: underline;
       }
+    }
+
+    // Add the separator before the link
+    &::before {
+      content: "::";
+      display: inline-block;
+      margin: 0 8px;
     }
   }
 }
