@@ -1,11 +1,7 @@
 {{ define "main" }}
-<article class="post{{ if eq .Type "links" }} link-post{{ end }}">
+<article class="post link-post">
   <h1 class="post-title">
-    {{ if eq .Type "links" }}
-      <a href="{{ .Params.url | default .Permalink }}">🔗 {{ .Title | markdownify }}</a>
-    {{ else }}
-      <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
-    {{ end }}
+    <a href="{{ .Params.url | default .Permalink }}">🔗 {{ .Title | markdownify }}</a>
   </h1>
   <div class="post-meta">
     {{- if .Date -}}
@@ -19,7 +15,7 @@
     {{- with .Params.Author -}}
       <span class="post-author">{{ . }}</span>
     {{- end -}}
-    {{- if and (eq .Type "links") .Params.url -}}
+    {{- if .Params.url -}}
       <span class="post-link-url">→ <a href="{{ .Params.url }}" target="_blank" rel="noopener">{{ .Params.url }}</a></span>
     {{- end -}}
     <!-- comments counter -->

@@ -150,3 +150,27 @@ figure:has(.post-cover) {
     margin-top: 0;
   }
 }
+
+// Link post styling
+.link-post {
+  background-color: var(--link-post-background);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+
+  .post-link-url {
+    display: block;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-top: 5px;
+
+    a {
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

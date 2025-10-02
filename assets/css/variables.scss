@@ -20,6 +20,9 @@
   --syntax-code-copy-button-background: hsla(0, 0%, 87.8%, 0.2);
   --syntax-code-copy-button-color: #bbb;
   --syntax-code-copy-button-box-shadow-color: rgba(0, 0, 0, 0.2);
+
+  // Link post background color for dark theme
+  --link-post-background: #3c3836;
 }
 
 // Native CSS Variable aren't supported in a combination with MEDIA QUERIES. Wait for a new standard https://drafts.csswg.org/css-env-1/

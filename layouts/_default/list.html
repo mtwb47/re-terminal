@@ -6,9 +6,13 @@
   {{ end }}
   <div class="posts">
     {{ range .Paginator.Pages }}
-      <article class="post on-list">
+      <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}">
         <h1 class="post-title">
-          <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+          {{ if eq .Type "links" }}
+            <a href="{{ .Params.url | default .Permalink }}">🔗 {{ .Title | markdownify }}</a>
+          {{ else }}
+            <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+          {{ end }}
         </h1>
         <div class="post-meta">
           {{- if .Date -}}
@@ -18,6 +22,9 @@
           {{- end -}}
           {{- with .Params.Author -}}
             <span class="post-author">{{- . -}}</span>
+          {{- end -}}
+          {{- if and (eq .Type "links") .Params.url -}}
+            <span class="post-link-url">→ <a href="{{ .Params.url }}" target="_blank" rel="noopener">{{ .Params.url }}</a></span>
           {{- end -}}
           <!-- comments counter -->
           {{ partial "comments_counter.html" . }}
