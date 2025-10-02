@@ -202,6 +202,11 @@ figure:has(.post-cover) {
   .post-link-url {
     display: none;
   }
+
+  // Hide horizontal rules in link posts
+  .post-content hr {
+    display: none;
+  }
 }
 
 // Link post button styling
