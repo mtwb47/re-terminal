@@ -155,27 +155,21 @@ figure:has(.post-cover) {
 .link-post {
   // Apply background to the entire post, but position it to start at the title
   &.post {
-    background-color: var(--link-post-background);
-    border-radius: 8px;
+    // background-color: var(--link-post-background);
+    // border-radius: 8px;
     margin: 20px auto;
-    padding: 0 20px; // Add side padding to container
+    padding: 20px 0; // Back to normal padding
 
     // Light theme override
-    [data-theme="light"] & {
-      background-color: #d5c4a1;
-    }
+    // [data-theme="light"] & {
+    //   background-color: #d5c4a1;
+    // }
   }
 
-  // Add padding to the content that needs it
+  // Revert title to normal
   .post-title {
-    padding: 15px 20px; // Add back side padding for the text
-    margin: 0 -20px; // Extend title to full width for border
-
-    // Make sure the border spans the full width regardless of padding
-    &:after {
-      left: 20px; // Offset for the negative margin
-      width: 100%;
-    }
+    padding: 20px 0;
+    margin: 0;
   }
 
   .post-meta {
