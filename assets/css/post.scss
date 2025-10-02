@@ -163,14 +163,8 @@ figure:has(.post-cover) {
 
   // Add padding to the content that needs it
   .post-title {
-    padding: 15px 20px;
-    margin: 0;
-
-    // Make the border match regular posts (full width)
-    &:after {
-      width: 100%;
-      left: -20px; // Extend beyond the padding to match regular posts
-    }
+    padding: 15px 0; // Remove side padding from title
+    margin: 0 20px; // Add margin instead to position text but keep border full width
   }
 
   .post-meta {
