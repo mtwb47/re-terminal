@@ -153,63 +153,58 @@ figure:has(.post-cover) {
 
 // Link post styling
 .link-post {
-  background-color: var(--link-post-background);
-  border-radius: 8px;
-  margin: 20px 0;
-
-  // Override the existing post styling
+  // Remove background and padding from main post container
   &.post {
-    padding: 15px 20px 20px 20px;
-    margin: 20px 0;
+    padding: 20px 0; // Keep normal spacing
+    margin: 20px auto;
   }
 
-  // Ensure no gaps in background
+  // Apply background only to the inner content wrapper
   .post-title,
   .post-meta,
   .post-tags,
-  .post-content {
-    background: none; // Remove individual backgrounds
-    padding-left: 0;
-    padding-right: 0;
+  .post-content,
+  & > div:last-child { // read more button container
+    background-color: var(--link-post-background);
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
+  // Round the corners and connect sections
   .post-title {
-    margin-bottom: 15px;
+    border-radius: 8px 8px 0 0;
+    padding-top: 15px;
     padding-bottom: 15px;
+    margin-bottom: 0;
   }
 
   .post-meta {
-    margin-bottom: 10px;
+    padding-top: 0;
+    padding-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .post-tags {
-    margin-bottom: 20px;
+    padding-top: 0;
+    padding-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .post-content {
+    padding-top: 10px;
+    padding-bottom: 15px;
     margin-top: 0;
   }
 
-  // Style the link URL inline with other metadata
+  // Read more button section
+  & > div:last-child {
+    border-radius: 0 0 8px 8px;
+    padding-top: 0;
+    padding-bottom: 15px;
+  }
+
+  // Hide the link URL from metadata
   .post-link-url {
-    display: inline;
-    font-size: 0.9rem;
-    opacity: 0.8;
-
-    a {
-      text-decoration: none;
-      color: inherit;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-
-    // Add the separator before the link
-    &::before {
-      content: "::";
-      display: inline-block;
-      margin: 0 8px;
-    }
+    display: none;
   }
 }
