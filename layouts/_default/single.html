@@ -50,12 +50,15 @@
     </div>
   {{ end }}
 
+  <!-- Debug: Type={{ .Type }}, link_url={{ .Params.link_url }} -->
   {{- if and (eq .Type "links") .Params.link_url -}}
     <div class="link-post-button">
       <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener" class="button">
         🔗 Visit External Link
       </a>
     </div>
+  {{- else -}}
+    <!-- Debug: Button not shown - Type: {{ .Type }}, HasLinkURL: {{ if .Params.link_url }}true{{ else }}false{{ end }} -->
   {{- end -}}
 
   <div class="post-content">
