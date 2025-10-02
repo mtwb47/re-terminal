@@ -168,7 +168,7 @@ figure:has(.post-cover) {
 
   // Add padding to the content that needs it
   .post-title {
-    padding: 15px 0; // Remove side padding since container has it
+    padding: 15px 20px; // Add back side padding for the text
     margin: 0 -20px; // Extend title to full width for border
   }
 
