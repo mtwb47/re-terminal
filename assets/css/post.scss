@@ -166,10 +166,10 @@ figure:has(.post-cover) {
     padding: 15px 20px;
     margin: 0;
 
-    // Contain the border within the background
+    // Make the border match regular posts (full width)
     &:after {
-      width: calc(100% - 40px); // Account for left/right padding
-      margin-left: 0;
+      width: 100%;
+      left: -20px; // Extend beyond the padding to match regular posts
     }
   }
 
