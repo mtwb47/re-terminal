@@ -170,6 +170,11 @@ figure:has(.post-cover) {
   .post-title {
     padding: 20px 0;
     margin: 0;
+
+    // Change the border color for link posts
+    &:after {
+      border-bottom-color: #8ec97c;
+    }
   }
 
   .post-meta {
