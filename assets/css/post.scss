@@ -153,60 +153,39 @@ figure:has(.post-cover) {
 
 // Link post styling
 .link-post {
-  // Remove background and padding from main post container
+  // Apply background to the entire post, but position it to start at the title
   &.post {
-    padding: 20px 0; // Keep normal spacing
-    margin: 20px auto;
-  }
-
-  // Apply background only to the inner content wrapper
-  .post-title,
-  .post-meta,
-  .post-tags,
-  .post-content,
-  & > div:last-child { // read more button container
     background-color: var(--link-post-background);
-    padding-left: 20px;
-    padding-right: 20px;
+    border-radius: 8px;
+    margin: 20px auto;
+    padding: 0; // Remove default padding
   }
 
-  // Round the corners and connect sections
+  // Add padding to the content that needs it
   .post-title {
-    border-radius: 8px 8px 0 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    margin-bottom: 0;
+    padding: 15px 20px;
+    margin: 0;
   }
 
   .post-meta {
-    padding-top: 0;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    padding: 0 20px 10px 20px;
+    margin: 0;
   }
 
   .post-tags {
-    padding-top: 0;
-    padding-bottom: 10px;
-    margin-bottom: 0;
-    margin-top: 0;
-  }
-
-  // If no tags, connect meta directly to content
-  .post-meta:not(:has(+ .post-tags)) {
-    padding-bottom: 10px;
+    padding: 0 20px 10px 20px;
+    margin: 0;
   }
 
   .post-content {
-    padding-top: 10px;
-    padding-bottom: 15px;
-    margin-top: 0;
+    padding: 10px 20px 15px 20px;
+    margin: 0;
   }
 
   // Read more button section
   & > div:last-child {
-    border-radius: 0 0 8px 8px;
-    padding-top: 0;
-    padding-bottom: 15px;
+    padding: 0 20px 15px 20px;
+    margin: 0;
   }
 
   // Hide the link URL from metadata
