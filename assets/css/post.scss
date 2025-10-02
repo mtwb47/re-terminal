@@ -159,6 +159,11 @@ figure:has(.post-cover) {
     border-radius: 8px;
     margin: 20px auto;
     padding: 0 20px; // Add side padding to container
+
+    // Light theme override
+    [data-theme="light"] & {
+      background-color: #d5c4a1;
+    }
   }
 
   // Add padding to the content that needs it
