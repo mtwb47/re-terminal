@@ -1,7 +1,7 @@
 {{ define "main" }}
 <article class="post link-post">
   <h1 class="post-title">
-    <a href="{{ .Params.url | default .Permalink }}">🔗 {{ .Title | markdownify }}</a>
+    <a href="{{ .Permalink }}">🔗 {{ .Title | markdownify }}</a>
   </h1>
   <div class="post-meta">
     {{- if .Date -}}
@@ -14,9 +14,6 @@
     {{- end -}}
     {{- with .Params.Author -}}
       <span class="post-author">{{ . }}</span>
-    {{- end -}}
-    {{- if .Params.url -}}
-      <span class="post-link-url">→ <a href="{{ .Params.url }}" target="_blank" rel="noopener">{{ .Params.url }}</a></span>
     {{- end -}}
     <!-- comments counter -->
     {{- if ne (.Param "commentCounter") false -}}
@@ -45,6 +42,14 @@
       {{ .TableOfContents }}
     </div>
   {{ end }}
+
+  {{- if .Params.link_url -}}
+    <div class="link-post-button">
+      <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener" class="button">
+        🔗 Visit External Link
+      </a>
+    </div>
+  {{- end -}}
 
   <div class="post-content">
     {{- with .Content -}}
