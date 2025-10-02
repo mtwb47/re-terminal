@@ -203,3 +203,24 @@ figure:has(.post-cover) {
     display: none;
   }
 }
+
+// Link post button styling
+.link-post-button {
+  margin: 20px 0;
+  text-align: center;
+
+  .button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: var(--accent);
+    color: var(--accent-contrast-color);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
