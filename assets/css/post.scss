@@ -158,33 +158,33 @@ figure:has(.post-cover) {
     background-color: var(--link-post-background);
     border-radius: 8px;
     margin: 20px auto;
-    padding: 0; // Remove default padding
+    padding: 0 20px; // Add side padding to container
   }
 
   // Add padding to the content that needs it
   .post-title {
-    padding: 15px 20px; // Add back the padding
-    margin: 0 -20px; // Negative margin to break out of container and match regular posts
+    padding: 15px 0; // Remove side padding since container has it
+    margin: 0 -20px; // Extend title to full width for border
   }
 
   .post-meta {
-    padding: 0 20px 10px 20px;
+    padding: 0 0 10px 0;
     margin: 0;
   }
 
   .post-tags {
-    padding: 0 20px 10px 20px;
+    padding: 0 0 10px 0;
     margin: 0;
   }
 
   .post-content {
-    padding: 10px 20px 15px 20px;
+    padding: 10px 0 15px 0;
     margin: 0;
   }
 
   // Read more button section
   & > div:last-child {
-    padding: 0 20px 15px 20px;
+    padding: 0 0 15px 0;
     margin: 0;
   }
 
