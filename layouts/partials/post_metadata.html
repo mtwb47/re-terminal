@@ -11,11 +11,11 @@
     <span class="post-link-url">→ <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>
   {{- end -}}
   {{- if ne (.Param "commentCounter") false -}}
-    {{- if or .Date .Params.Author (and (eq .Type "links") .Params.link_url) }} - {{ end -}}
+    {{- if or .Date .Params.Author }} - {{ end -}}
     {{ partial "comments_counter.html" . }}
   {{- end -}}
   {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
-    {{- if or .Date .Params.Author (ne (.Param "commentCounter") false) (and (eq .Type "links") .Params.link_url) }} - {{ end -}}
+    {{- if or .Date .Params.Author (ne (.Param "commentCounter") false) }} - {{ end -}}
     <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
   {{- end -}}
 </div>
