@@ -6,7 +6,7 @@ you can use the snippet bellow to add disqus comments counter to your posts
 
 <span>
   <a class="disqus_comments" href="{{ .Permalink }}#disqus_thread">
-    <span 
+    <span
     class="disqus-comment-count"
     data-disqus-url="{{ with .Params.disqus_url }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}">O {{ $.Site.Params.comments | default "comments" }}</span>
     {{ .Site.Params.noCounter }}
