@@ -36,7 +36,7 @@
 
     & > *:not(:first-child) {
       &::before {
-        content: "::";
+        content: "-";
         display: inline-block;
         margin: 0 8px;
       }
