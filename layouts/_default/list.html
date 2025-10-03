@@ -15,21 +15,7 @@
           {{ end }}
         </h1>
         <div class="post-meta">
-          {{- with .Params.Author -}}
-            <span class="post-author">{{- . -}}</span>
-          {{- end -}}
-          {{- if .Date -}}
-            {{- if .Params.Author -}} - {{- end -}}
-            <time class="post-date">
-              {{- .Date.Format "01/02/2006" -}}
-            </time>
-          {{- end -}}
-          {{- if and (eq .Type "links") .Params.link_url -}}
-            <span class="post-link-url"> - → <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>
-          {{- end -}}
-          <!-- comments counter -->
-          {{- if or .Date .Params.Author -}} - {{- end -}}
-          {{ partial "comments_counter.html" . }}
+          {{ with .Params.Author }}<span class="post-author">{{ . }}</span>{{ end }}{{ if .Date }}{{ if .Params.Author }} - {{ end }}<time class="post-date">{{ .Date.Format "01/02/2006" }}</time>{{ end }}{{ if and (eq .Type "links") .Params.link_url }}{{ if or .Date .Params.Author }} - {{ end }}<span class="post-link-url">→ <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>{{ end }}{{ if or .Date .Params.Author }} - {{ end }}{{ partial "comments_counter.html" . }}
         </div>
 
         {{ if .Params.tags }}
