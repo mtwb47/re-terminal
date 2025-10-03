@@ -36,10 +36,13 @@
 
     & > *:not(:first-child) {
       &::before {
-        content: "-";
-        display: inline-block;
-        margin: 0 8px;
+        content: " - ";
+        display: inline;
       }
+    }
+
+    span, time {
+      display: inline;
     }
   }
 
