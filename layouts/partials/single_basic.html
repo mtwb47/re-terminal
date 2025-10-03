@@ -59,7 +59,7 @@ HERE INSERT ANY CUSTOM <script/> or <style/>
   {{ partial "comments_counter.html" . }}
   {{ if and (.Param "readingTime") (eq (.Param "readingTime") true) }}
     {{ if or .Params.Date .Params.Author }} - {{ end }}
-    <span class="post-reading-time"> {{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
+    <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
   {{ end }}
 </div>
 
