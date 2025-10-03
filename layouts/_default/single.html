@@ -12,6 +12,7 @@
       <span class="post-author">{{ . }}</span>
     {{- end -}}
     {{- if .Date -}}
+      {{- if .Params.Author -}} - {{- end -}}
       <time class="post-date">
         {{- .Date.Format "01/02/2006" -}}
         {{- if $.Site.Params.showLastUpdated -}}
@@ -20,13 +21,15 @@
       </time>
     {{- end -}}
     {{- if and (eq .Type "links") .Params.link_url -}}
-      <span class="post-link-url">→ <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>
+      <span class="post-link-url"> - → <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.link_url }}</a></span>
     {{- end -}}
     <!-- comments counter -->
     {{- if ne (.Param "commentCounter") false -}}
-    {{ partial "comments_counter.html" . }}
+      {{- if or .Date .Params.Author -}} - {{- end -}}
+      {{ partial "comments_counter.html" . }}
     {{- end -}}
     {{- if and (.Param "readingTime") (eq (.Param "readingTime") true) -}}
+      {{- if or .Date .Params.Author (.Param "commentCounter") -}} - {{- end -}}
       <span class="post-reading-time">{{ .ReadingTime }} {{ $.Site.Params.minuteReadingTime | default "min read" }} ({{ .WordCount }} {{ $.Site.Params.words | default "words" }})</span>
     {{- end -}}
   </div>
