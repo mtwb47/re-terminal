@@ -33,7 +33,6 @@
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .RelPermalink | absURL }}</guid>
       <description>{{ if and (eq .Type "links") .Params.link_url }}{{ .Content | html }}<br><br><strong>Link:</strong> <a href="{{ .Params.link_url }}">{{ .Params.link_url }}</a>{{ else }}{{ .Content | html }}{{ end }}</description>
-      <content>{{ if and (eq .Type "links") .Params.link_url }}{{ .Content | html }}<br><br><strong>Link:</strong> <a href="{{ .Params.link_url }}">{{ .Params.link_url }}</a>{{ else }}{{ .Content | html }}{{ end }}</content>
     </item>
     {{ end }}
   </channel>
