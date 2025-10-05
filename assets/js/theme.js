@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // New theme switcher elements
   const themeSwitcher = document.getElementById('theme-switcher');
+  const themeToggleButton = document.getElementById('theme-toggle-button');
+  const currentThemeName = document.getElementById('current-theme-name');
   const themeOptions = document.querySelectorAll('.theme-option');
 
   // Theme configuration
@@ -46,7 +48,10 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('themeFamily', family);
     localStorage.setItem('themeVariant', variant);
 
-    // No need to update theme name display in minimal version
+    // Update current theme name display
+    if (currentThemeName && themes[family]) {
+      currentThemeName.textContent = family;
+    }
 
     // Update active theme option
     themeOptions.forEach(option => {
@@ -74,7 +79,19 @@ document.addEventListener('DOMContentLoaded', function() {
   // Initialize theme on page load
   applyTheme(currentThemeFamily, currentThemeVariant);
 
-  // No dropdown functionality needed for minimal version
+  // Theme toggle button functionality
+  if (themeToggleButton) {
+    themeToggleButton.addEventListener('click', function() {
+      themeSwitcher.classList.toggle('open');
+    });
+  }
+
+  // Close theme switcher when clicking outside
+  document.addEventListener('click', function(e) {
+    if (themeSwitcher && !themeSwitcher.contains(e.target)) {
+      themeSwitcher.classList.remove('open');
+    }
+  });
 
   // Theme option selection
   themeOptions.forEach(option => {
@@ -82,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const selectedFamily = this.dataset.theme;
       const currentVariant = localStorage.getItem('themeVariant') || 'dark';
       applyTheme(selectedFamily, currentVariant);
+      themeSwitcher.classList.remove('open');
     });
   });
 

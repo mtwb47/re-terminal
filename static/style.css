@@ -853,17 +853,9 @@ a.read-more:active {
   font-family: monospace;
   font-size: 0.8rem;
   color: var(--text-secondary);
-  line-height: 1.4;
 }
 
-.theme-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  max-width: 200px;
-}
-
-.theme-option {
+.theme-toggle-button {
   background: none;
   border: none;
   color: var(--text-secondary);
@@ -871,8 +863,48 @@ a.read-more:active {
   font-family: inherit;
   font-size: inherit;
   padding: 0;
-  margin: 0;
   text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.theme-toggle-button:hover {
+  color: var(--accent);
+}
+
+.theme-options {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  padding: 8px;
+  margin-bottom: 4px;
+  min-width: 120px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.2s ease;
+}
+
+.theme-switcher.open .theme-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.theme-option {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 4px 0;
+  margin: 0;
+  text-align: left;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -882,8 +914,6 @@ a.read-more:active {
 
 .theme-option.active {
   color: var(--accent);
-  font-weight: bold;
-  text-decoration: none;
 }
 
 /* Hide theme switcher on small screens */
@@ -891,5 +921,15 @@ a.read-more:active {
   .theme-switcher {
     display: none;
   }
+}
+
+/* ===== LINK POST FIXES ===== */
+
+.link-post .post-title:after {
+  border-bottom-color: var(--accent) !important;
+}
+
+.link-post .post-meta {
+  color: var(--accent) !important;
 }
 
