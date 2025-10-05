@@ -848,96 +848,42 @@ a.read-more:active {
 .theme-switcher {
   position: fixed;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 1001;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.theme-family-selector {
-  background: var(--menu-bg);
-  border: 2px solid var(--border);
-  border-radius: 8px;
-  padding: 8px;
-  min-width: 140px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-}
-
-.theme-switcher.open .theme-family-selector {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-.theme-family-button {
-  background: var(--accent);
-  color: var(--bg-primary);
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  cursor: pointer;
-  font-family: "Anton", sans-serif;
-  font-size: 0.9rem;
-  font-weight: bold;
-  min-width: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s ease;
-  outline: none;
-}
-
-.theme-family-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-.theme-family-button::after {
-  content: "▲";
+  font-family: monospace;
   font-size: 0.8rem;
-  transition: transform 0.3s ease;
-}
-
-.theme-switcher.open .theme-family-button::after {
-  transform: rotate(180deg);
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 .theme-options {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-top: 8px;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 200px;
 }
 
 .theme-option {
-  background: transparent;
-  color: var(--menu-text);
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 8px 12px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
   cursor: pointer;
-  font-family: "Anton", sans-serif;
-  font-size: 0.85rem;
-  text-align: left;
-  transition: all 0.2s ease;
-  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  transition: color 0.2s ease;
 }
 
 .theme-option:hover {
-  background: var(--accent);
-  color: var(--bg-primary);
+  color: var(--accent);
 }
 
 .theme-option.active {
-  background: var(--accent);
-  color: var(--bg-primary);
+  color: var(--accent);
   font-weight: bold;
+  text-decoration: none;
 }
 
 /* Hide theme switcher on small screens */
