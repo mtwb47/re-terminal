@@ -1,6 +1,3 @@
-/* ===== THEME SYSTEM ===== */
-
-/* Default theme: Gruvbox Dark */
 :root {
   --bg-primary: #282828;
   --bg-secondary: #282828;
@@ -22,7 +19,6 @@
   --hamburger-color: #ebdbb2;
 }
 
-/* Gruvbox Light */
 [data-theme-family="gruvbox"][data-theme-variant="light"] {
   --bg-primary: #fbf1c7;
   --bg-secondary: #f9f5d7;
@@ -44,7 +40,6 @@
   --hamburger-color: #3c3836;
 }
 
-/* Everforest Dark */
 [data-theme-family="everforest"][data-theme-variant="dark"] {
   --bg-primary: #2d353b;
   --bg-secondary: #343f44;
@@ -66,7 +61,6 @@
   --hamburger-color: #d3c6aa;
 }
 
-/* Everforest Light */
 [data-theme-family="everforest"][data-theme-variant="light"] {
   --bg-primary: #fdf6e3;
   --bg-secondary: #f4f0d9;
@@ -88,7 +82,6 @@
   --hamburger-color: #5c6a72;
 }
 
-/* Catppuccin Mocha (Dark) */
 [data-theme-family="catppuccin"][data-theme-variant="dark"] {
   --bg-primary: #1e1e2e;
   --bg-secondary: #181825;
@@ -110,7 +103,6 @@
   --hamburger-color: #cdd6f4;
 }
 
-/* Catppuccin Latte (Light) */
 [data-theme-family="catppuccin"][data-theme-variant="light"] {
   --bg-primary: #eff1f5;
   --bg-secondary: #e6e9ef;
@@ -132,7 +124,6 @@
   --hamburger-color: #4c4f69;
 }
 
-/* High Contrast Dark */
 [data-theme-family="high-contrast"][data-theme-variant="dark"] {
   --bg-primary: #000000;
   --bg-secondary: #111111;
@@ -154,7 +145,6 @@
   --hamburger-color: #ffffff;
 }
 
-/* High Contrast Light */
 [data-theme-family="high-contrast"][data-theme-variant="light"] {
   --bg-primary: #ffffff;
   --bg-secondary: #f0f0f0;
@@ -176,7 +166,6 @@
   --hamburger-color: #000000;
 }
 
-/* Oxocarbon Dark */
 [data-theme-family="oxocarbon"][data-theme-variant="dark"] {
   --bg-primary: #161616;
   --bg-secondary: #262626;
@@ -198,7 +187,6 @@
   --hamburger-color: #f4f4f4;
 }
 
-/* Oxocarbon Light */
 [data-theme-family="oxocarbon"][data-theme-variant="light"] {
   --bg-primary: #ffffff;
   --bg-secondary: #f4f4f4;
@@ -220,7 +208,6 @@
   --hamburger-color: #161616;
 }
 
-/* Dracula */
 [data-theme-family="dracula"][data-theme-variant="dark"] {
   --bg-primary: #282a36;
   --bg-secondary: #44475a;
@@ -242,7 +229,6 @@
   --hamburger-color: #f8f8f2;
 }
 
-/* Dracula Light (custom interpretation) */
 [data-theme-family="dracula"][data-theme-variant="light"] {
   --bg-primary: #f8f8f2;
   --bg-secondary: #e6e6fa;
@@ -264,7 +250,6 @@
   --hamburger-color: #282a36;
 }
 
-/* Nord */
 [data-theme-family="nord"][data-theme-variant="dark"] {
   --bg-primary: #2e3440;
   --bg-secondary: #3b4252;
@@ -286,7 +271,6 @@
   --hamburger-color: #eceff4;
 }
 
-/* Nord Light */
 [data-theme-family="nord"][data-theme-variant="light"] {
   --bg-primary: #eceff4;
   --bg-secondary: #e5e9f0;
@@ -308,7 +292,6 @@
   --hamburger-color: #2e3440;
 }
 
-/* Rose Pine */
 [data-theme-family="rosepine"][data-theme-variant="dark"] {
   --bg-primary: #191724;
   --bg-secondary: #1f1d2e;
@@ -330,7 +313,6 @@
   --hamburger-color: #e0def4;
 }
 
-/* Rose Pine Dawn (Light) */
 [data-theme-family="rosepine"][data-theme-variant="light"] {
   --bg-primary: #faf4ed;
   --bg-secondary: #fffaf3;
@@ -352,7 +334,6 @@
   --hamburger-color: #575279;
 }
 
-/* Tokyo Night Dark */
 [data-theme-family="tokyonight"][data-theme-variant="dark"] {
   --bg-primary: #1a1b26;
   --bg-secondary: #16161e;
@@ -374,7 +355,6 @@
   --hamburger-color: #c0caf5;
 }
 
-/* Tokyo Night Light */
 [data-theme-family="tokyonight"][data-theme-variant="light"] {
   --bg-primary: #d5d6db;
   --bg-secondary: #dfe0e5;
@@ -396,7 +376,6 @@
   --hamburger-color: #343b58;
 }
 
-/* Solarized Dark */
 [data-theme-family="solarized"][data-theme-variant="dark"] {
   --bg-primary: #002b36;
   --bg-secondary: #073642;
@@ -418,7 +397,6 @@
   --hamburger-color: #839496;
 }
 
-/* Solarized Light */
 [data-theme-family="solarized"][data-theme-variant="light"] {
   --bg-primary: #fdf6e3;
   --bg-secondary: #eee8d5;
@@ -440,7 +418,6 @@
   --hamburger-color: #657b83;
 }
 
-/* Monokai Dark */
 [data-theme-family="monokai"][data-theme-variant="dark"] {
   --bg-primary: #272822;
   --bg-secondary: #383830;
@@ -462,7 +439,6 @@
   --hamburger-color: #f8f8f2;
 }
 
-/* Monokai Light */
 [data-theme-family="monokai"][data-theme-variant="light"] {
   --bg-primary: #fafafa;
   --bg-secondary: #f5f5f5;
@@ -484,7 +460,6 @@
   --hamburger-color: #272822;
 }
 
-/* Ayu Dark */
 [data-theme-family="ayu"][data-theme-variant="dark"] {
   --bg-primary: #0f1419;
   --bg-secondary: #0d1016;
@@ -506,7 +481,6 @@
   --hamburger-color: #bfbdb6;
 }
 
-/* Ayu Light */
 [data-theme-family="ayu"][data-theme-variant="light"] {
   --bg-primary: #fafafa;
   --bg-secondary: #f8f9fa;
@@ -528,7 +502,6 @@
   --hamburger-color: #5c6166;
 }
 
-/* Base body styles using CSS variables */
 body {
   background-color: var(--bg-primary) !important;
   color: var(--text-primary) !important;
@@ -560,15 +533,14 @@ body {
 
 .calls {
   display: flex;
-  justify-content: center;   /* center the two links */
-  align-items: center;       /* line-up their boxes in the middle */
-  gap: 2rem;                 /* space between Mastodon & RSS */
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
   width: 100%;
   margin: 2rem 0;
 }
 
 .calls a {
-  /* make each link only as big as its content, and allow flex centering */
   display: inline-flex;
   align-items: center;
   text-decoration: none;
@@ -583,28 +555,24 @@ body {
   width: 1.5em;
   height: 1.5em;
   flex-shrink: 0;
-  object-fit: contain;        /* guard against weird intrinsic padding */
-  vertical-align: middle;     /* extra baseline safeguard */
+  object-fit: contain;
+  vertical-align: middle;
 }
 
 .calls h5 {
-  /* force the heading into the exact same line-box as the icon */
   display: inline-block !important;
   height: 1.5em !important;
   line-height: 1.5em !important;
-
   margin: 3px !important;
   font-size: 1rem;
   font-weight: 500;
 }
 
-/* RSS-only margin tweak */
 .calls img.rss-icon {
   height: 0.8em !important;
   width: auto !important;
 }
 
-/* Email-only margin tweak */
 .calls img.email-icon {
   height: 0.9em !important;
   width: auto !important;
@@ -612,7 +580,7 @@ body {
 
 .navigation-menu ul {
   display: flex;
-  justify-content: center;  /* push all items to the right */
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -679,7 +647,6 @@ a:hover .logo .blog {
     letter-spacing: 0.12em;
 }
 
-/* Responsive logo font sizes */
 @media (max-width: 1200px) {
     .logo .matts, .logo .blog, a:hover .logo .matts, a:hover .logo .blog {
         font-size: 5em;
@@ -713,18 +680,14 @@ a:hover .logo .blog {
     }
 }
 
-
-
-/* Make summary look like an h3 */
 details summary {
-  font-size: 1.4em; /* Matches <h3> */
+  font-size: 1.4em;
   font-weight: bold;
   margin: 1em 0;
   cursor: pointer;
-  list-style: none; /* Prevent default bullets in some browsers */
+  list-style: none;
 }
 
-/* Hide default disclosure triangles (Chrome, Safari, Firefox) */
 details summary::-webkit-details-marker {
   display: none;
 }
@@ -732,7 +695,6 @@ details summary::marker {
   display: none;
 }
 
-/* Insert custom arrow before the summary text */
 details summary::before {
   content: "► ";
   display: inline-block;
@@ -741,30 +703,25 @@ details summary::before {
   transform-origin: center;
 }
 
-/* Rotate arrow when open */
 details[open] summary::before {
   transform: rotate(90deg);
 }
 
-/* Style the collapsible content block */
 details .content {
   padding: 0.5em 1em;
   margin-bottom: 1em;
 }
 
-/* Optional: spacing between collapsibles */
 details {
   margin-bottom: 1em;
 }
 
-/* Style LastFM on the Now Page */
 .lastfm h3 { margin-top: 1.25rem; }
 .lastfm ol { padding-left: 1.25rem; }
 .lastfm li { margin: .15rem 0; display: list-item; }
 .lastfm .badge { display:inline-block; margin-left:.35rem; padding:0 .5em; border-radius:.75em; font-size:.85em; opacity:.9; border:1px solid currentColor; }
 .lastfm .lastfm-updated { opacity:.7; font-size:.9em; margin-bottom:.25rem; }
 .lastfm em { opacity:.8; }
-
 
 a.read-more,
 a.read-more:hover,
@@ -780,7 +737,6 @@ a.read-more:active {
   text-align: right;
 }
 
-/* Desktop menu styles */
 .new-menu .menu-items {
   display: flex;
   justify-content: center;
@@ -808,7 +764,6 @@ a.read-more:active {
   color: var(--bg-primary);
 }
 
-/* Hamburger button - hidden by default */
 .menu-toggle {
   display: none;
   background: none;
@@ -829,12 +784,11 @@ a.read-more:active {
   transition: all 0.3s ease;
 }
 
-/* Mobile responsive styles */
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
   }
-  
+
   .new-menu .menu-items {
     display: none;
     flex-direction: column;
@@ -846,34 +800,33 @@ a.read-more:active {
     border-top: 1px solid var(--accent);
     z-index: 1000;
   }
-  
+
   .new-menu .menu-items.active {
     display: flex;
   }
-  
+
   .new-menu {
     position: relative;
   }
-  
+
   .new-menu li {
     margin: 0;
     border-bottom: 1px solid var(--bg-tertiary);
   }
-  
+
   .new-menu li:last-child {
     border-bottom: none;
   }
-  
+
   .new-menu li a {
     padding: 1rem;
     text-align: center;
   }
-  
-  /* Mobile dropdown styles */
+
   .dropdown {
     margin: 0;
   }
-  
+
   .dropdown-content {
     position: static;
     box-shadow: none;
@@ -886,7 +839,7 @@ a.read-more:active {
     transition: all 0.3s ease;
     visibility: hidden;
   }
-  
+
   .dropdown-content a {
     padding: 0.8rem 1rem;
     text-align: center;
@@ -897,11 +850,11 @@ a.read-more:active {
     box-sizing: border-box;
     transition: background-color 0.2s ease;
   }
-  
+
   .dropdown-content a:last-child {
     border-bottom: none;
   }
-  
+
   .dropdown.show .dropdown-content {
     max-height: none;
     opacity: 1;
@@ -911,7 +864,7 @@ a.read-more:active {
 
 .myfoot ul {
   display: flex;
-  justify-content: center;  /* push all items to the right */
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -936,9 +889,6 @@ a.read-more:active {
   color: var(--bg-primary);
 }
 
-/* Dropdown Menu CSS */
-
-/* The dropdown container <li> - styled exactly like other menu items */
 .dropdown {
   position: relative;
   background-color: var(--menu-bg);
@@ -947,7 +897,6 @@ a.read-more:active {
   font-size: 1.3em;
 }
 
-/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   opacity: 0;
   visibility: hidden;
@@ -963,7 +912,6 @@ a.read-more:active {
   transition: all 0.3s ease;
 }
 
-/* Links inside the dropdown */
 .dropdown-content a {
   color: var(--menu-text);
   padding: 0.3rem 0.8rem;
@@ -974,20 +922,17 @@ a.read-more:active {
   transition: background-color 0.2s ease;
 }
 
-/* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: var(--accent);
   color: var(--bg-primary);
 }
 
-/* Show the dropdown menu */
 .show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
 
-/* Theme Toggle Button */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -1026,16 +971,11 @@ a.read-more:active {
   transform: rotate(180deg);
 }
 
-/* Hide theme toggle on mobile */
 @media (max-width: 768px) {
   .theme-toggle {
     display: none;
   }
 }
-
-/* Legacy theme overrides removed - now using CSS custom properties */
-
-/* ===== THEME SWITCHER ===== */
 
 .theme-switcher {
   position: fixed;
@@ -1111,14 +1051,11 @@ a.read-more:active {
   color: var(--bg-primary);
 }
 
-/* Hide theme switcher on small screens */
 @media (max-width: 768px) {
   .theme-switcher {
     display: none;
   }
 }
-
-/* ===== LINK POST FIXES ===== */
 
 .link-post .post-title:after {
   border-bottom-color: var(--accent-secondary) !important;
@@ -1127,4 +1064,3 @@ a.read-more:active {
 .link-post .post-meta {
   color: var(--accent-secondary) !important;
 }
-

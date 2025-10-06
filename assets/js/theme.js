@@ -1,17 +1,13 @@
-// Enhanced theme system functionality
 document.addEventListener('DOMContentLoaded', function() {
-  // Legacy theme toggle elements
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.querySelector('.theme-icon');
   const logoImg = document.getElementById('logo-img');
 
-  // New theme switcher elements
   const themeSwitcher = document.getElementById('theme-switcher');
   const themeToggleButton = document.getElementById('theme-toggle-button');
   const currentThemeName = document.getElementById('current-theme-name');
   const themeOptions = document.querySelectorAll('.theme-option');
 
-  // Theme configuration
   const themes = {
     'gruvbox': { name: 'Gruvbox', displayName: 'Gruvbox' },
     'everforest': { name: 'Everforest', displayName: 'Everforest' },
@@ -27,11 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
     'ayu': { name: 'Ayu', displayName: 'Ayu' }
   };
 
-  // Get current theme settings from localStorage or defaults
   const currentThemeFamily = localStorage.getItem('themeFamily') || 'gruvbox';
   const currentThemeVariant = localStorage.getItem('themeVariant') || 'dark';
 
-  // Function to update logo based on theme variant
   function updateLogo(variant) {
     if (logoImg) {
       if (variant === 'light') {
@@ -42,22 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Function to apply theme
   function applyTheme(family, variant) {
     const html = document.documentElement;
     html.setAttribute('data-theme-family', family);
     html.setAttribute('data-theme-variant', variant);
 
-    // Update localStorage
     localStorage.setItem('themeFamily', family);
     localStorage.setItem('themeVariant', variant);
 
-    // Update current theme name display
     if (currentThemeName && themes[family]) {
       currentThemeName.textContent = family;
     }
 
-    // Update active theme option
     themeOptions.forEach(option => {
       option.classList.remove('active');
       if (option.dataset.theme === family) {
@@ -65,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Update legacy theme toggle appearance
     if (themeToggle && themeIcon) {
       if (variant === 'light') {
         themeToggle.classList.add('light');
@@ -76,28 +65,23 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
 
-    // Update logo
     updateLogo(variant);
   }
 
-  // Initialize theme on page load
   applyTheme(currentThemeFamily, currentThemeVariant);
 
-  // Theme toggle button functionality
   if (themeToggleButton) {
     themeToggleButton.addEventListener('click', function() {
       themeSwitcher.classList.toggle('open');
     });
   }
 
-  // Close theme switcher when clicking outside
   document.addEventListener('click', function(e) {
     if (themeSwitcher && !themeSwitcher.contains(e.target)) {
       themeSwitcher.classList.remove('open');
     }
   });
 
-  // Theme option selection
   themeOptions.forEach(option => {
     option.addEventListener('click', function() {
       const selectedFamily = this.dataset.theme;
@@ -107,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Legacy light/dark toggle (now works within current theme family)
   if (themeToggle) {
     themeToggle.addEventListener('click', function() {
       const currentFamily = localStorage.getItem('themeFamily') || 'gruvbox';
