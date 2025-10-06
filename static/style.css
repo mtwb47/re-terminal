@@ -885,6 +885,7 @@ a.read-more:active {
 
 .theme-toggle-button:hover {
   color: var(--accent);
+  background: none !important;
 }
 
 .theme-options {
