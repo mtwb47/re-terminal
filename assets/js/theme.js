@@ -20,7 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
     'oxocarbon': { name: 'Oxocarbon', displayName: 'Oxocarbon' },
     'dracula': { name: 'Dracula', displayName: 'Dracula' },
     'nord': { name: 'Nord', displayName: 'Nord' },
-    'rosepine': { name: 'Rose Pine', displayName: 'Rose Pine' }
+    'rosepine': { name: 'Rose Pine', displayName: 'Rose Pine' },
+    'tokyonight': { name: 'Tokyo Night', displayName: 'Tokyo Night' },
+    'solarized': { name: 'Solarized', displayName: 'Solarized' },
+    'monokai': { name: 'Monokai', displayName: 'Monokai' },
+    'ayu': { name: 'Ayu', displayName: 'Ayu' }
   };
 
   // Get current theme settings from localStorage or defaults

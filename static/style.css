@@ -352,6 +352,182 @@
   --hamburger-color: #575279;
 }
 
+/* Tokyo Night Dark */
+[data-theme-family="tokyonight"][data-theme-variant="dark"] {
+  --bg-primary: #1a1b26;
+  --bg-secondary: #16161e;
+  --bg-tertiary: #24283b;
+  --text-primary: #c0caf5;
+  --text-secondary: #9aa5ce;
+  --text-link: #7aa2f7;
+  --accent: #7aa2f7;
+  --accent-hover: #bb9af7;
+  --accent-secondary: #9ece6a;
+  --border: #7aa2f7;
+  --menu-bg: #1a1b26;
+  --menu-text: #c0caf5;
+  --dropdown-bg: #24283b;
+  --logo-primary: #c0caf5;
+  --logo-secondary: #7aa2f7;
+  --logo-hover-primary: #7aa2f7;
+  --logo-hover-secondary: #c0caf5;
+  --hamburger-color: #c0caf5;
+}
+
+/* Tokyo Night Light */
+[data-theme-family="tokyonight"][data-theme-variant="light"] {
+  --bg-primary: #d5d6db;
+  --bg-secondary: #dfe0e5;
+  --bg-tertiary: #c4c8da;
+  --text-primary: #343b58;
+  --text-secondary: #565a6e;
+  --text-link: #34548a;
+  --accent: #34548a;
+  --accent-hover: #5a4a78;
+  --accent-secondary: #485e30;
+  --border: #34548a;
+  --menu-bg: #c4c8da;
+  --menu-text: #343b58;
+  --dropdown-bg: #b6bbd1;
+  --logo-primary: #343b58;
+  --logo-secondary: #34548a;
+  --logo-hover-primary: #34548a;
+  --logo-hover-secondary: #343b58;
+  --hamburger-color: #343b58;
+}
+
+/* Solarized Dark */
+[data-theme-family="solarized"][data-theme-variant="dark"] {
+  --bg-primary: #002b36;
+  --bg-secondary: #073642;
+  --bg-tertiary: #586e75;
+  --text-primary: #839496;
+  --text-secondary: #657b83;
+  --text-link: #268bd2;
+  --accent: #268bd2;
+  --accent-hover: #2aa198;
+  --accent-secondary: #859900;
+  --border: #268bd2;
+  --menu-bg: #002b36;
+  --menu-text: #839496;
+  --dropdown-bg: #073642;
+  --logo-primary: #839496;
+  --logo-secondary: #268bd2;
+  --logo-hover-primary: #268bd2;
+  --logo-hover-secondary: #839496;
+  --hamburger-color: #839496;
+}
+
+/* Solarized Light */
+[data-theme-family="solarized"][data-theme-variant="light"] {
+  --bg-primary: #fdf6e3;
+  --bg-secondary: #eee8d5;
+  --bg-tertiary: #93a1a1;
+  --text-primary: #657b83;
+  --text-secondary: #839496;
+  --text-link: #268bd2;
+  --accent: #268bd2;
+  --accent-hover: #2aa198;
+  --accent-secondary: #859900;
+  --border: #268bd2;
+  --menu-bg: #eee8d5;
+  --menu-text: #657b83;
+  --dropdown-bg: #e5dcc3;
+  --logo-primary: #657b83;
+  --logo-secondary: #268bd2;
+  --logo-hover-primary: #268bd2;
+  --logo-hover-secondary: #657b83;
+  --hamburger-color: #657b83;
+}
+
+/* Monokai Dark */
+[data-theme-family="monokai"][data-theme-variant="dark"] {
+  --bg-primary: #272822;
+  --bg-secondary: #383830;
+  --bg-tertiary: #49483e;
+  --text-primary: #f8f8f2;
+  --text-secondary: #75715e;
+  --text-link: #a6e22e;
+  --accent: #a6e22e;
+  --accent-hover: #f92672;
+  --accent-secondary: #fd971f;
+  --border: #a6e22e;
+  --menu-bg: #272822;
+  --menu-text: #f8f8f2;
+  --dropdown-bg: #49483e;
+  --logo-primary: #f8f8f2;
+  --logo-secondary: #a6e22e;
+  --logo-hover-primary: #a6e22e;
+  --logo-hover-secondary: #f8f8f2;
+  --hamburger-color: #f8f8f2;
+}
+
+/* Monokai Light */
+[data-theme-family="monokai"][data-theme-variant="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f5f5f5;
+  --bg-tertiary: #e8e8e8;
+  --text-primary: #272822;
+  --text-secondary: #75715e;
+  --text-link: #669900;
+  --accent: #669900;
+  --accent-hover: #cc1f5a;
+  --accent-secondary: #ff6600;
+  --border: #669900;
+  --menu-bg: #e8e8e8;
+  --menu-text: #272822;
+  --dropdown-bg: #dcdcdc;
+  --logo-primary: #272822;
+  --logo-secondary: #669900;
+  --logo-hover-primary: #669900;
+  --logo-hover-secondary: #272822;
+  --hamburger-color: #272822;
+}
+
+/* Ayu Dark */
+[data-theme-family="ayu"][data-theme-variant="dark"] {
+  --bg-primary: #0f1419;
+  --bg-secondary: #0d1016;
+  --bg-tertiary: #272d38;
+  --text-primary: #bfbdb6;
+  --text-secondary: #828997;
+  --text-link: #e6b450;
+  --accent: #e6b450;
+  --accent-hover: #ff8f40;
+  --accent-secondary: #39bae6;
+  --border: #e6b450;
+  --menu-bg: #0f1419;
+  --menu-text: #bfbdb6;
+  --dropdown-bg: #272d38;
+  --logo-primary: #bfbdb6;
+  --logo-secondary: #e6b450;
+  --logo-hover-primary: #e6b450;
+  --logo-hover-secondary: #bfbdb6;
+  --hamburger-color: #bfbdb6;
+}
+
+/* Ayu Light */
+[data-theme-family="ayu"][data-theme-variant="light"] {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f0f0f0;
+  --text-primary: #5c6166;
+  --text-secondary: #828997;
+  --text-link: #f29718;
+  --accent: #f29718;
+  --accent-hover: #ff6a00;
+  --accent-secondary: #4cbf99;
+  --border: #f29718;
+  --menu-bg: #f0f0f0;
+  --menu-text: #5c6166;
+  --dropdown-bg: #e6e6e6;
+  --logo-primary: #5c6166;
+  --logo-secondary: #f29718;
+  --logo-hover-primary: #f29718;
+  --logo-hover-secondary: #5c6166;
+  --hamburger-color: #5c6166;
+}
+
 /* Base body styles using CSS variables */
 body {
   background-color: var(--bg-primary) !important;
