@@ -20,6 +20,16 @@
     font-family: "Anton", sans-serif;
   }
 </style>
+
+<!-- Critical theme initialization to prevent FOUC -->
+<script>
+(function() {
+  var themeFamily = localStorage.getItem('themeFamily') || 'gruvbox';
+  var themeVariant = localStorage.getItem('themeVariant') || 'dark';
+  document.documentElement.setAttribute('data-theme-family', themeFamily);
+  document.documentElement.setAttribute('data-theme-variant', themeVariant);
+})();
+</script>
 <meta name="description" content="{{ if .IsHome }}{{ $.Site.Params.Subtitle }}{{ else if .Description}}{{ .Description | plainify }}{{ else }}{{ .Summary | plainify }}{{ end }}" />
 <meta name="keywords" content="{{ with .Params.Keywords }}{{ delimit . ", " }}{{ else }}{{ $.Site.Params.Keywords }}{{ end }}" />
 {{ if .Params.noindex }}
