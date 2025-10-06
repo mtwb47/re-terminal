@@ -924,12 +924,12 @@ a.read-more:active {
   transition: color 0.2s ease;
 }
 
-.theme-option:hover {
+.theme-options .theme-option:hover {
   background: var(--accent);
   color: var(--bg-primary);
 }
 
-.theme-option.active {
+.theme-options .theme-option.active {
   background: var(--accent);
   color: var(--bg-primary);
 }
