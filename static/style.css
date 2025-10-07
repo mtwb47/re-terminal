@@ -1117,3 +1117,30 @@ a.read-more:active {
 .link-post .post-meta {
   color: var(--accent-secondary) !important;
 }
+
+.image-post .post-title:after {
+  border-bottom-color: var(--accent) !important;
+}
+
+.image-post .post-meta {
+  color: var(--accent) !important;
+}
+
+.image-post .image-preview {
+  margin: 1.5rem 0;
+}
+
+.image-post .preview-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.image-post .image-caption-preview {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--accent);
+}
