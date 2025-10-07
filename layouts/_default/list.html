@@ -5,7 +5,9 @@
     </div>
   {{ end }}
   <div class="posts">
-    {{ range .Paginator.Pages }}
+    {{ $pages := where site.RegularPages "Type" "in" (slice "posts" "links" "images") }}
+    {{ $paginator := .Paginate $pages }}
+    {{ range $paginator.Pages }}
       <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}">
         <h1 class="post-title">
           {{ if eq .Type "links" }}
@@ -64,6 +66,6 @@
       </article>
     {{ end }}
 
-    {{ partial "pagination.html" . }}
+    {{ partial "pagination.html" $paginator }}
   </div>
 {{ end }}
