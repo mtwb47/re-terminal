@@ -15,9 +15,10 @@
     {{ $posts := where $PageContext.RegularPages "Type" $contentTypeName }}
     {{ $links := where $PageContext.RegularPages "Type" "links" }}
     {{ $images := where $PageContext.RegularPages "Type" "images" }}
-    <!-- DEBUG: Posts: {{ len $posts }}, Links: {{ len $links }}, Images: {{ len $images }} -->
-    {{ $allPosts := union $posts $links | union $images }}
-    {{ $paginator := .Paginate $allPosts }}
+    {{ $postsAndLinks := union $posts $links }}
+    {{ $allPosts := union $postsAndLinks $images }}
+    {{ $sortedPosts := $allPosts.ByDate.Reverse }}
+    {{ $paginator := .Paginate $sortedPosts }}
 
     {{ range $paginator.Pages }}
       <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}">

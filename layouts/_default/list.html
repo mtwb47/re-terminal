@@ -6,7 +6,8 @@
   {{ end }}
   <div class="posts">
     {{ $pages := where site.RegularPages "Type" "in" (slice "posts" "links" "images") }}
-    {{ range (.Paginate $pages).Pages }}
+    {{ $sortedPages := $pages.ByDate.Reverse }}
+    {{ range (.Paginate $sortedPages).Pages }}
       <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}">
         <h1 class="post-title">
           {{ if eq .Type "links" }}
