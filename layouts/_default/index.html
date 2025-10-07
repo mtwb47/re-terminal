@@ -14,11 +14,12 @@
     {{ end }}
     {{ $posts := where $PageContext.RegularPages "Type" $contentTypeName }}
     {{ $links := where $PageContext.RegularPages "Type" "links" }}
-    {{ $allPosts := union $posts $links }}
-    {{ $paginator := .Paginate (where $allPosts "Type" "!=" "images") }}
+    {{ $images := where $PageContext.RegularPages "Type" "images" }}
+    {{ $allPosts := union $posts $links | union $images }}
+    {{ $paginator := .Paginate $allPosts }}
 
     {{ range $paginator.Pages }}
-      <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}">
+      <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}">
         <h1 class="post-title">
           {{ if eq .Type "links" }}
             <a href="{{ .Params.link_url | default .Permalink | safeURL }}">🔗 {{ .Title | markdownify }}</a>
@@ -39,7 +40,25 @@
           </span>
         {{ end }}
 
-        {{ partial "cover.html" . }}
+        {{ if eq .Type "images" }}
+          {{ if .Params.image }}
+            <div class="image-preview">
+              <a href="{{ .Permalink }}">
+                {{ $image := resources.Get .Params.image }}
+                {{ if $image }}
+                  <img src="{{ $image.RelPermalink }}" alt="{{ .Params.imageAlt | default .Title }}" class="preview-image">
+                {{ else }}
+                  <img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" class="preview-image">
+                {{ end }}
+              </a>
+              {{ if .Params.imageCaption }}
+                <p class="image-caption-preview">{{ .Params.imageCaption | markdownify }}</p>
+              {{ end }}
+            </div>
+          {{ end }}
+        {{ else }}
+          {{ partial "cover.html" . }}
+        {{ end }}
 
         <div class="post-content">
           {{ if .Params.showFullContent }}
