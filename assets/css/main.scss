@@ -41,18 +41,31 @@ body {
     &:not(first-child) {
       margin-top: 40px;
     }
+
+    @media (max-width: $phone) {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
   }
 
   h1,
   h2,
   h3 {
     font-size: 1.4rem;
+
+    @media (max-width: $phone) {
+      font-size: 1.2rem;
+    }
   }
 
   h4,
   h5,
   h6 {
     font-size: 1.2rem;
+
+    @media (max-width: $phone) {
+      font-size: 1.1rem;
+    }
   }
 }
 
@@ -232,6 +245,12 @@ table {
   border-collapse: collapse;
   width: 100%;
   margin: 40px 0;
+  overflow-x: auto;
+  display: block;
+
+  @media (max-width: $phone) {
+    font-size: 0.85rem;
+  }
 }
 
 table,
@@ -239,6 +258,10 @@ th,
 td {
   border: 1px dashed var(--accent);
   padding: 10px;
+
+  @media (max-width: $phone) {
+    padding: 6px 8px;
+  }
 }
 
 th {

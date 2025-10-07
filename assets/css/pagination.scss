@@ -44,6 +44,12 @@
     a {
       text-decoration: none;
     }
+
+    @media(max-width: $phone) {
+      flex-direction: column;
+      width: 100%;
+      gap: 8px;
+    }
   }
 }
 
@@ -58,6 +64,7 @@
 
   @media(max-width: $phone) {
     flex: 1;
+    width: 100%;
   }
 
   a {
@@ -69,19 +76,40 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
+    @media(max-width: $phone) {
+      padding: 12px 16px;
+    }
+
+    @media(max-width: 480px) {
+      padding: 10px 12px;
+      font-size: 0.9rem;
+    }
   }
 
   &__text {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+
+    @media(max-width: 480px) {
+      font-size: 0.85rem;
+    }
   }
 
   &.next .button__icon {
     margin-left: 8px;
+
+    @media(max-width: 480px) {
+      margin-left: 4px;
+    }
   }
 
   &.previous .button__icon {
     margin-right: 8px;
+
+    @media(max-width: 480px) {
+      margin-right: 4px;
+    }
   }
 }

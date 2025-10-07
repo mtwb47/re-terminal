@@ -37,6 +37,12 @@
     span, time {
       display: inline;
     }
+
+    @media (max-width: $phone) {
+      font-size: 0.9rem;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
   }
 
   &-title {
@@ -57,6 +63,12 @@
 
     a {
       text-decoration: none;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+
+    @media (max-width: $phone) {
+      font-size: 1.2rem;
     }
   }
 
@@ -68,6 +80,10 @@
 
     a {
       text-decoration: none;
+    }
+
+    @media (max-width: $phone) {
+      font-size: 0.9rem;
     }
   }
 

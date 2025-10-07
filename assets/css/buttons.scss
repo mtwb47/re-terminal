@@ -25,6 +25,11 @@ a.button {
   cursor: pointer;
   outline: none;
 
+  @media (max-width: $phone) {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
   &:hover {
     background: color-mix(in srgb, var(--accent), transparent 10%);
   }
@@ -36,6 +41,10 @@ a.button {
     box-shadow: none;
     padding: 8px 18px;
 
+    @media (max-width: $phone) {
+      padding: 10px 16px;
+    }
+
     :hover {
       transform: none;
       box-shadow: none;
@@ -45,6 +54,10 @@ a.button {
   &.link {
     background: none;
     font-size: 1rem;
+
+    @media (max-width: $phone) {
+      font-size: 0.9rem;
+    }
   }
 
   /* sizes */
@@ -56,6 +69,11 @@ a.button {
   &.wide {
     min-width: 200px;
     padding: 14px 24px;
+
+    @media (max-width: $phone) {
+      min-width: 150px;
+      padding: 12px 20px;
+    }
   }
 }
 
