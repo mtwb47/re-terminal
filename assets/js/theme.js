@@ -66,6 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     updateLogo(variant);
+
+    // Update Hyvor comments theme
+    const comments = document.querySelector('hyvor-talk-comments');
+    if (comments) {
+      comments.setAttribute('colors', variant);
+    }
   }
 
   applyTheme(currentThemeFamily, currentThemeVariant);

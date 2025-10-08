@@ -18,6 +18,19 @@
   --logo-hover-primary: #d65d0e;
   --logo-hover-secondary: #fbf1c7;
   --hamburger-color: #ebdbb2;
+
+  /* Hyvor comments theming */
+  --ht-color-text: var(--text-primary);
+  --ht-color-accent: var(--accent);
+  --ht-color-accent-text: var(--bg-primary);
+  --ht-color-box: var(--bg-secondary);
+  --ht-color-box-text: var(--text-primary);
+  --ht-color-box-text-light: var(--text-secondary);
+  --ht-color-input: var(--bg-tertiary);
+  --ht-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  --ht-box-radius: 4px;
+  --ht-box-border: 1px solid var(--border);
+  --ht-button-radius: 4px;
 }
 
 [data-theme-family="gruvbox"][data-theme-variant="light"] {
