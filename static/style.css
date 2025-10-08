@@ -1207,3 +1207,12 @@ a.read-more:active {
   font-style: italic;
   color: var(--accent-tertiary);
 }
+
+.image-post .image-caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--accent-tertiary);
+  background-color: transparent;
+  text-align: center;
+}
