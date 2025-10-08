@@ -71,7 +71,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const comments = document.querySelector('hyvor-talk-comments');
     if (comments) {
       comments.setAttribute('colors', variant);
+      updateHyvorStyles(comments);
     }
+  }
+
+  function updateHyvorStyles(comments) {
+    // Get computed styles from current theme
+    const styles = getComputedStyle(document.documentElement);
+
+    const cssVars = `
+      :host {
+        --ht-color-text: ${styles.getPropertyValue('--text-primary').trim()};
+        --ht-color-accent: ${styles.getPropertyValue('--accent').trim()};
+        --ht-color-accent-text: ${styles.getPropertyValue('--bg-primary').trim()};
+        --ht-color-box: ${styles.getPropertyValue('--bg-secondary').trim()};
+        --ht-color-box-text: ${styles.getPropertyValue('--text-primary').trim()};
+        --ht-color-box-text-light: ${styles.getPropertyValue('--text-secondary').trim()};
+        --ht-color-input: ${styles.getPropertyValue('--bg-tertiary').trim()};
+        --ht-box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        --ht-box-radius: 4px;
+        --ht-box-border: 1px solid ${styles.getPropertyValue('--border').trim()};
+        --ht-button-radius: 4px;
+      }
+    `;
+
+    comments.setAttribute('custom-css', cssVars);
   }
 
   applyTheme(currentThemeFamily, currentThemeVariant);
