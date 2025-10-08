@@ -1196,7 +1196,8 @@ a.read-more:active {
 .image-post .preview-image {
   width: 100%;
   max-width: 100%;
-  height: auto;
+  max-height: 400px;
+  object-fit: cover;
   border-radius: 8px;
   display: block;
 }
