@@ -1180,6 +1180,7 @@ a.read-more:active {
 .link-post-button a {
   background-color: var(--accent-secondary) !important;
   color: var(--bg-primary) !important;
+  border-color: var(--accent-secondary) !important;
 }
 
 .link-post .post-title a:hover {
