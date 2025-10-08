@@ -12,6 +12,8 @@
         <h1 class="post-title">
           {{ if eq .Type "links" }}
             <a href="{{ .Params.link_url | default .Permalink | safeURL }}">🔗 {{ .Title | markdownify }}</a>
+          {{ else if eq .Type "images" }}
+            <a href="{{ .Permalink }}">📷 {{ .Title | markdownify }}</a>
           {{ else }}
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
           {{ end }}
