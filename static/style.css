@@ -1174,5 +1174,5 @@ a.read-more:active {
   margin-top: 0.5rem;
   font-size: 0.9rem;
   font-style: italic;
-  color: var(--accent);
+  color: var(--accent-tertiary);
 }
