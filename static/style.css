@@ -1177,6 +1177,14 @@ a.read-more:active {
   text-decoration: underline;
 }
 
+.link-post-button a {
+  color: var(--accent-secondary) !important;
+}
+
+.link-post .post-title a:hover {
+  color: var(--accent-secondary) !important;
+}
+
 .image-post .post-title:after {
   border-bottom-color: var(--accent-tertiary) !important;
 }
@@ -1186,6 +1194,10 @@ a.read-more:active {
 }
 
 .image-post .read-more {
+  color: var(--accent-tertiary) !important;
+}
+
+.image-post .post-title a:hover {
   color: var(--accent-tertiary) !important;
 }
 
