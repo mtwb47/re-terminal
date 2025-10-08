@@ -12,6 +12,13 @@
       {{ end }}
     </span>
   {{ end }}
+
+  {{ if .Description }}
+    <div class="link-description-callout">
+      {{ .Description | markdownify }}
+    </div>
+  {{ end }}
+
   {{ partial "cover.html" (dict "ctx" . "isCoverCaptionEnabled" true) }}
 
   {{ if (.Params.Toc | default .Site.Params.Toc) }}
