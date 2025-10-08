@@ -531,6 +531,36 @@ body {
   color: var(--text-primary) !important;
 }
 
+::selection {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+::-moz-selection {
+  background-color: var(--accent);
+  color: var(--bg-primary);
+}
+
+.link-post ::selection {
+  background-color: var(--accent-secondary);
+  color: var(--bg-primary);
+}
+
+.link-post ::-moz-selection {
+  background-color: var(--accent-secondary);
+  color: var(--bg-primary);
+}
+
+.image-post ::selection {
+  background-color: var(--accent-tertiary);
+  color: var(--bg-primary);
+}
+
+.image-post ::-moz-selection {
+  background-color: var(--accent-tertiary);
+  color: var(--bg-primary);
+}
+
 .post-title a {
   color: var(--text-primary);
 }
