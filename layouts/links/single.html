@@ -16,6 +16,19 @@
   {{ if .Description }}
     <div class="link-description-callout">
       {{ .Description | markdownify }}
+      {{ if or .Params.author .Params.link_url }}
+        <div class="link-attribution">
+          {{ if .Params.author }}
+            {{ if .Params.link_url }}
+              — <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">{{ .Params.author }}</a>
+            {{ else }}
+              — {{ .Params.author }}
+            {{ end }}
+          {{ else if .Params.link_url }}
+            — <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener">Source</a>
+          {{ end }}
+        </div>
+      {{ end }}
     </div>
   {{ end }}
 

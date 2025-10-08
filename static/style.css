@@ -1160,6 +1160,23 @@ a.read-more:active {
   margin-bottom: 0;
 }
 
+.link-attribution {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  font-style: normal;
+  color: var(--text-secondary);
+}
+
+.link-attribution a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-attribution a:hover {
+  text-decoration: underline;
+}
+
 .image-post .post-title:after {
   border-bottom-color: var(--accent-tertiary) !important;
 }
