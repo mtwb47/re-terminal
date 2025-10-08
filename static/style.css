@@ -1142,11 +1142,19 @@ a.read-more:active {
   color: var(--accent-secondary) !important;
 }
 
+.link-post .read-more {
+  color: var(--accent-secondary) !important;
+}
+
 .image-post .post-title:after {
   border-bottom-color: var(--accent-tertiary) !important;
 }
 
 .image-post .post-meta {
+  color: var(--accent-tertiary) !important;
+}
+
+.image-post .read-more {
   color: var(--accent-tertiary) !important;
 }
 
