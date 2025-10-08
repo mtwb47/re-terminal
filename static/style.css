@@ -1220,3 +1220,16 @@ a.read-more:active {
 .image-post figcaption {
   background-color: var(--bg-primary) !important;
 }
+
+.image-post-preview .image-caption-preview {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--accent-tertiary);
+  background-color: var(--bg-primary) !important;
+}
+
+.image-post-preview figcaption,
+.image-post-preview .image-caption {
+  background-color: var(--bg-primary) !important;
+}
