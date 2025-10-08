@@ -1178,7 +1178,8 @@ a.read-more:active {
 }
 
 .link-post-button a {
-  color: var(--accent-secondary) !important;
+  background-color: var(--accent-secondary) !important;
+  color: var(--bg-primary) !important;
 }
 
 .link-post .post-title a:hover {
