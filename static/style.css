@@ -1213,6 +1213,10 @@ a.read-more:active {
   font-size: 0.9rem;
   font-style: italic;
   color: var(--accent-tertiary);
-  background-color: transparent;
+  background-color: var(--bg-primary) !important;
   text-align: center;
+}
+
+.image-post figcaption {
+  background-color: var(--bg-primary) !important;
 }
