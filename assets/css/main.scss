@@ -243,7 +243,8 @@ blockquote {
 table {
   table-layout: auto;
   border-collapse: collapse;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   margin: 40px auto;
   overflow-x: auto;
   display: block;
