@@ -1,0 +1,45 @@
+{{- $input := .Get 0 -}}
+{{- $id := "" -}}
+
+{{- /* Extract video ID from various YouTube URL formats */ -}}
+{{- if strings.Contains $input "youtube.com/watch" -}}
+  {{- $id = (index (last 1 (split (index (split $input "v=") 1) "&")) 0) -}}
+{{- else if strings.Contains $input "youtu.be/" -}}
+  {{- $id = (index (last 1 (split $input "youtu.be/")) 0) -}}
+  {{- $id = (index (split $id "?") 0) -}}
+{{- else if strings.Contains $input "youtube.com/embed/" -}}
+  {{- $id = (index (last 1 (split $input "embed/")) 0) -}}
+  {{- $id = (index (split $id "?") 0) -}}
+{{- else -}}
+  {{- /* Assume it's already a video ID */ -}}
+  {{- $id = $input -}}
+{{- end -}}
+
+{{- $title := .Get "title" | default "YouTube video player" -}}
+
+<style>
+  .youtube-embed {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+  }
+  .youtube-embed iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<div class="youtube-embed">
+  <iframe
+    src="https://www.youtube.com/embed/{{ $id }}"
+    title="{{ $title }}"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen>
+  </iframe>
+</div>
