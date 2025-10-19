@@ -1,0 +1,49 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">
+      {{ . }}
+    </div>
+  {{ end }}
+  <div class="posts">
+    {{ $pages := where site.RegularPages "Type" "links" }}
+    {{ $sortedPages := $pages.ByDate.Reverse }}
+    {{ range (.Paginate $sortedPages).Pages }}
+      <article class="post on-list link-post">
+        <h1 class="post-title">
+          <a href="{{ .Permalink }}">🔗 {{ .Title | markdownify }}</a>
+        </h1>
+        {{ partial "post_metadata.html" . }}
+
+        {{ if .Params.tags }}
+          <span class="post-tags">
+            {{ range .Params.tags }}
+            #<a href="{{ (urls.JoinPath "tags" (urlize .) "/") | absLangURL }}">
+              {{- . -}}
+            </a>&nbsp;
+            {{ end }}
+          </span>
+        {{ end }}
+
+        {{ partial "cover.html" . }}
+
+        <div class="post-content">
+          {{ if .Params.showFullContent }}
+            {{ .Content }}
+          {{ else if .Description }}
+            {{ .Description | markdownify }}
+          {{ else }}
+            {{ .Summary }}
+          {{ end }}
+        </div>
+
+        {{ if not .Params.showFullContent }}
+          <div>
+            <a class="read-more button" href="{{.RelPermalink}}">{{ $.Site.Params.ReadMore }}→</a>
+          </div>
+        {{ end }}
+      </article>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}
