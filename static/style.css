@@ -1309,10 +1309,6 @@ a.read-more:active {
 }
 
 /* Archives styling for link and image posts */
-.archives .post-list li.link-post .post-date {
-  color: var(--accent-secondary);
-}
-
 .archives .post-list li.link-post .post-link {
   color: var(--accent-secondary);
 }
@@ -1320,10 +1316,6 @@ a.read-more:active {
 .archives .post-list li.link-post .post-link:hover {
   color: var(--accent-secondary);
   text-decoration: underline;
-}
-
-.archives .post-list li.image-post .post-date {
-  color: var(--accent-tertiary);
 }
 
 .archives .post-list li.image-post .post-link {
