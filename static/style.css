@@ -1308,6 +1308,31 @@ a.read-more:active {
   background-color: var(--bg-primary) !important;
 }
 
+/* Archives styling for link and image posts */
+.archives .post-list li.link-post .post-date {
+  color: var(--accent-secondary);
+}
+
+.archives .post-list li.link-post .post-link {
+  color: var(--text-primary);
+}
+
+.archives .post-list li.link-post .post-link:hover {
+  color: var(--accent-secondary);
+}
+
+.archives .post-list li.image-post .post-date {
+  color: var(--accent-tertiary);
+}
+
+.archives .post-list li.image-post .post-link {
+  color: var(--text-primary);
+}
+
+.archives .post-list li.image-post .post-link:hover {
+  color: var(--accent-tertiary);
+}
+
 /* Hyvor comments theming */
 hyvor-talk-comments {
   --ht-color-text: var(--text-primary);
