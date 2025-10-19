@@ -1314,11 +1314,12 @@ a.read-more:active {
 }
 
 .archives .post-list li.link-post .post-link {
-  color: var(--text-primary);
+  color: var(--accent-secondary);
 }
 
 .archives .post-list li.link-post .post-link:hover {
   color: var(--accent-secondary);
+  text-decoration: underline;
 }
 
 .archives .post-list li.image-post .post-date {
@@ -1326,11 +1327,12 @@ a.read-more:active {
 }
 
 .archives .post-list li.image-post .post-link {
-  color: var(--text-primary);
+  color: var(--accent-tertiary);
 }
 
 .archives .post-list li.image-post .post-link:hover {
   color: var(--accent-tertiary);
+  text-decoration: underline;
 }
 
 /* Hyvor comments theming */
