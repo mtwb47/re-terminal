@@ -8,27 +8,13 @@ As the maintainer, I'm excited to share that this theme will continue to evolve 
 
 This fork aims to breathe new life into the original Terminal theme, which was once a popular choice among Hugo enthusiasts. Unfortunately, it had been neglected over time. But no more! With re-Terminal, we're committed to keeping the spirit of the original alive while adding fresh perspectives and innovations.
 
-In the coming weeks and months, you can expect to see new features, and bug fixes. We'll also be actively seeking feedback from our community to ensure that this theme continues to meet your needs and exceed your expectations.
-
 So, welcome aboard! I'm excited to have you join us on this journey as we shape the future of Hugo Theme re-Terminal together. Let's get started!
-
-## Changes vs original Terminal
-
-- removed all deprecated HUGO code
-- comments counter for pages
-- added post base primitive for more flexible pages where you can embed your code
-- site top banner, aka call to action banner
-- migrated from SCSS variable to CSS' Native, it brings super easy color customization via `style.css`
-- add submenus for the main menu
-- `coverCaption` for your article covers. Now you can add some information about the image in proper way
 
 ---
 
 ![re-Terminal](https://github.com/mirus-ua/hugo-theme-re-terminal/blob/main/images/screenshot.png?raw=true)
 
-### DEMO and some blog posts about re-Terminal - https://re-terminal.nebrowser.com/
-
-### Visit repo's wiki (WIP) - https://github.com/mirus-ua/hugo-theme-re-terminal/wiki
+### DEMO - https://mtwb.blog
 
 ### ⚠️ The theme needs at least Hugo **Extended** v0.128.0.
 
@@ -36,14 +22,18 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 
 ---
 
+## Table of Contents
+
 - [Features](#features)
-- [CSS Variable](#css-variable)
+- [What's New in re-Terminal](#whats-new-in-re-terminal)
+- [CSS Variables](#css-variables)
 - [Built-in shortcodes](#built-in-shortcodes)
 - [Code highlighting](#code-highlighting)
 - [How to start](#how-to-start)
 - [How to run your site](#how-to-run-your-site)
 - [How to configure](#how-to-configure)
 - [Post archetype](#post-archetype)
+- [Content Types](#content-types)
 - [Add-ons](#add-ons)
 - [How to edit the theme](#how-to-edit)
 - [Found a bug?](#bug)
@@ -54,10 +44,62 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 ## Features
 
 - **6 duotone themes**, depending on your preferences (blue is default, red, orange, green, pink, paper)
+- **Theme switcher** for dynamic theme selection
+- **Multiple post types** including standard posts, links, and images with galleries
 - [**Fira Code**](https://github.com/tonsky/FiraCode) as default monospaced font. It's gorgeous!
-- **really nice duotone**, custom syntax highlighting based on [**PrismJS**](https://prismjs.com)
-- fully responsive
-- fully based on Hugo ecosystem (Pipes and Modules)
+- **Really nice duotone**, custom syntax highlighting based on [**PrismJS**](https://prismjs.com)
+- **Fully responsive** design with mobile menu support
+- **Fully based on Hugo ecosystem** (Pipes and Modules)
+- **Native CSS variables** for super easy color customization
+- **Archive page** with chronological post listing
+- **Image galleries** with lightbox support
+- **YouTube shortcode** for embedded videos
+- **Comments system** support with counter
+- **Customizable scrollbar** and selection styling
+- **Logo animations** and customization
+- **Light/dark theme toggle**
+- **Footer menu** support
+- **Dropdown menus** and submenus
+
+## What's New in re-Terminal
+
+This fork includes extensive improvements and new features compared to the original Terminal theme:
+
+### Design & Theming
+- **Migrated from SCSS to CSS Native Variables** - brings super easy color customization via `style.css`
+- **Theme switcher functionality** - dynamically change between color themes
+- **Light theme support** - including the "paper" theme for light mode enthusiasts
+- **Custom scrollbar** and selection background styling
+- **Logo animations** with customizable fonts and styling
+- **Improved responsive design** with enhanced mobile menu
+
+### Content Types & Features
+- **Link post type** - share and curate external links with special styling
+- **Image galleries** - with lightbox support for beautiful image displays
+- **YouTube shortcode** - easily embed YouTube videos
+- **Archive page** - unified chronological view of all post types (posts, links, images) with color-coded styling
+- **Comments counter** - display comment counts on pages
+- **Cover captions** (`coverCaption`) - add information about your article cover images
+- **Site top banner** - call to action banner support
+
+### Navigation & Menus
+- **Submenus** for the main menu (since v2.1.0)
+- **Footer menu** with extended footer partials
+- **Dropdown menu** support
+- **Mobile menu** improvements
+
+### Integrations
+- **Last.fm shortcode** - display your music listening activity (requires Last.fm data via GitLab CI/CD or similar - not included with theme)
+- **Mastodon integration** - connect your Mastodon profile
+- **Analytics support** - easily add your analytics tracking
+- **RSS improvements** - better RSS feed generation
+
+### Developer Experience
+- **Removed all deprecated HUGO code** - fully compatible with modern Hugo
+- **Post base primitive** - flexible pages where you can embed your code
+- **Extended head/footer partials** - easy customization without modifying theme files
+- **Metadata system** - improved post metadata handling
+- **Table rendering fixes** - better table support and styling
 
 ## CSS Variables
 
@@ -72,14 +114,14 @@ You can find all of them in the browser's page inspector, but here is the list w
     --color: white; /* text color, also some other text use the variable in color mixing */
     --border-color: rgba(255, 255, 255, .1); /* border color */
     --article-link-color: var(inherit); /* for you, who want to colorize your article links */
-    --menu-color: blackl /* a variable for menus color */
+    --menu-color: black; /* a variable for menus color */
 
     /* code syntax */
     /* take a look at themes/re-terminal/assets/css/syntax.scss to understand in detail which color stands for */
-    --syntax-func-color: color-mix(in srgb, var(--accent) 70%, #999 30%); 
+    --syntax-func-color: color-mix(in srgb, var(--accent) 70%, #999 30%);
     --syntax-var-color: color-mix(in srgb, var(--accent) 90%, transparent);
     --syntax-value-color: color-mix(in srgb, var(--accent), white);
-  
+
     /* breakpoints */
     /* unfortunately, native CSS variables don't support media queries, so use SCSS vars instead */
     $phone: 684px;
@@ -87,48 +129,111 @@ You can find all of them in the browser's page inspector, but here is the list w
   }
 ```
 
-#### Built-in shortcodes
+### Theme Colors
 
-- **`image`** (props required: **`src`**; props optional: **`alt`**, **`position`** (**left** is default | center | right), **`style`**)
-  - e.g.
+Available theme colors: `blue` (default), `orange`, `red`, `green`, `pink`, `paper` (light theme)
 
-  ```go
-  {{< image src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" >}}
-  ```
-- **`figure`** (same as `image`, plus few optional props: **`caption`**, **`captionPosition`** (left | **center** is default | right), **`captionStyle`**)
-  - e.g.
+Set your preferred theme in the config:
 
-  ```go
-  {{< figure src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" caption="Hello Friend!" captionPosition="right" captionStyle="color: red;" >}}
-  ```
-- **`code`** (props required: **`language`**; props optional: **`title`**, **`id`**, **`expand`** (default "△"), **`collapse`** (default "▽"), **`isCollapsed`**)
-  - e.g.
+```toml
+[params]
+  themeColor = "orange"
+```
 
-  ```go
-  {{< code language="css" title="Really cool snippet" id="1" expand="Show" collapse="Hide" isCollapsed="true" >}}
-  pre {
-    background: #1a1a1d;
-    padding: 20px;
-    border-radius: 8px;
-    font-size: 1rem;
-    overflow: auto;
+## Built-in shortcodes
 
-    @media (--phone) {
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
+### `image`
+Display an image with optional positioning and styling.
 
-    code {
-      background: none !important;
-      color: #ccc;
-      padding: 0;
-      font-size: inherit;
-    }
-  }
-  {{< /code >}}
-  ```
+**Required props:** `src`
+**Optional props:** `alt`, `position` (left | center | right), `style`
 
-#### Code highlighting
+```go
+{{< image src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" >}}
+```
+
+### `figure`
+Same as `image`, plus caption support.
+
+**Required props:** `src`
+**Optional props:** `alt`, `position`, `style`, `caption`, `captionPosition` (left | center | right), `captionStyle`
+
+```go
+{{< figure src="/img/hello.png" alt="Hello Friend" position="center" style="border-radius: 8px;" caption="Hello Friend!" captionPosition="right" captionStyle="color: red;" >}}
+```
+
+### `code`
+Display collapsible code blocks with syntax highlighting.
+
+**Required props:** `language`
+**Optional props:** `title`, `id`, `expand` (default "△"), `collapse` (default "▽"), `isCollapsed`
+
+```go
+{{< code language="css" title="Really cool snippet" id="1" expand="Show" collapse="Hide" isCollapsed="true" >}}
+pre {
+  background: #1a1a1d;
+  padding: 20px;
+  border-radius: 8px;
+}
+{{< /code >}}
+```
+
+### `collapse`
+Create collapsible sections.
+
+**Optional props:** `title`, `open`, `class`
+
+```go
+{{< collapse title="Click to expand" >}}
+This content is hidden by default.
+{{< /collapse >}}
+```
+
+### `youtube`
+Embed YouTube videos with responsive sizing.
+
+**Required:** Video ID or full YouTube URL
+
+```go
+{{< youtube "dQw4w9WgXcQ" >}}
+```
+
+Or with full URL:
+```go
+{{< youtube "https://www.youtube.com/watch?v=dQw4w9WgXcQ" >}}
+```
+
+### `archives`
+Display a chronological archive of all posts, links, and images grouped by year.
+
+```go
+{{< archives >}}
+```
+
+### `wordcount`
+Display blog statistics including total posts and word count.
+
+```go
+{{< wordcount >}}
+```
+
+### `lastfm`
+Display Last.fm listening statistics including recent tracks, top tracks, and top artists.
+
+**Note:** Requires Last.fm data to be fetched via GitLab CI/CD or similar automation and saved to `data/lastfm/`. This functionality is not included with the theme.
+
+```go
+{{< lastfm >}}
+```
+
+### `recent`
+Display most recent Last.fm scrobble only (compact version).
+
+```go
+{{< recent >}}
+```
+
+## Code highlighting
 
 A custom syntax highlighting based on PrismJS. All you need to do is to wrap you code like this:
 
@@ -268,15 +373,12 @@ pagination.pagerSize = 5
   # can be overridden in a page's front-matter
   # TocTitle = "Table of Contents" # default
 
-
   # you can set a banner on the top of the page with a call to action
   # defaults: dismissible = false; URL is optional
   # [params.banner]
   # dismissible = false
   # text = "Check it out on GitHub"
   # url = "https://github.com/mirus-ua/hugo-theme-re-terminal"
-
-
 
 [params.twitter]
   # set Twitter handles for Twitter cards
@@ -336,11 +438,88 @@ pagination.pagerSize = 5
 
 to `config.toml` file in your Hugo root directory and change params fields. In case you need, here's [a YAML version](https://gist.github.com/panr/9eeea6f595c257febdadc11763e3a6d1).
 
-**NOTE:** Please keep in mind that `main menu` supports only one level of nesting.
+**NOTE:** Please keep in mind that `main menu` supports submenu nesting (since v2.1.0).
 
 ## Post archetype
 
 See the default `post` file params supported by the theme — https://github.com/mirus-ua/hugo-theme-re-terminal/blob/main/archetypes/posts.md
+
+## Content Types
+
+re-Terminal supports multiple content types with different front matter configurations:
+
+### Standard Posts
+
+Create with: `hugo new posts/my-post.md`
+
+```toml
++++
+title = "My Post Title"
+date = "2025-10-19"
+author = ""
+authorTwitter = "" #do not include @
+cover = ""
+coverCaption = ""
+tags = ["tag1", "tag2"]
+keywords = ["keyword1", "keyword2"]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
+color = "" #color from the theme settings
++++
+```
+
+### Link Posts
+
+Create with: `hugo new links/my-link.md`
+
+Link posts appear with special styling and a 🔗 icon in archives.
+
+```toml
++++
+title = "Interesting Article"
+date = "2025-10-19"
+author = ""
+authorTwitter = "" #do not include @
+cover = ""
+coverCaption = ""
+tags = ["links", "web"]
+keywords = [""]
+description = ""
+showFullContent = false
+readingTime = false
+hideComments = false
+color = "" #color from the theme settings
+type = "links"
+link_url = "https://example.com/article" # The external URL for the link post
++++
+```
+
+### Image Posts
+
+Create with: `hugo new images/my-image.md`
+
+Image posts support galleries with lightbox and appear with a 📷 icon in archives.
+
+```toml
++++
+title = "My Photo Gallery"
+date = "2025-10-19"
+author = ""
+type = "images"
+image = ""
+imageAlt = ""
+imageCaption = ""
+tags = ["photography", "gallery"]
+keywords = [""]
+description = ""
+showFullContent = true
+readingTime = false
+hideComments = false
+color = ""
++++
+```
 
 ## Add-ons
 
@@ -356,6 +535,16 @@ See the default `post` file params supported by the theme — https://github.com
 ## How to edit the theme `<a id="how-to-edit" />`
 
 If you are using as a remote Hugo Module (you don't have the theme files in the `theme/re-terminal`) and you have to override only some of the styles, you can do this easily by adding `static/style.css` in your root directory and point things you want to change.
+
+Thanks to the native CSS variables migration, you can easily customize colors without touching the theme files. Just override the CSS variables in your `static/style.css`:
+
+```css
+:root {
+  --accent: #FF6B35; /* Change accent color */
+  --background: #1a1a1a; /* Change background */
+  --color: #f0f0f0; /* Change text color */
+}
+```
 
 If you have the theme files in the theme directory, then you can directly edit anything in the theme, you just have to go to `themes/re-terminal` and modify the files. No compilation step needed.
 
@@ -380,9 +569,13 @@ This will help keeping the theme close to its roots, and also allow anyone who w
 
 Sounds OK? Cool, let's rock! 🤘
 
-## re-Terminal theme user?
+## Terminal theme user?
 
 I'd be happy to know more about you and what you are doing. If you want to share it, please make a contribution and [add your site to the list](https://github.com/mirus-ua/hugo-theme-re-terminal/blob/main/USERS.md)! 🤗
+
+## Changelog
+
+For a detailed list of all changes, improvements, and new features, please see [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
