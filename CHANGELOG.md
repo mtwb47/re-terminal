@@ -2,6 +2,15 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.1.1] - 2025-10-19
+
+### Added
+- Archives shortcode now includes links and images post types
+- Color-coded styling for links (green) and images (blue) in archives matching main feed
+
+### Changed
+- Archives now displays all post types (posts, links, images) in a unified chronological view
+
 ## [3.1.0] - 2025-10-19
 
 ### Added
@@ -392,6 +401,7 @@ All notable changes to this Hugo theme since it was forked from Terminal on 2024
 - Fork date: 2024-07-28 (commit d45d6d6)
 - Forked by: Mirus (re-terminal)
 
+[3.1.1]: https://github.com/mtwb47/re-terminal/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/mtwb47/re-terminal/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/mtwb47/re-terminal/compare/v2.9.0...v3.0.0
 [2.9.0]: https://github.com/mtwb47/re-terminal/compare/v2.8.0...v2.9.0
