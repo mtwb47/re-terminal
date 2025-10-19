@@ -1,11 +1,12 @@
-{{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections -}}
-{{- $links := where site.RegularPages "Type" "links" -}}
-{{- $images := where site.RegularPages "Type" "images" -}}
-{{- $postsAndLinks := union $posts $links -}}
-{{- $allPosts := union $postsAndLinks $images -}}
+{{- $allPages := slice -}}
+{{- range site.RegularPages -}}
+  {{- if or (in site.Params.mainSections .Type) (eq .Type "links") (eq .Type "images") -}}
+    {{- $allPages = $allPages | append . -}}
+  {{- end -}}
+{{- end -}}
 {{- $postsByYear := dict -}}
 
-{{- range $allPosts -}}
+{{- range $allPages -}}
   {{- $year := .Date.Format "2006" -}}
   {{- $yearPosts := index $postsByYear $year | default slice -}}
   {{- $postsByYear = merge $postsByYear (dict $year ($yearPosts | append .)) -}}
