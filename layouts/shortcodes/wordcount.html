@@ -1,12 +1,9 @@
-{{- $posts := where site.RegularPages "Type" "posts" -}}
-{{- $totalWords := 0 -}}
-{{- range $posts -}}
-  {{- $totalWords = add $totalWords .WordCount -}}
-{{- end -}}
-
 <div class="wordcount-stats">
-  <h3>📊 Blog Statistics</h3>
-  <p><strong>Total posts:</strong> {{ len $posts }}</p>
-  <p><strong>Total words:</strong> {{ $totalWords }}</p>
-  <p><strong>Average words per post:</strong> {{ if gt (len $posts) 0 }}{{ div $totalWords (len $posts) }}{{ else }}0{{ end }}</p>
+<pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 5px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.4;">
+{{ with os.ReadFile "content/word-count-output.txt" }}
+{{ . | safeHTML }}
+{{ else }}
+<em>Statistics unavailable. Run word-count.sh to generate stats.</em>
+{{ end }}
+</pre>
 </div>
