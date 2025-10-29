@@ -1,0 +1,41 @@
+{{- $src := .Get "src" -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $width := .Get "width" | default "" -}}
+{{- $height := .Get "height" | default "" -}}
+{{- $maxWidth := .Get "max-width" | default "" -}}
+{{- $float := .Get "float" | default "none" -}}
+{{- $margin := .Get "margin" | default "" -}}
+{{- $caption := .Get "caption" | default "" -}}
+
+{{- $style := "" -}}
+
+{{- if eq $float "left" -}}
+  {{- $style = printf "float: left; margin: %s;" (default "0 1.5rem 1rem 0" $margin) -}}
+{{- else if eq $float "right" -}}
+  {{- $style = printf "float: right; margin: %s;" (default "0 0 1rem 1.5rem" $margin) -}}
+{{- else if eq $float "center" -}}
+  {{- $style = printf "display: block; margin: %s;" (default "1rem auto" $margin) -}}
+{{- else -}}
+  {{- $style = printf "display: block; margin: %s;" (default "1rem 0" $margin) -}}
+{{- end -}}
+
+{{- if $width -}}
+  {{- $style = printf "%s width: %s;" $style $width -}}
+{{- end -}}
+
+{{- if $height -}}
+  {{- $style = printf "%s height: %s;" $style $height -}}
+{{- end -}}
+
+{{- if $maxWidth -}}
+  {{- $style = printf "%s max-width: %s;" $style $maxWidth -}}
+{{- end -}}
+
+{{- if $caption -}}
+<figure style="{{ $style | safeCSS }}">
+  <img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" style="width: 100%; height: auto; display: block;" />
+  <figcaption style="font-size: 0.9em; font-style: italic; margin-top: 0.5rem; {{ if or (eq $float "left") (eq $float "right") }}text-align: center;{{ end }}">{{ $caption | safeHTML }}</figcaption>
+</figure>
+{{- else -}}
+<img src="{{ $src | safeURL }}" alt="{{ $alt | plainify }}" style="{{ $style | safeCSS }} height: auto;" />
+{{- end -}}
