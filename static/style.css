@@ -26,19 +26,19 @@
   --bg-tertiary: #ebdbb2;
   --text-primary: #3c3836;
   --text-secondary: #504945;
-  --text-link: #af3a03;
-  --accent: #af3a03;
-  --accent-hover: #9d0006;
-  --accent-secondary: #79740e;
-  --accent-tertiary: #076678;
-  --border: #af3a03;
+  --text-link: #fe8019;
+  --accent: #fe8019;
+  --accent-hover: #d65d0e;
+  --accent-secondary: #b8bb26;
+  --accent-tertiary: #83a598;
+  --border: #fe8019;
   --menu-bg: #ebdbb2;
   --menu-text: #3c3836;
   --dropdown-bg: #d5c4a1;
-  --logo-primary: #282828;
-  --logo-secondary: #d65d0e;
+  --logo-primary: #3c3836;
+  --logo-secondary: #fe8019;
   --logo-hover-primary: #d65d0e;
-  --logo-hover-secondary: #282828;
+  --logo-hover-secondary: #3c3836;
   --hamburger-color: #3c3836;
 }
 
@@ -70,18 +70,18 @@
   --bg-tertiary: #efebd4;
   --text-primary: #5c6a72;
   --text-secondary: #708089;
-  --text-link: #8da101;
-  --accent: #8da101;
-  --accent-hover: #879a39;
-  --accent-secondary: #a96b2c;
-  --accent-tertiary: #829181;
-  --border: #8da101;
+  --text-link: #6d8344;
+  --accent: #6d8344;
+  --accent-hover: #527b7b;
+  --accent-secondary: #d0885d;
+  --accent-tertiary: #6ba589;
+  --border: #6d8344;
   --menu-bg: #efebd4;
   --menu-text: #5c6a72;
   --dropdown-bg: #e6e2cc;
   --logo-primary: #5c6a72;
-  --logo-secondary: #8da101;
-  --logo-hover-primary: #8da101;
+  --logo-secondary: #6d8344;
+  --logo-hover-primary: #527b7b;
   --logo-hover-secondary: #5c6a72;
   --hamburger-color: #5c6a72;
 }
@@ -122,10 +122,10 @@
   --border: #1e66f5;
   --menu-bg: #dce0e8;
   --menu-text: #4c4f69;
-  --dropdown-bg: #ccd0da;
+  --dropdown-bg: #bcc0cc;
   --logo-primary: #4c4f69;
   --logo-secondary: #1e66f5;
-  --logo-hover-primary: #1e66f5;
+  --logo-hover-primary: #04a5e5;
   --logo-hover-secondary: #4c4f69;
   --hamburger-color: #4c4f69;
 }
@@ -197,23 +197,23 @@
 }
 
 [data-theme-family="oxocarbon"][data-theme-variant="light"] {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f4f4f4;
-  --bg-tertiary: #e0e0e0;
+  --bg-primary: #f2f4f8;
+  --bg-secondary: #dde1e6;
+  --bg-tertiary: #525252;
   --text-primary: #161616;
-  --text-secondary: #525252;
+  --text-secondary: #393939;
   --text-link: #0f62fe;
   --accent: #0f62fe;
-  --accent-hover: #0043ce;
-  --accent-secondary: #198038;
-  --accent-tertiary: #8a3ffc;
+  --accent-hover: #ee5396;
+  --accent-secondary: #42be65;
+  --accent-tertiary: #be95ff;
   --border: #0f62fe;
-  --menu-bg: #e0e0e0;
+  --menu-bg: #dde1e6;
   --menu-text: #161616;
-  --dropdown-bg: #d0d0d0;
+  --dropdown-bg: #c1c7cd;
   --logo-primary: #161616;
   --logo-secondary: #0f62fe;
-  --logo-hover-primary: #0f62fe;
+  --logo-hover-primary: #ee5396;
   --logo-hover-secondary: #161616;
   --hamburger-color: #161616;
 }
@@ -293,15 +293,15 @@
   --text-link: #5e81ac;
   --accent: #5e81ac;
   --accent-hover: #81a1c1;
-  --accent-secondary: #56949f;
-  --accent-tertiary: #907aa9;
+  --accent-secondary: #a3be8c;
+  --accent-tertiary: #b48ead;
   --border: #5e81ac;
   --menu-bg: #d8dee9;
   --menu-text: #2e3440;
-  --dropdown-bg: #cbcfd8;
+  --dropdown-bg: #cbd2d9;
   --logo-primary: #2e3440;
   --logo-secondary: #5e81ac;
-  --logo-hover-primary: #5e81ac;
+  --logo-hover-primary: #81a1c1;
   --logo-hover-secondary: #2e3440;
   --hamburger-color: #2e3440;
 }
@@ -342,10 +342,10 @@
   --border: #d7827e;
   --menu-bg: #f2e9e1;
   --menu-text: #575279;
-  --dropdown-bg: #ede4dd;
+  --dropdown-bg: #f4ede8;
   --logo-primary: #575279;
   --logo-secondary: #d7827e;
-  --logo-hover-primary: #d7827e;
+  --logo-hover-primary: #ea9d34;
   --logo-hover-secondary: #575279;
   --hamburger-color: #575279;
 }
@@ -373,25 +373,25 @@
 }
 
 [data-theme-family="tokyonight"][data-theme-variant="light"] {
-  --bg-primary: #d5d6db;
-  --bg-secondary: #dfe0e5;
+  --bg-primary: #e1e2e7;
+  --bg-secondary: #e9e9ec;
   --bg-tertiary: #c4c8da;
-  --text-primary: #343b58;
-  --text-secondary: #565a6e;
-  --text-link: #34548a;
-  --accent: #34548a;
-  --accent-hover: #5a4a78;
-  --accent-secondary: #485e30;
+  --text-primary: #3760bf;
+  --text-secondary: #6172b0;
+  --text-link: #2e7de9;
+  --accent: #2e7de9;
+  --accent-hover: #188092;
+  --accent-secondary: #587539;
   --accent-tertiary: #9854f1;
-  --border: #34548a;
+  --border: #2e7de9;
   --menu-bg: #c4c8da;
-  --menu-text: #343b58;
+  --menu-text: #3760bf;
   --dropdown-bg: #b6bbd1;
-  --logo-primary: #343b58;
-  --logo-secondary: #34548a;
-  --logo-hover-primary: #34548a;
-  --logo-hover-secondary: #343b58;
-  --hamburger-color: #343b58;
+  --logo-primary: #3760bf;
+  --logo-secondary: #2e7de9;
+  --logo-hover-primary: #188092;
+  --logo-hover-secondary: #3760bf;
+  --hamburger-color: #3760bf;
 }
 
 [data-theme-family="solarized"][data-theme-variant="dark"] {
@@ -430,10 +430,10 @@
   --border: #268bd2;
   --menu-bg: #eee8d5;
   --menu-text: #657b83;
-  --dropdown-bg: #e5dcc3;
+  --dropdown-bg: #e4ddc7;
   --logo-primary: #657b83;
   --logo-secondary: #268bd2;
-  --logo-hover-primary: #268bd2;
+  --logo-hover-primary: #2aa198;
   --logo-hover-secondary: #657b83;
   --hamburger-color: #657b83;
 }
@@ -506,24 +506,24 @@
 
 [data-theme-family="ayu"][data-theme-variant="light"] {
   --bg-primary: #fafafa;
-  --bg-secondary: #f8f9fa;
-  --bg-tertiary: #f0f0f0;
-  --text-primary: #5c6166;
-  --text-secondary: #828997;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f3f3f3;
+  --text-primary: #5c6773;
+  --text-secondary: #828c99;
   --text-link: #f29718;
-  --accent: #f29718;
-  --accent-hover: #ff6a00;
-  --accent-secondary: #4cbf99;
-  --accent-tertiary: #ba68c8;
-  --border: #f29718;
-  --menu-bg: #f0f0f0;
-  --menu-text: #5c6166;
-  --dropdown-bg: #e6e6e6;
-  --logo-primary: #5c6166;
-  --logo-secondary: #f29718;
+  --accent: #ff6a00;
+  --accent-hover: #ff7733;
+  --accent-secondary: #86b300;
+  --accent-tertiary: #4cbf99;
+  --border: #ff6a00;
+  --menu-bg: #f3f3f3;
+  --menu-text: #5c6773;
+  --dropdown-bg: #e8e8e8;
+  --logo-primary: #5c6773;
+  --logo-secondary: #ff6a00;
   --logo-hover-primary: #f29718;
-  --logo-hover-secondary: #5c6166;
-  --hamburger-color: #5c6166;
+  --logo-hover-secondary: #5c6773;
+  --hamburger-color: #5c6773;
 }
 
 body {
