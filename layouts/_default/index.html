@@ -88,7 +88,7 @@
                 {{ end }}
               </div>
               {{ if .Params.videoCaption }}
-                <p class="video-caption-preview">{{ .Params.videoCaption | markdownify }}</p>
+                <figcaption class="video-caption">{{ .Params.videoCaption | markdownify }}</figcaption>
               {{ end }}
             </div>
           {{ end }}

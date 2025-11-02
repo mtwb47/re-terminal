@@ -2,6 +2,36 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.2.0] - 2025-11-02
+
+### Added
+- Video post type with red accent color styling
+- `--accent-video` CSS variable for all 16 theme variants (Gruvbox, Everforest, Catppuccin, High Contrast, Oxocarbon, Dracula, Nord, Rose Pine, Tokyo Night, Solarized, Monokai, Ayu)
+- Video archetype template (`archetypes/videos.md`)
+- Video single page template (`layouts/videos/single.html`)
+- Video list page template (`layouts/videos/list.html`)
+- Video styling (`assets/css/videos.scss`)
+- Automatic video embed support for YouTube (both formats), Vimeo, and direct video URLs
+- Video posts now display in main blog feed with responsive embeds
+- Video posts now appear in archives shortcode with red accent color
+- 🎬 emoji prefix for video posts in feeds, archives, and single pages
+- Separate RSS feeds:
+  - Posts only feed (`/posts/index.xml`)
+  - Links only feed (`/links/index.xml`)
+  - Videos only feed (`/videos/index.xml`)
+  - Main feed includes all post types (`/index.xml`)
+- Video URL and caption display in RSS feeds
+
+### Changed
+- Updated main feed templates to show video embeds (index.html, list.html)
+- Updated archives shortcode to include videos post type
+- Updated default RSS feed to include video posts with proper formatting
+- Imported videos.scss in main style.scss
+
+### Fixed
+- Video container width on single pages now displays at full width
+- Video figure display set to block for proper sizing
+
 ## [3.1.1] - 2025-10-19
 
 ### Added
@@ -401,6 +431,7 @@ All notable changes to this Hugo theme since it was forked from Terminal on 2024
 - Fork date: 2024-07-28 (commit d45d6d6)
 - Forked by: Mirus (re-terminal)
 
+[3.2.0]: https://github.com/mtwb47/re-terminal/compare/v3.1.1...v3.2.0
 [3.1.1]: https://github.com/mtwb47/re-terminal/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/mtwb47/re-terminal/compare/v3.0.0...v3.1.0
 [3.0.0]: https://github.com/mtwb47/re-terminal/compare/v2.9.0...v3.0.0
