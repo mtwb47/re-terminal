@@ -1,6 +1,6 @@
 {{- $allPages := slice -}}
 {{- range site.RegularPages -}}
-  {{- if or (in site.Params.mainSections .Type) (eq .Type "links") (eq .Type "images") -}}
+  {{- if or (in site.Params.mainSections .Type) (eq .Type "links") (eq .Type "images") (eq .Type "videos") -}}
     {{- $allPages = $allPages | append . -}}
   {{- end -}}
 {{- end -}}
@@ -27,13 +27,15 @@
       <div class="content">
         <ul class="post-list">
           {{- range $yearPosts -}}
-            <li class="{{ if eq .Type "links" }}link-post{{ else if eq .Type "images" }}image-post{{ end }}">
+            <li class="{{ if eq .Type "links" }}link-post{{ else if eq .Type "images" }}image-post{{ else if eq .Type "videos" }}video-post{{ end }}">
               <span class="post-date">{{ .Date.Format "Jan 2" }}</span>
               <a href="{{ .Permalink }}" class="post-link">
                 {{- if eq .Type "links" -}}
                   🔗 {{ .Title }}
                 {{- else if eq .Type "images" -}}
                   📷 {{ .Title }}
+                {{- else if eq .Type "videos" -}}
+                  🎬 {{ .Title }}
                 {{- else -}}
                   {{ .Title }}
                 {{- end -}}

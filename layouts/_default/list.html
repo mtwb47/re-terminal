@@ -5,15 +5,17 @@
     </div>
   {{ end }}
   <div class="posts">
-    {{ $pages := where site.RegularPages "Type" "in" (slice "posts" "links" "images") }}
+    {{ $pages := where site.RegularPages "Type" "in" (slice "posts" "links" "images" "videos") }}
     {{ $sortedPages := $pages.ByDate.Reverse }}
     {{ range (.Paginate $sortedPages).Pages }}
-      <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}">
+      <article class="post on-list{{ if eq .Type "links" }} link-post{{ end }}{{ if eq .Type "images" }} image-post{{ end }}{{ if eq .Type "videos" }} video-post{{ end }}">
         <h1 class="post-title">
           {{ if eq .Type "links" }}
             <a href="{{ .Permalink }}">🔗 {{ .Title | markdownify }}</a>
           {{ else if eq .Type "images" }}
             <a href="{{ .Permalink }}">📷 {{ .Title | markdownify }}</a>
+          {{ else if eq .Type "videos" }}
+            <a href="{{ .Permalink }}">🎬 {{ .Title | markdownify }}</a>
           {{ else }}
             <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
           {{ end }}
