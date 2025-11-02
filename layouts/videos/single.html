@@ -1,0 +1,70 @@
+{{ define "main" }}
+<article class="post video-post">
+  <h1 class="post-title">
+    <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+  </h1>
+  {{ partial "post_metadata.html" . }}
+
+  {{ if .Params.tags }}
+    <span class="post-tags">
+      {{ range .Params.tags }}
+      #<a href="{{ (urls.JoinPath "tags" (urlize .) "/") | absLangURL }}">{{ . }}</a>&nbsp;
+      {{ end }}
+    </span>
+  {{ end }}
+
+  <div class="video-container">
+    {{ if .Params.video_url }}
+      <figure class="video-figure">
+        <div class="featured-video">
+          {{ $videoURL := .Params.video_url }}
+          {{ if findRE "youtube\\.com/watch\\?v=" $videoURL }}
+            {{ $videoID := replaceRE ".*youtube\\.com/watch\\?v=([^&]+).*" "$1" $videoURL }}
+            <iframe src="https://www.youtube.com/embed/{{ $videoID }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          {{ else if findRE "youtu\\.be/" $videoURL }}
+            {{ $videoID := replaceRE ".*youtu\\.be/([^?]+).*" "$1" $videoURL }}
+            <iframe src="https://www.youtube.com/embed/{{ $videoID }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          {{ else if findRE "vimeo\\.com/" $videoURL }}
+            {{ $videoID := replaceRE ".*vimeo\\.com/([0-9]+).*" "$1" $videoURL }}
+            <iframe src="https://player.vimeo.com/video/{{ $videoID }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+          {{ else if .Params.video_embed }}
+            {{ .Params.video_embed | safeHTML }}
+          {{ else }}
+            <video controls>
+              <source src="{{ $videoURL | safeURL }}">
+              Your browser does not support the video tag.
+            </video>
+          {{ end }}
+        </div>
+        {{ if .Params.videoCaption }}
+          <figcaption class="video-caption">{{ .Params.videoCaption | markdownify }}</figcaption>
+        {{ end }}
+      </figure>
+    {{ else if .Params.video_embed }}
+      <figure class="video-figure">
+        <div class="featured-video">
+          {{ .Params.video_embed | safeHTML }}
+        </div>
+        {{ if .Params.videoCaption }}
+          <figcaption class="video-caption">{{ .Params.videoCaption | markdownify }}</figcaption>
+        {{ end }}
+      </figure>
+    {{ end }}
+  </div>
+
+  <div class="post-content">
+    {{- with .Content -}}
+      <div>
+        {{ . | replaceRE "(<h[1-9] id=\"([^\"]+)\".+)(</h[1-9]+>)" `${1}<a href="#${2}" class="hanchor" ariaLabel="Anchor">&#8983;</a> ${3}` | safeHTML }}
+      </div>
+    {{- end -}}
+  </div>
+
+  {{- if ne (.Param "callout") false -}}
+  {{ partial "callout.html" }}
+  {{- end -}}
+  {{ if not (.Params.hideComments | default false) }}
+    {{ partial "comments.html" . }}
+  {{ end }}
+</article>
+{{ end }}

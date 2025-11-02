@@ -1,0 +1,69 @@
+{{ define "main" }}
+  {{ with .Content }}
+    <div class="index-content">
+      {{ . }}
+    </div>
+  {{ end }}
+  <div class="posts videos-grid">
+    {{ range .Paginator.Pages }}
+      <article class="post on-list video-post-preview">
+        <h2 class="post-title">
+          <a href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+        </h2>
+        {{ partial "post_metadata.html" . }}
+
+        {{ if .Params.tags }}
+          <span class="post-tags">
+            {{ range .Params.tags }}
+            #<a href="{{ (urls.JoinPath "tags" (urlize .) "/") | absLangURL }}">
+              {{- . -}}
+            </a>&nbsp;
+            {{ end }}
+          </span>
+        {{ end }}
+
+        {{ if .Params.video_url }}
+          <div class="video-preview">
+            <div class="preview-video">
+              {{ $videoURL := .Params.video_url }}
+              {{ if findRE "youtube\\.com/watch\\?v=" $videoURL }}
+                {{ $videoID := replaceRE ".*youtube\\.com/watch\\?v=([^&]+).*" "$1" $videoURL }}
+                <iframe src="https://www.youtube.com/embed/{{ $videoID }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              {{ else if findRE "youtu\\.be/" $videoURL }}
+                {{ $videoID := replaceRE ".*youtu\\.be/([^?]+).*" "$1" $videoURL }}
+                <iframe src="https://www.youtube.com/embed/{{ $videoID }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              {{ else if findRE "vimeo\\.com/" $videoURL }}
+                {{ $videoID := replaceRE ".*vimeo\\.com/([0-9]+).*" "$1" $videoURL }}
+                <iframe src="https://player.vimeo.com/video/{{ $videoID }}" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              {{ else if .Params.video_embed }}
+                {{ .Params.video_embed | safeHTML }}
+              {{ else }}
+                <video controls>
+                  <source src="{{ $videoURL | safeURL }}">
+                  Your browser does not support the video tag.
+                </video>
+              {{ end }}
+            </div>
+            {{ if .Params.videoCaption }}
+              <p class="video-caption-preview">{{ .Params.videoCaption | markdownify }}</p>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        <div class="post-content">
+          {{ if .Description }}
+            {{ .Description | markdownify }}
+          {{ else }}
+            {{ .Summary }}
+          {{ end }}
+        </div>
+
+        <div>
+          <a class="read-more button" href="{{.RelPermalink}}">Watch Video →</a>
+        </div>
+      </article>
+    {{ end }}
+
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}
