@@ -1,0 +1,92 @@
+<div class="rss-feeds">
+  <h3>Available RSS Feeds</h3>
+  <ul class="rss-feed-list">
+    <li>
+      <strong>Everything:</strong>
+      <a href="{{ .Site.BaseURL }}/index.xml" target="_blank">{{ .Site.BaseURL }}/index.xml</a>
+      <span class="feed-description">All posts, links, images, and videos</span>
+    </li>
+    <li>
+      <strong>Posts Only:</strong>
+      <a href="{{ .Site.BaseURL }}/posts/index.xml" target="_blank">{{ .Site.BaseURL }}/posts/index.xml</a>
+      <span class="feed-description">Regular blog posts only</span>
+    </li>
+    <li>
+      <strong>Links Only:</strong>
+      <a href="{{ .Site.BaseURL }}/links/index.xml" target="_blank">{{ .Site.BaseURL }}/links/index.xml</a>
+      <span class="feed-description">🔗 Link posts only</span>
+    </li>
+    <li>
+      <strong>Images Only:</strong>
+      <a href="{{ .Site.BaseURL }}/images/index.xml" target="_blank">{{ .Site.BaseURL }}/images/index.xml</a>
+      <span class="feed-description">📷 Image posts only</span>
+    </li>
+    <li>
+      <strong>Videos Only:</strong>
+      <a href="{{ .Site.BaseURL }}/videos/index.xml" target="_blank">{{ .Site.BaseURL }}/videos/index.xml</a>
+      <span class="feed-description">🎬 Video posts only</span>
+    </li>
+  </ul>
+</div>
+
+<style>
+.rss-feeds {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background-color: var(--bg-secondary);
+}
+
+.rss-feeds h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.rss-feed-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.rss-feed-list li {
+  margin: 1rem 0;
+  padding: 0.75rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+}
+
+.rss-feed-list li strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+.rss-feed-list li a {
+  color: var(--accent);
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.rss-feed-list li a:hover {
+  text-decoration: underline;
+}
+
+.feed-description {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+@media (max-width: 768px) {
+  .rss-feeds {
+    padding: 1rem;
+  }
+
+  .rss-feed-list li {
+    padding: 0.5rem;
+  }
+}
+</style>
