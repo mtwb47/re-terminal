@@ -27,12 +27,12 @@
     {{- end -}}
     {{ range where $pages "Params.excludeFromRSS" "ne" true }}
     <item>
-      <title>{{ if eq .Type "links" }}🔗 {{ end }}{{ if eq .Type "images" }}📷 {{ end }}{{ .Title }}</title>
+      <title>{{ if eq .Type "links" }}🔗 {{ end }}{{ if eq .Type "images" }}📷 {{ end }}{{ if eq .Type "videos" }}🎬 {{ end }}{{ .Title }}</title>
       <link>{{ .RelPermalink | absURL }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .RelPermalink | absURL }}</guid>
-      <description>{{ if eq .Type "images" }}{{ if .Params.image }}&lt;img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" /&gt;{{ end }}{{ if .Params.imageCaption }}&lt;p&gt;{{ .Params.imageCaption | plainify }}&lt;/p&gt;{{ end }}{{ .Content | html }}{{ else if and (eq .Type "links") .Params.link_url }}{{ .Content | html }}&lt;br&gt;&lt;br&gt;&lt;strong&gt;Link:&lt;/strong&gt; &lt;a href="{{ .Params.link_url }}"&gt;{{ .Params.link_url }}&lt;/a&gt;{{ else }}{{ .Content | html }}{{ end }}</description>
+      <description>{{ if eq .Type "images" }}{{ if .Params.image }}&lt;img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" /&gt;{{ end }}{{ if .Params.imageCaption }}&lt;p&gt;{{ .Params.imageCaption | plainify }}&lt;/p&gt;{{ end }}{{ .Content | html }}{{ else if eq .Type "videos" }}{{ if .Params.video_url }}&lt;p&gt;&lt;strong&gt;Video:&lt;/strong&gt; &lt;a href="{{ .Params.video_url }}"&gt;{{ .Params.video_url }}&lt;/a&gt;&lt;/p&gt;{{ end }}{{ if .Params.videoCaption }}&lt;p&gt;{{ .Params.videoCaption | plainify }}&lt;/p&gt;{{ end }}{{ .Content | html }}{{ else if and (eq .Type "links") .Params.link_url }}{{ .Content | html }}&lt;br&gt;&lt;br&gt;&lt;strong&gt;Link:&lt;/strong&gt; &lt;a href="{{ .Params.link_url }}"&gt;{{ .Params.link_url }}&lt;/a&gt;{{ else }}{{ .Content | html }}{{ end }}</description>
       {{ if and (eq .Type "images") .Params.image }}<enclosure url="{{ .Params.image | absURL }}" type="image/jpeg" />{{ end }}
     </item>
     {{ end }}
