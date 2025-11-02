@@ -2,12 +2,11 @@
 .video-post {
   .video-container {
     margin: 2rem 0;
-    text-align: center;
 
     .video-figure {
       margin: 0;
-      display: inline-block;
-      max-width: 100%;
+      display: block;
+      width: 100%;
 
       .featured-video {
         position: relative;
