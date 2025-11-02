@@ -16,6 +16,7 @@ $centerTheme: {{ if $.Site.Params.CenterTheme }}center{{ else }}flex-start{{ end
 @import "main";
 @import "post";
 @import "images";
+@import "videos";
 @import "pagination";
 @import "footer";
 @import "banner";
