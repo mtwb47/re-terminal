@@ -1483,24 +1483,54 @@ hyvor-talk-comments {
   border-radius: 8px;
 }
 
-.series-header {
-  margin-bottom: 1.5rem;
+.series-details {
+  margin: 0;
+}
+
+.series-summary {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 0 0 1rem 0;
+  cursor: pointer;
+  list-style: none;
   padding-bottom: 1rem;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.series-summary::-webkit-details-marker {
+  display: none;
+}
+
+.series-summary::marker {
+  display: none;
+}
+
+.series-summary::before {
+  content: "► ";
+  display: inline-block;
+  margin-right: 0.4em;
+  transition: transform 0.2s ease;
+  transform-origin: center;
+}
+
+.series-details[open] .series-summary::before {
+  transform: rotate(90deg);
 }
 
 .series-title {
-  margin: 0 0 0.5rem 0;
   color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .series-count {
-  margin: 0;
   color: var(--text-secondary);
   font-size: 0.9rem;
   font-style: italic;
+  font-weight: normal;
 }
 
 .series-list {
@@ -1577,6 +1607,10 @@ hyvor-talk-comments {
   .series-container {
     padding: 1rem;
     margin: 2rem 0;
+  }
+
+  .series-summary {
+    font-size: 1.25rem;
   }
 
   .series-title {
