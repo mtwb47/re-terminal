@@ -6,7 +6,18 @@
 {{- $seriesPages := where .Site.RegularPages "Params.series" "eq" $seriesName -}}
 
 {{- /* Sort by series_order if available, otherwise by date */ -}}
-{{- $seriesPages = $seriesPages | sort ".Params.series_order" -}}
+{{- $hasOrder := false -}}
+{{- range $seriesPages -}}
+  {{- if .Params.series_order -}}
+    {{- $hasOrder = true -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if $hasOrder -}}
+  {{- $seriesPages = sort $seriesPages "Params.series_order" "asc" -}}
+{{- else -}}
+  {{- $seriesPages = sort $seriesPages "Date" "asc" -}}
+{{- end -}}
 
 {{- if gt (len $seriesPages) 1 -}}
 <div class="series-container">
