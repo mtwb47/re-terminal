@@ -1488,16 +1488,11 @@ hyvor-talk-comments {
 }
 
 .series-summary {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin: 0 0 1rem 0;
   cursor: pointer;
   list-style: none;
   padding-bottom: 1rem;
+  margin: 0 0 1rem 0;
   border-bottom: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
 }
 
 .series-summary::-webkit-details-marker {
@@ -1508,22 +1503,24 @@ hyvor-talk-comments {
   display: none;
 }
 
-.series-summary::before {
-  content: "► ";
-  display: inline-block;
-  margin-right: 0.4em;
-  transition: transform 0.2s ease;
-  transform-origin: center;
-}
-
-.series-details[open] .series-summary::before {
-  transform: rotate(90deg);
-}
-
 .series-title {
   color: var(--text-primary);
   font-size: 1.5rem;
   font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.series-title::before {
+  content: "► ";
+  display: inline-block;
+  margin-right: 0.4em;
+  transition: transform 0.2s ease;
+  transform-origin: 0.35em 0.5em;
+}
+
+.series-details[open] .series-title::before {
+  transform: rotate(90deg);
 }
 
 .series-count {
@@ -1531,6 +1528,8 @@ hyvor-talk-comments {
   font-size: 0.9rem;
   font-style: italic;
   font-weight: normal;
+  display: block;
+  margin-left: 1.8em;
 }
 
 .series-list {
