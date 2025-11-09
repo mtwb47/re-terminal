@@ -842,7 +842,7 @@ details summary::before {
   content: "► ";
   display: inline-block;
   margin-right: 0.4em;
-  transition: transform 0.4s ease;
+  transition: transform 0.3s ease;
   transform-origin: center;
 }
 
@@ -861,19 +861,11 @@ details {
 }
 
 details > *:not(summary) {
-  animation: slideDown 0.4s ease-out forwards;
-  transform-origin: top;
+  overflow: hidden;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px) scaleY(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scaleY(1);
-  }
+details.is-animating > *:not(summary) {
+  transition: all 0.3s ease-out;
 }
 
 .lastfm h3 { margin-top: 1.25rem; }
