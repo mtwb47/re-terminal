@@ -3,13 +3,16 @@
 {{- range .Site.RegularPages -}}
   {{- if .Params.series -}}
     {{- $seriesName := .Params.series -}}
-    {{- $existingPages := index $seriesMap $seriesName -}}
-    {{- if $existingPages -}}
-      {{- $seriesMap = merge $seriesMap (dict $seriesName (append $existingPages .)) -}}
-    {{- else -}}
-      {{- $seriesMap = merge $seriesMap (dict $seriesName (slice .)) -}}
+    {{- if not (index $seriesMap $seriesName) -}}
+      {{- $seriesMap = merge $seriesMap (dict $seriesName slice) -}}
     {{- end -}}
   {{- end -}}
+{{- end -}}
+
+{{- /* Now populate each series with its pages */ -}}
+{{- range $seriesName, $_ := $seriesMap -}}
+  {{- $pages := where $.Site.RegularPages "Params.series" "eq" $seriesName -}}
+  {{- $seriesMap = merge $seriesMap (dict $seriesName $pages) -}}
 {{- end -}}
 
 {{- if gt (len $seriesMap) 0 -}}
