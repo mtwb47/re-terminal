@@ -1,0 +1,36 @@
+{{- if .Params.series -}}
+{{- $currentPage := . -}}
+{{- $seriesName := .Params.series -}}
+
+{{- /* Find all pages in this series */ -}}
+{{- $seriesPages := where .Site.RegularPages "Params.series" "eq" $seriesName -}}
+
+{{- /* Sort by series_order if available, otherwise by date */ -}}
+{{- $seriesPages = $seriesPages | sort "Params.series_order" "asc" -}}
+
+{{- if gt (len $seriesPages) 1 -}}
+<div class="series-container">
+  <div class="series-header">
+    <h3 class="series-title">📚 Series: {{ $seriesName }}</h3>
+    <p class="series-count">{{ len $seriesPages }} part{{ if gt (len $seriesPages) 1 }}s{{ end }} in this series</p>
+  </div>
+
+  <ol class="series-list">
+    {{- range $index, $page := $seriesPages -}}
+    <li class="series-item{{ if eq $page.Permalink $currentPage.Permalink }} series-current{{ end }}">
+      {{- if eq $page.Permalink $currentPage.Permalink -}}
+        <span class="series-link-current">
+          <span class="series-indicator">➤</span> {{ $page.Title }}
+          <span class="series-badge">You are here</span>
+        </span>
+      {{- else -}}
+        <a href="{{ $page.Permalink }}" class="series-link">
+          {{ $page.Title }}
+        </a>
+      {{- end -}}
+    </li>
+    {{- end -}}
+  </ol>
+</div>
+{{- end -}}
+{{- end -}}

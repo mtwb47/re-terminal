@@ -51,6 +51,8 @@
     {{- end -}}
   </div>
 
+  {{ partial "series.html" . }}
+
   {{- if .Params.link_url -}}
     <div class="link-post-button">
       <a href="{{ .Params.link_url | safeURL }}" target="_blank" rel="noopener" class="button">

@@ -44,6 +44,8 @@
     {{- end -}}
   </div>
 
+  {{ partial "series.html" . }}
+
   {{- if ne (.Param "callout") false -}}
   {{ partial "callout.html" }}
   {{- end -}}

@@ -1474,3 +1474,125 @@ hyvor-talk-comments {
   --ht-box-border: 1px solid var(--border);
   --ht-button-radius: 4px;
 }
+
+/* Series Navigation */
+.series-container {
+  margin: 3rem 0;
+  padding: 1.5rem;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border);
+  border-radius: 8px;
+}
+
+.series-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.series-title {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.series-count {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.series-list {
+  list-style: none;
+  counter-reset: series-counter;
+  padding: 0;
+  margin: 0;
+}
+
+.series-item {
+  counter-increment: series-counter;
+  margin: 0.75rem 0;
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.series-item::before {
+  content: counter(series-counter) ".";
+  position: absolute;
+  left: -1.5rem;
+  color: var(--text-secondary);
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.series-item.series-current {
+  background: var(--bg-primary);
+  border: 2px solid var(--accent);
+  padding: 0.75rem 1rem;
+}
+
+.series-link {
+  color: var(--accent);
+  text-decoration: none;
+  display: block;
+  transition: all 0.2s ease;
+}
+
+.series-link:hover {
+  color: var(--accent-hover);
+  transform: translateX(4px);
+}
+
+.series-link-current {
+  color: var(--text-primary);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.series-indicator {
+  color: var(--accent);
+  font-weight: bold;
+  margin-right: 0.25rem;
+}
+
+.series-badge {
+  margin-left: auto;
+  padding: 0.25rem 0.75rem;
+  background: var(--accent);
+  color: var(--bg-primary);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 768px) {
+  .series-container {
+    padding: 1rem;
+    margin: 2rem 0;
+  }
+
+  .series-title {
+    font-size: 1.25rem;
+  }
+
+  .series-badge {
+    display: block;
+    margin-left: 0;
+    margin-top: 0.5rem;
+    text-align: center;
+    width: fit-content;
+  }
+
+  .series-link-current {
+    flex-wrap: wrap;
+  }
+}

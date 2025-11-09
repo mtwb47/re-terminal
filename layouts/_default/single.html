@@ -46,6 +46,8 @@
     {{- end -}}
   </div>
 
+  {{ partial "series.html" . }}
+
   {{ if eq .Type $.Site.Params.contentTypeName }}
     {{ partial "posts_pagination.html" . }}
   {{ end }}
