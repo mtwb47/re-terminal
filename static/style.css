@@ -856,16 +856,18 @@ details .content {
 }
 
 /* Smooth animation for all collapsible details elements */
-details {
-  overflow: hidden;
-}
-
 details > *:not(summary) {
+  max-height: 0;
   overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: max-height 0.4s ease, opacity 0.3s ease, transform 0.3s ease;
 }
 
-details.is-animating > *:not(summary) {
-  transition: all 0.3s ease-out;
+details[open] > *:not(summary) {
+  max-height: 5000px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .lastfm h3 { margin-top: 1.25rem; }
