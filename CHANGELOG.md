@@ -2,6 +2,28 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.3.0] - 2025-11-09
+
+### Added
+- Series feature for organizing related posts across all post types (posts, links, images, videos)
+- Series partial template (`layouts/partials/series.html`) with collapsible navigation
+- Series list shortcode (`layouts/shortcodes/series-list.html`) for displaying all available series in a card grid
+- Series navigation automatically appears at the end of posts that are part of a series
+- Front matter support: `series` (series name) and optional `series_order` (custom ordering)
+- "You are here" badge highlighting current post in series navigation
+- Numbered list showing all posts in a series with clickable links
+- Series card grid with hover effects and preview of first 3 posts per series
+- Comprehensive CSS styling for series components with theme color variable support
+- Mobile-responsive design for series navigation and series list
+- Collapsible series navigation (open by default) with arrow indicator
+- Smooth animations for all collapsible details/summary elements site-wide
+- Fade and slide animations (0.4s) when expanding/collapsing details elements
+
+### Changed
+- Enhanced details/summary animation with opacity, transform, and max-height transitions
+- Arrow rotation animation increased to 0.3s for smoother visual feedback
+- Integrated series partial into all post type layouts (default, images, videos, links)
+
 ## [3.2.0] - 2025-11-02
 
 ### Added
