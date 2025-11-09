@@ -1,0 +1,48 @@
+{{- /* Collect all unique series */ -}}
+{{- $seriesMap := dict -}}
+{{- range .Site.RegularPages -}}
+  {{- if .Params.series -}}
+    {{- $seriesName := .Params.series -}}
+    {{- $existingPages := index $seriesMap $seriesName -}}
+    {{- if $existingPages -}}
+      {{- $seriesMap = merge $seriesMap (dict $seriesName (append $existingPages .)) -}}
+    {{- else -}}
+      {{- $seriesMap = merge $seriesMap (dict $seriesName (slice .)) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- if gt (len $seriesMap) 0 -}}
+<div class="series-list-container">
+  <h2 class="series-list-heading">📚 Available Series</h2>
+
+  <div class="series-grid">
+    {{- range $seriesName, $pages := $seriesMap -}}
+    {{- $sortedPages := sort $pages "Date" "asc" -}}
+    {{- $firstPost := index $sortedPages 0 -}}
+    {{- $postCount := len $pages -}}
+
+    <div class="series-card">
+      <a href="{{ $firstPost.Permalink }}" class="series-card-link">
+        <h3 class="series-card-title">{{ $seriesName }}</h3>
+        <p class="series-card-count">{{ $postCount }} part{{ if gt $postCount 1 }}s{{ end }}</p>
+        <div class="series-card-posts">
+          {{- range $index, $page := $sortedPages -}}
+            {{- if lt $index 3 -}}
+              <span class="series-card-post">{{ $page.Title }}</span>
+            {{- end -}}
+          {{- end -}}
+          {{- if gt $postCount 3 -}}
+            <span class="series-card-more">and {{ sub $postCount 3 }} more...</span>
+          {{- end -}}
+        </div>
+      </a>
+    </div>
+    {{- end -}}
+  </div>
+</div>
+{{- else -}}
+<div class="series-list-container">
+  <p class="series-list-empty">No series available yet.</p>
+</div>
+{{- end -}}

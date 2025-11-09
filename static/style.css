@@ -1480,7 +1480,6 @@ hyvor-talk-comments {
   margin: 3rem 0;
   padding: 1.5rem;
   background: var(--bg-secondary);
-  border: 2px solid var(--border);
   border-radius: 8px;
 }
 
@@ -1594,5 +1593,116 @@ hyvor-talk-comments {
 
   .series-link-current {
     flex-wrap: wrap;
+  }
+}
+
+/* Series List Shortcode */
+.series-list-container {
+  margin: 2rem 0;
+}
+
+.series-list-heading {
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  font-size: 2rem;
+  text-align: center;
+}
+
+.series-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+
+.series-card {
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.series-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.series-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.series-card-title {
+  margin: 0 0 0.5rem 0;
+  color: var(--accent);
+  font-size: 1.4rem;
+  font-weight: bold;
+  transition: color 0.2s ease;
+}
+
+.series-card:hover .series-card-title {
+  color: var(--accent-hover);
+}
+
+.series-card-count {
+  margin: 0 0 1rem 0;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.series-card-posts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.series-card-post {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.series-card-post::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+.series-card-more {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-style: italic;
+  padding-left: 1rem;
+}
+
+.series-list-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .series-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .series-list-heading {
+    font-size: 1.5rem;
+  }
+
+  .series-card {
+    padding: 1rem;
+  }
+
+  .series-card-title {
+    font-size: 1.2rem;
   }
 }
