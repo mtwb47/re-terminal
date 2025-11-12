@@ -26,6 +26,9 @@
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
       <description>{{ .Content | html }}{{ if .Params.link_url }}&lt;br&gt;&lt;br&gt;&lt;strong&gt;Link:&lt;/strong&gt; &lt;a href="{{ .Params.link_url }}"&gt;{{ .Params.link_url }}&lt;/a&gt;{{ end }}</description>
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
     </item>
     {{ end }}
   </channel>

@@ -26,6 +26,9 @@
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
       <guid>{{ .Permalink }}</guid>
       <description>{{ if .Params.image }}&lt;img src="{{ .Params.image | absURL }}" alt="{{ .Params.imageAlt | default .Title }}" /&gt;{{ end }}{{ if .Params.imageCaption }}&lt;p&gt;{{ .Params.imageCaption | plainify }}&lt;/p&gt;{{ end }}{{ .Content | html }}</description>
+      {{- range .Params.tags }}
+      <category>{{ . }}</category>
+      {{- end }}
       {{ if .Params.image }}<enclosure url="{{ .Params.image | absURL }}" type="image/jpeg" />{{ end }}
     </item>
     {{ end }}
