@@ -54,7 +54,7 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 - **Archive page** with chronological post listing
 - **Image galleries** with lightbox support
 - **YouTube shortcode** for embedded videos
-- **Comments system** support with counter
+- **FediComment** - Fediverse-based commenting system (Mastodon, GoToSocial, etc.)
 - **Customizable scrollbar** and selection styling
 - **Logo animations** and customization
 - **Light/dark theme toggle**
@@ -89,6 +89,7 @@ This fork includes extensive improvements and new features compared to the origi
 - **Mobile menu** improvements
 
 ### Integrations
+- **FediComment** - Self-hosted commenting via the Fediverse (Mastodon, GoToSocial) - see [FEDICOMMENT.md](FEDICOMMENT.md)
 - **Last.fm shortcode** - display your music listening activity (requires Last.fm data via GitLab CI/CD or similar - not included with theme)
 - **Mastodon integration** - connect your Mastodon profile
 - **Analytics support** - easily add your analytics tracking

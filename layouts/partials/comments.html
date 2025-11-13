@@ -1,18 +1,35 @@
 <!--
-To add comments section, please create `layouts/partials/comments.html` in your
-Hugo directory and insert:
+FediComment - Fediverse commenting system
+To enable comments on a post, add this to your frontmatter:
 
-{{ template "_internal/disqus.html" . }}
-
-or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout
+fediverse:
+  instance: "https://mastodon.social"
+  id: "123456789012345678"
+  username: "yourname"
 -->
 
+{{ if .Params.fediverse }}
+<div class="fedicomment-section">
+  <h2 style="color: var(--text-primary); margin-top: 3rem;">Comments</h2>
+  <div id="fedicomment-container"></div>
 
-<script async src="https://talk.hyvor.com/embed/embed.js" type="module"></script>
-<hyvor-talk-comments
-	website-id="13540"
-	page-id="{{ .Permalink }}"
-	colors="dark"
-></hyvor-talk-comments>
-
-
+  <script src="{{ "js/fedicomment.js" | absURL }}"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    {{ with .Params.fediverse }}
+    new FediComment({
+      containerEl: '#fedicomment-container',
+      instanceUrl: '{{ .instance }}',
+      statusId: '{{ .id }}',
+      username: '{{ .username }}',
+      loadButtonText: 'Load Comments from Fediverse',
+      replyButtonText: '💬 Reply on Fediverse',
+      noCommentsText: 'No comments yet. Be the first to reply on the Fediverse!',
+      maxDepth: 10,
+      dateFormat: 'relative'
+    });
+    {{ end }}
+  });
+  </script>
+</div>
+{{ end }}
