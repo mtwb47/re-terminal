@@ -109,11 +109,17 @@ class FediComment {
     // Add reply button to original post
     const replyButton = document.createElement('a');
     replyButton.className = 'fedicomment-reply-btn';
-    // GoToSocial uses /@username/statuses/{id}, Mastodon uses /@username/{id}
+    // GoToSocial uses Phanpy as frontend since GTS doesn't allow replies
     // GoToSocial IDs are ULIDs (alphanumeric), Mastodon IDs are numeric
     const isGoToSocial = /[A-Z]/.test(this.config.statusId);
-    const statusPath = isGoToSocial ? 'statuses' : '';
-    replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}${statusPath ? '/' + statusPath : ''}/${this.config.statusId}`;
+    if (isGoToSocial) {
+      // Use Phanpy for GoToSocial: https://phanpy.social/#/instance.com/s/POSTID
+      const instanceDomain = new URL(this.config.instanceUrl).hostname;
+      replyButton.href = `https://phanpy.social/#/${instanceDomain}/s/${this.config.statusId}`;
+    } else {
+      // Mastodon uses /@username/{id}
+      replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}/${this.config.statusId}`;
+    }
     replyButton.target = '_blank';
     replyButton.rel = 'noopener noreferrer';
     replyButton.textContent = this.config.replyButtonText;
