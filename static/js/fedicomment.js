@@ -109,7 +109,11 @@ class FediComment {
     // Add reply button to original post
     const replyButton = document.createElement('a');
     replyButton.className = 'fedicomment-reply-btn';
-    replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}/${this.config.statusId}`;
+    // GoToSocial uses /@username/statuses/{id}, Mastodon uses /@username/{id}
+    // GoToSocial IDs are ULIDs (alphanumeric), Mastodon IDs are numeric
+    const isGoToSocial = /[A-Z]/.test(this.config.statusId);
+    const statusPath = isGoToSocial ? 'statuses' : '';
+    replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}${statusPath ? '/' + statusPath : ''}/${this.config.statusId}`;
     replyButton.target = '_blank';
     replyButton.rel = 'noopener noreferrer';
     replyButton.textContent = this.config.replyButtonText;
