@@ -17,6 +17,7 @@ class FediComment {
       containerEl: config.containerEl,
       instanceUrl: config.instanceUrl?.replace(/\/$/, ''), // Remove trailing slash
       statusId: config.statusId,
+      username: config.username, // Username for reply link
       proxyUrl: config.proxyUrl?.replace(/\/$/, ''), // Optional proxy URL
       loadButtonText: config.loadButtonText || 'Load Comments from Fediverse',
       replyButtonText: config.replyButtonText || 'Reply on Fediverse',
