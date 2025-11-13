@@ -6,10 +6,6 @@ fediverse:
   instance: "https://mastodon.social"
   id: "123456789012345678"
   username: "yourname"
-
-For GoToSocial instances, set FEDICOMMENT_PROXY_URL in your site params (config.toml):
-[params]
-  fedicommentProxyUrl = "https://your-proxy-server.com"
 -->
 
 {{ if .Params.fediverse }}
@@ -26,9 +22,6 @@ For GoToSocial instances, set FEDICOMMENT_PROXY_URL in your site params (config.
       instanceUrl: '{{ .instance }}',
       statusId: '{{ .id }}',
       username: '{{ .username }}',
-      {{ if $.Site.Params.fedicommentProxyUrl }}
-      proxyUrl: '{{ $.Site.Params.fedicommentProxyUrl }}',
-      {{ end }}
       loadButtonText: 'Load Comments from Fediverse',
       replyButtonText: '💬 Reply on Fediverse',
       noCommentsText: 'No comments yet. Be the first to reply on the Fediverse!',

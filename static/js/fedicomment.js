@@ -1,13 +1,13 @@
 /**
  * FediComment - Fediverse commenting system for static sites
- * Works with Mastodon, GoToSocial, and other ActivityPub platforms
+ * Works with Mastodon and other ActivityPub platforms
  *
  * Usage:
  * new FediComment({
  *   containerEl: '#comments',
  *   instanceUrl: 'https://mastodon.social',
  *   statusId: '12345678901234567',
- *   proxyUrl: 'https://proxy.example.com' // Optional, for GoToSocial
+ *   username: 'yourname'
  * });
  */
 
@@ -18,7 +18,6 @@ class FediComment {
       instanceUrl: config.instanceUrl?.replace(/\/$/, ''), // Remove trailing slash
       statusId: config.statusId,
       username: config.username, // Username for reply link
-      proxyUrl: config.proxyUrl?.replace(/\/$/, ''), // Optional proxy URL
       loadButtonText: config.loadButtonText || 'Load Comments from Fediverse',
       replyButtonText: config.replyButtonText || 'Reply on Fediverse',
       noCommentsText: config.noCommentsText || 'No comments yet. Be the first to reply!',
@@ -62,19 +61,9 @@ class FediComment {
     }
 
     try {
-      let url;
-
-      // Use proxy if configured (needed for GoToSocial)
-      if (this.config.proxyUrl) {
-        // Base64 encode the instance URL to safely pass it as a URL parameter
-        const encodedInstance = btoa(this.config.instanceUrl);
-        url = `${this.config.proxyUrl}/api/context/${encodedInstance}/${this.config.statusId}`;
-      } else {
-        // Direct API call (works for Mastodon)
-        url = `${this.config.instanceUrl}/api/v1/statuses/${this.config.statusId}/context`;
-      }
-
-      const response = await fetch(url);
+      const response = await fetch(
+        `${this.config.instanceUrl}/api/v1/statuses/${this.config.statusId}/context`
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -109,17 +98,7 @@ class FediComment {
     // Add reply button to original post
     const replyButton = document.createElement('a');
     replyButton.className = 'fedicomment-reply-btn';
-    // GoToSocial uses Phanpy as frontend since GTS doesn't allow replies
-    // GoToSocial IDs are ULIDs (alphanumeric), Mastodon IDs are numeric
-    const isGoToSocial = /[A-Z]/.test(this.config.statusId);
-    if (isGoToSocial) {
-      // Use Phanpy for GoToSocial: https://phanpy.social/#/instance.com/s/POSTID
-      const instanceDomain = new URL(this.config.instanceUrl).hostname;
-      replyButton.href = `https://phanpy.social/#/${instanceDomain}/s/${this.config.statusId}`;
-    } else {
-      // Mastodon uses /@username/{id}
-      replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}/${this.config.statusId}`;
-    }
+    replyButton.href = `${this.config.instanceUrl}/@${this.config.username || 'user'}/${this.config.statusId}`;
     replyButton.target = '_blank';
     replyButton.rel = 'noopener noreferrer';
     replyButton.textContent = this.config.replyButtonText;
