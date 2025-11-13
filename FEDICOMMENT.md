@@ -142,7 +142,25 @@ FediComment:
 
 ## GoToSocial Support
 
-FediComment fully supports GoToSocial! Just use your GoToSocial instance URL and post ID:
+FediComment fully supports GoToSocial, but requires a **proxy server** because GoToSocial requires authentication for all API calls.
+
+### Setting Up the Proxy
+
+A lightweight Docker-based proxy server is included in `/proxy`. See [proxy/README.md](../../fedicomment/proxy/README.md) for detailed setup instructions.
+
+**Quick setup:**
+
+1. Get your GoToSocial API token (Settings → Applications)
+2. Configure the proxy with your token
+3. Deploy the proxy with Docker Compose
+4. Add `fedicommentProxyUrl` to your Hugo config
+
+```toml
+[params]
+  fedicommentProxyUrl = "https://your-proxy-server.com"
+```
+
+5. Add frontmatter to your posts:
 
 ```yaml
 fediverse:
@@ -150,6 +168,8 @@ fediverse:
   id: "01HQ123ABCDEF123456789"  # GoToSocial uses ULID format
   username: "yourname"
 ```
+
+The proxy handles authentication securely and keeps your API token private.
 
 ## Troubleshooting
 

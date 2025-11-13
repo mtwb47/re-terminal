@@ -6,7 +6,8 @@
  * new FediComment({
  *   containerEl: '#comments',
  *   instanceUrl: 'https://mastodon.social',
- *   statusId: '12345678901234567'
+ *   statusId: '12345678901234567',
+ *   proxyUrl: 'https://proxy.example.com' // Optional, for GoToSocial
  * });
  */
 
@@ -16,6 +17,7 @@ class FediComment {
       containerEl: config.containerEl,
       instanceUrl: config.instanceUrl?.replace(/\/$/, ''), // Remove trailing slash
       statusId: config.statusId,
+      proxyUrl: config.proxyUrl?.replace(/\/$/, ''), // Optional proxy URL
       loadButtonText: config.loadButtonText || 'Load Comments from Fediverse',
       replyButtonText: config.replyButtonText || 'Reply on Fediverse',
       noCommentsText: config.noCommentsText || 'No comments yet. Be the first to reply!',
@@ -59,9 +61,19 @@ class FediComment {
     }
 
     try {
-      const response = await fetch(
-        `${this.config.instanceUrl}/api/v1/statuses/${this.config.statusId}/context`
-      );
+      let url;
+
+      // Use proxy if configured (needed for GoToSocial)
+      if (this.config.proxyUrl) {
+        // Base64 encode the instance URL to safely pass it as a URL parameter
+        const encodedInstance = btoa(this.config.instanceUrl);
+        url = `${this.config.proxyUrl}/api/context/${encodedInstance}/${this.config.statusId}`;
+      } else {
+        // Direct API call (works for Mastodon)
+        url = `${this.config.instanceUrl}/api/v1/statuses/${this.config.statusId}/context`;
+      }
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
