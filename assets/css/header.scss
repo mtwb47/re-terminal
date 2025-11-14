@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-bottom: 60px; // Add space below header
+  margin-bottom: 20px; // Reduced since menu is now separate
 
   @media print {
     display: none;
