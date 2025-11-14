@@ -60,6 +60,7 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 - **Light/dark theme toggle**
 - **Footer menu** support
 - **Dropdown menus** and submenus
+- **Sticky menu** with configurable position (top, bottom, or none)
 
 ## What's New in re-Terminal
 
@@ -373,6 +374,11 @@ pagination.pagerSize = 5
   # set title for the table of contents
   # can be overridden in a page's front-matter
   # TocTitle = "Table of Contents" # default
+
+  # sticky menu position on desktop (min-width: 769px)
+  # options: "top" (menu above logo, sticky), "bottom" (menu below logo, sticky), "none" (no sticky behavior)
+  # default: "bottom"
+  # stickyMenuPosition = "bottom"
 
   # you can set a banner on the top of the page with a call to action
   # defaults: dismissible = false; URL is optional

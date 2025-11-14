@@ -2,6 +2,23 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.3.1] - 2025-11-13
+
+### Added
+- Sticky menu functionality with configurable position (`stickyMenuPosition` parameter)
+  - Options: "top" (menu above logo, sticky), "bottom" (menu below logo, sticky), "none" (no sticky behavior)
+  - Default: "bottom"
+  - Only applies on desktop (min-width: 769px)
+- Menu wrapper classes for position-based styling (menu-position-top, menu-position-bottom, menu-position-none)
+
+### Changed
+- Refactored header.html to support conditional menu positioning based on config parameter
+- Header margin-bottom reduced from 60px to 20px when menu is positioned separately
+
+### Fixed
+- Archives shortcode cutting off posts after 5000px height by removing max-height constraint for year-section elements
+- Wordcount shortcode text unreadable in light themes by replacing hardcoded colors with CSS variables (var(--bg-secondary), var(--text-primary), var(--border))
+
 ## [3.3.0] - 2025-11-09
 
 ### Added
@@ -453,6 +470,8 @@ All notable changes to this Hugo theme since it was forked from Terminal on 2024
 - Fork date: 2024-07-28 (commit d45d6d6)
 - Forked by: Mirus (re-terminal)
 
+[3.3.1]: https://github.com/mtwb47/re-terminal/compare/v3.3.0...v3.3.1
+[3.3.0]: https://github.com/mtwb47/re-terminal/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/mtwb47/re-terminal/compare/v3.1.1...v3.2.0
 [3.1.1]: https://github.com/mtwb47/re-terminal/compare/v3.1.0...v3.1.1
 [3.1.0]: https://github.com/mtwb47/re-terminal/compare/v3.0.0...v3.1.0
