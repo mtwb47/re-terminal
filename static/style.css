@@ -951,19 +951,21 @@ a.read-more:active {
     top: 0;
     z-index: 999;
     background-color: var(--bg-primary);
-    padding: 10px 0;
   }
 
   .menu-position-top {
-    margin-bottom: 10px;
+    padding: 10px 0 0 0;
+    margin-bottom: 5px;
   }
 
   .menu-position-bottom {
+    padding: 10px 0;
     margin-bottom: 40px;
   }
 
   /* Non-sticky menu when position is "none" */
   .menu-position-none {
+    padding: 10px 0;
     margin-bottom: 40px;
   }
 }
