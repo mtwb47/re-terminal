@@ -952,6 +952,13 @@ a.read-more:active {
     z-index: 999;
     background-color: var(--bg-primary);
     padding: 10px 0;
+  }
+
+  .menu-position-top {
+    margin-bottom: 20px;
+  }
+
+  .menu-position-bottom {
     margin-bottom: 40px;
   }
 
