@@ -1,17 +1,17 @@
 # FediComment Integration
 
-The re-terminal theme now includes **FediComment**, a self-hosted commenting system that uses the Fediverse (Mastodon, GoToSocial, Pleroma, etc.) for comments.
+The re-terminal theme now includes **FediComment**, a self-hosted commenting system that uses Mastodon for comments.
 
 ## How It Works
 
 1. Write a blog post
-2. Post about it on your Fediverse instance (Mastodon, GoToSocial, etc.)
+2. Post about it on your Mastodon instance
 3. Add the post ID to your article's frontmatter
-4. Replies to your Fediverse post appear as comments on your blog!
+4. Replies to your Mastodon post appear as comments on your blog!
 
 ## Features
 
-- ✅ Works with Mastodon, GoToSocial, and any Mastodon API-compatible platform
+- ✅ Works with Mastodon and Mastodon-compatible platforms
 - ✅ Automatically themed to match all re-terminal color schemes
 - ✅ Nested comment threads
 - ✅ Custom emoji support
@@ -19,12 +19,13 @@ The re-terminal theme now includes **FediComment**, a self-hosted commenting sys
 - ✅ Lazy loading (comments load on demand)
 - ✅ Privacy-friendly (no tracking, no third parties)
 - ✅ No database or server-side code required
+- ✅ Direct API access (no proxy needed)
 
 ## Usage
 
 ### Step 1: Post About Your Article
 
-After publishing your blog post, create a post about it on your Fediverse instance:
+After publishing your blog post, create a post about it on Mastodon:
 
 ```
 Just published a new article about Hugo themes!
@@ -38,8 +39,9 @@ https://yourblog.com/posts/my-article/
 
 Find the status ID from your post URL:
 
-- **Mastodon**: `https://mastodon.social/@username/123456789` → Status ID: `123456789`
-- **GoToSocial**: `https://gts.example.com/@username/01HQ123ABC...` → Status ID: `01HQ123ABC...`
+**Example:** `https://fosstodon.org/@thelinuxcast/123456789` → Status ID: `123456789`
+
+The status ID is the number at the end of your post URL.
 
 ### Step 3: Add to Frontmatter
 
@@ -51,9 +53,9 @@ Add the Fediverse information to your post's frontmatter:
 title: "My Blog Post"
 date: 2025-01-12
 fediverse:
-  instance: "https://mastodon.social"
+  instance: "https://fosstodon.org"
   username: "yourname"
-  id: "123456789012345678"
+  id: "123456789"
 ---
 ```
 
@@ -64,9 +66,9 @@ title = "My Blog Post"
 date = 2025-01-12
 
 [fediverse]
-instance = "https://mastodon.social"
+instance = "https://fosstodon.org"
 username = "yourname"
-id = "123456789012345678"
+id = "123456789"
 +++
 ```
 
@@ -118,13 +120,13 @@ The styling is defined in `static/style.css` using CSS variables.
 1. Write post: `content/posts/hello-world.md`
 2. Build and deploy: `hugo && deploy`
 3. Post on Mastodon: "Check out my new post! https://yourblog.com/posts/hello-world/"
-4. Copy status ID from the Mastodon post URL
+4. Copy status ID from the Mastodon post URL (e.g., `https://fosstodon.org/@thelinuxcast/123456789` → `123456789`)
 5. Edit `content/posts/hello-world.md` and add:
-   ```yaml
-   fediverse:
-     instance: "https://mastodon.social"
-     username: "yourname"
-     id: "123456789"
+   ```toml
+   [fediverse]
+   instance = "https://fosstodon.org"
+   username = "thelinuxcast"
+   id = "123456789"
    ```
 6. Rebuild and redeploy: `hugo && deploy`
 7. People reply to your Mastodon post
@@ -133,67 +135,41 @@ The styling is defined in `static/style.css` using CSS variables.
 ## Privacy & Security
 
 FediComment:
-- Makes direct API calls to the Fediverse instance you specify
+- Makes direct API calls to your Mastodon instance
 - Does not use cookies or localStorage
 - Does not track users
 - Does not send data to third parties
 - Loads comments only when users click "Load Comments"
 - Includes XSS protection (sanitizes HTML, removes scripts)
-
-## GoToSocial Support
-
-FediComment fully supports GoToSocial, but requires a **proxy server** because GoToSocial requires authentication for all API calls.
-
-### Setting Up the Proxy
-
-A lightweight Docker-based proxy server is included in `/proxy`. See [proxy/README.md](../../fedicomment/proxy/README.md) for detailed setup instructions.
-
-**Quick setup:**
-
-1. Get your GoToSocial API token (Settings → Applications)
-2. Configure the proxy with your token
-3. Deploy the proxy with Docker Compose
-4. Add `fedicommentProxyUrl` to your Hugo config
-
-```toml
-[params]
-  fedicommentProxyUrl = "https://your-proxy-server.com"
-```
-
-5. Add frontmatter to your posts:
-
-```yaml
-fediverse:
-  instance: "https://gts.example.com"
-  id: "01HQ123ABCDEF123456789"  # GoToSocial uses ULID format
-  username: "yourname"
-```
-
-The proxy handles authentication securely and keeps your API token private.
+- Uses Mastodon's public API (no authentication required)
 
 ## Troubleshooting
 
 **Comments not loading?**
-- Check that the status ID is correct
+- Check that the status ID is correct (numeric only)
 - Verify the instance URL has no trailing slash
-- Ensure your Fediverse post is public
+- Ensure your Mastodon post is public
 - Check browser console for errors
+- Test the API directly: `https://your-instance.social/api/v1/statuses/YOUR_ID/context`
 
 **Styling issues?**
 - Make sure `static/style.css` is loaded
 - Verify theme is properly set with theme switcher
 - Check that CSS variables are defined for your theme
 
-**CORS errors?**
-- This is a server-side issue with some Fediverse instances
-- Most major instances (Mastodon, GoToSocial) have CORS properly configured
-- If you encounter issues, contact your instance administrator
+**Reply button 404?**
+- Verify the `username` field is set in frontmatter
+- Check the status ID matches your Mastodon post
 
 ## Files
 
 - `static/js/fedicomment.js` - Main JavaScript widget
 - `static/style.css` - FediComment theming (lines 1478-1685)
 - `layouts/partials/comments.html` - Hugo template partial
+
+## Why Mastodon?
+
+Mastodon's public API allows unauthenticated access to public posts, making it perfect for a simple, client-side commenting system. No backend servers, no databases, no authentication required - just clean, open web technology.
 
 ## Credits
 

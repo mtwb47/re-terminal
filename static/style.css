@@ -870,6 +870,11 @@ details[open] > *:not(summary) {
   transform: translateY(0);
 }
 
+/* Override max-height for archives year sections to accommodate large lists */
+.year-section[open] > *:not(summary) {
+  max-height: none;
+}
+
 .lastfm h3 { margin-top: 1.25rem; }
 .lastfm ol { padding-left: 1.25rem; }
 .lastfm li { margin: .15rem 0; display: list-item; }
