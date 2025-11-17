@@ -1984,3 +1984,14 @@ a.read-more:active {
     font-size: 1.2rem;
   }
 }
+
+/* FediComment counter link styling - blend with metadata */
+.fedicomment-counter-link {
+  color: inherit !important;
+  text-decoration: none !important;
+  cursor: pointer;
+}
+
+.fedicomment-counter-link:hover {
+  text-decoration: underline !important;
+}

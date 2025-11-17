@@ -4,12 +4,12 @@
     <span class="fedicomment-counter"
           data-instance="{{ .Params.fediverse.instance }}"
           data-status-id="{{ .Params.fediverse.id }}">
-      <a href="{{ .Permalink }}#fedicomment-container">💬 <span class="count">Comments</span></a>
+      <a href="{{ .Permalink }}#fedicomment-container" class="fedicomment-counter-link">💬 <span class="count">Comments</span></a>
     </span>
   {{ else }}
     {{/* List page - show static link */}}
     <span>
-      <a href="{{ .Permalink }}#fedicomment-container">💬 Comments</a>
+      <a href="{{ .Permalink }}#fedicomment-container" class="fedicomment-counter-link">💬 Comments</a>
     </span>
   {{ end }}
 {{ end }}
