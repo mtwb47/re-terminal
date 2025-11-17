@@ -1,19 +1,15 @@
-<!--
-To add comments section, please create `layouts/partials/comments_counter.html` in your
-Hugo directory and insert:
-
-you can use the snippet bellow to add disqus comments counter to your posts
-
-<span>
-  <a class="disqus_comments" href="{{ .Permalink }}#disqus_thread">
-    <span
-    class="disqus-comment-count"
-    data-disqus-url="{{ with .Params.disqus_url }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}">O {{ $.Site.Params.comments | default "comments" }}</span>
-    {{ .Site.Params.noCounter }}
-  </a>
-</span>
-
-or whatever comment engine you want -> https://gohugo.io/content-management/comments/#readout
--->
-
-<hyvor-talk-comment-count page-id="{{ .Permalink }}"></hyvor-talk-comment-count>
+{{ if .Params.fediverse }}
+  {{ if eq .Kind "page" }}
+    {{/* Single post page - show dynamic count */}}
+    <span class="fedicomment-counter"
+          data-instance="{{ .Params.fediverse.instance }}"
+          data-status-id="{{ .Params.fediverse.id }}">
+      <a href="{{ .Permalink }}#fedicomment-container">💬 <span class="count">Comments</span></a>
+    </span>
+  {{ else }}
+    {{/* List page - show static link */}}
+    <span>
+      <a href="{{ .Permalink }}#fedicomment-container">💬 Comments</a>
+    </span>
+  {{ end }}
+{{ end }}
