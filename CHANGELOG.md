@@ -2,6 +2,25 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.3.2] - 2025-11-17
+
+### Added
+- FediComment counter integration for displaying Fediverse comment counts
+  - JavaScript-based counter with localStorage caching (1-hour TTL) to minimize API calls
+  - Hybrid approach: static link on list pages, dynamic count on single post pages
+  - Counter script (`static/js/fedicomment-counter.js`) with automatic initialization
+  - CSS styling to blend counter links with metadata text
+  - Conditional script loading only on pages with fediverse frontmatter
+
+### Changed
+- Updated `layouts/partials/comments_counter.html` to support FediComment integration
+- Modified `layouts/partials/post_metadata.html` to only show comment counter when fediverse frontmatter is present
+- Added `layouts/partials/extended_head.html` to include FediComment counter script
+
+### Fixed
+- Removed double dash separators in post metadata when comment counter is not present
+- Fixed extra spacing between date and comment counter separator
+
 ## [3.3.1] - 2025-11-13
 
 ### Added
