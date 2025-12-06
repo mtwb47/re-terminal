@@ -1590,20 +1590,62 @@ a.read-more:active {
   margin-bottom: 12px;
 }
 
+.fedicomment-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
 .fedicomment-avatar {
   width: 48px;
   height: 48px;
   border-radius: 4px;
   flex-shrink: 0;
   border: 1px solid var(--border);
+  display: block;
+}
+
+.fedicomment-collapse-btn {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--bg-primary);
+  border: 2px solid var(--bg-secondary);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.fedicomment-collapse-btn:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.1);
+}
+
+.fedicomment-collapsed .fedicomment-body {
+  display: none;
+}
+
+.fedicomment-collapsed {
+  opacity: 0.7;
 }
 
 .fedicomment-author-info {
   flex: 1;
   min-width: 0;
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
 .fedicomment-display-name {
@@ -1630,6 +1672,7 @@ a.read-more:active {
   font-size: 13px;
   color: var(--text-secondary);
   text-decoration: none;
+  margin-left: auto;
 }
 
 .fedicomment-timestamp:hover {
@@ -1692,6 +1735,18 @@ a.read-more:active {
   border-left: 2px solid var(--border);
 }
 
+/* Limit indentation after depth 3 to prevent comments becoming too narrow */
+.fedicomment-comment[data-depth="4"] .fedicomment-replies,
+.fedicomment-comment[data-depth="5"] .fedicomment-replies,
+.fedicomment-comment[data-depth="6"] .fedicomment-replies,
+.fedicomment-comment[data-depth="7"] .fedicomment-replies,
+.fedicomment-comment[data-depth="8"] .fedicomment-replies,
+.fedicomment-comment[data-depth="9"] .fedicomment-replies,
+.fedicomment-comment[data-depth="10"] .fedicomment-replies {
+  margin-left: 0;
+  padding-left: 16px;
+}
+
 @media (max-width: 768px) {
   .fedicomment-comment {
     padding: 12px;
@@ -1712,6 +1767,19 @@ a.read-more:active {
 
   .fedicomment-replies {
     margin-left: 20px;
+    padding-left: 12px;
+  }
+
+  /* Even more aggressive indentation limiting on mobile */
+  .fedicomment-comment[data-depth="3"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="4"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="5"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="6"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="7"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="8"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="9"] .fedicomment-replies,
+  .fedicomment-comment[data-depth="10"] .fedicomment-replies {
+    margin-left: 0;
     padding-left: 12px;
   }
 }

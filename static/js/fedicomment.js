@@ -165,6 +165,31 @@ class FediComment {
     avatar.alt = `${comment.account.display_name || comment.account.username} avatar`;
     avatar.loading = 'lazy';
 
+    // Add collapse button if there are replies
+    const hasReplies = comment.replies && comment.replies.length > 0 && depth < this.config.maxDepth;
+    if (hasReplies) {
+      const collapseBtn = document.createElement('button');
+      collapseBtn.className = 'fedicomment-collapse-btn';
+      collapseBtn.setAttribute('aria-label', 'Collapse thread');
+      collapseBtn.innerHTML = '−'; // Minus sign when expanded
+      collapseBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        article.classList.toggle('fedicomment-collapsed');
+        collapseBtn.innerHTML = article.classList.contains('fedicomment-collapsed') ? '+' : '−';
+        collapseBtn.setAttribute('aria-label',
+          article.classList.contains('fedicomment-collapsed') ? 'Expand thread' : 'Collapse thread'
+        );
+      });
+      avatar.style.position = 'relative';
+      const avatarWrapper = document.createElement('div');
+      avatarWrapper.className = 'fedicomment-avatar-wrapper';
+      avatarWrapper.appendChild(avatar);
+      avatarWrapper.appendChild(collapseBtn);
+      header.appendChild(avatarWrapper);
+    } else {
+      header.appendChild(avatar);
+    }
+
     const authorInfo = document.createElement('div');
     authorInfo.className = 'fedicomment-author-info';
 
@@ -196,7 +221,6 @@ class FediComment {
     authorInfo.appendChild(username);
     authorInfo.appendChild(timestamp);
 
-    header.appendChild(avatar);
     header.appendChild(authorInfo);
 
     // Content
@@ -227,22 +251,27 @@ class FediComment {
       footer.appendChild(boosts);
     }
 
+    // Create collapsible body wrapper
+    const body = document.createElement('div');
+    body.className = 'fedicomment-body';
+
     article.appendChild(header);
-    article.appendChild(content);
+    body.appendChild(content);
     if (footer.children.length > 0) {
-      article.appendChild(footer);
+      body.appendChild(footer);
     }
 
     // Render replies
-    if (comment.replies && comment.replies.length > 0 && depth < this.config.maxDepth) {
+    if (hasReplies) {
       const replies = document.createElement('div');
       replies.className = 'fedicomment-replies';
       comment.replies.forEach(reply => {
         replies.appendChild(this.renderComment(reply, depth + 1));
       });
-      article.appendChild(replies);
+      body.appendChild(replies);
     }
 
+    article.appendChild(body);
     return article;
   }
 
