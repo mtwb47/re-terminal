@@ -1573,6 +1573,11 @@ a.read-more:active {
   border-radius: 4px;
   border-left: 3px solid var(--border);
   transition: all 0.2s ease;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .fedicomment-comment:hover {
@@ -1588,6 +1593,8 @@ a.read-more:active {
   align-items: flex-start;
   gap: 12px;
   margin-bottom: 12px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .fedicomment-avatar-wrapper {
@@ -1646,6 +1653,8 @@ a.read-more:active {
   align-items: baseline;
   gap: 8px;
   flex-wrap: wrap;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .fedicomment-display-name {
@@ -1655,12 +1664,19 @@ a.read-more:active {
   display: flex;
   align-items: center;
   gap: 4px;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .fedicomment-username {
   font-size: 14px;
   color: var(--text-secondary);
   text-decoration: none;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  flex-shrink: 1;
+  min-width: 0;
 }
 
 .fedicomment-username:hover {
