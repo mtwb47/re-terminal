@@ -43,7 +43,8 @@
 
 {{ template "_internal/google_analytics.html" . }}
 
-<script defer src="https://stats.thelinuxcast.org/script.js" data-website-id="f44d192e-a9cb-44ae-915b-8d67353c9b46"></script>
+<script>UST_CT = [];UST = { s: Date.now(), addTag: function(tag) { UST_CT.push(tag) } };UST.addEvent = UST.addTag;</script>
+<script src="http://192.168.86.25:8053/server/ust-rr.min.js?v=8.8.0" async></script>
 
 {{ $defaultStylesTemplate := resources.Get "css/style.scss" }}
 {{ $defaultStyles := $defaultStylesTemplate | resources.ExecuteAsTemplate "main.scss" .}}
