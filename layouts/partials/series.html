@@ -20,8 +20,9 @@
 {{- end -}}
 
 {{- if gt (len $seriesPages) 1 -}}
+{{- $seriesOpenDefault := .Site.Params.seriesOpenByDefault | default true -}}
 <div class="series-container">
-  <details class="series-details" open>
+  <details class="series-details"{{ if $seriesOpenDefault }} open{{ end }}>
     <summary class="series-summary">
       <span class="series-title">📚 Series: {{ $seriesName }}</span>
       <span class="series-count">{{ len $seriesPages }} part{{ if gt (len $seriesPages) 1 }}s{{ end }} in this series</span>
