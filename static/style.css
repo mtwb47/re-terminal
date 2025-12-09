@@ -1943,7 +1943,7 @@ a.read-more:active {
 
 .series-expand-btn {
   margin-top: 0.75rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 0;
   background: var(--accent);
   color: var(--bg-primary);
   border: none;
@@ -1951,8 +1951,7 @@ a.read-more:active {
   font-size: 0.85rem;
   font-weight: bold;
   cursor: pointer;
-  width: calc(100% + 2rem);
-  margin-left: -1rem;
+  width: 100%;
   transition: all 0.2s ease;
   text-align: center;
 }
