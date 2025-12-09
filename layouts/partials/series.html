@@ -57,7 +57,7 @@
     </ol>
 
     {{- if $showExpandButton -}}
-    <button class="series-expand-btn" onclick="this.previousElementSibling.classList.toggle('series-expanded'); this.classList.toggle('series-collapsed'); if(this.classList.contains('series-collapsed')) { this.innerHTML='Show all {{ $totalItems }} parts ▼'; } else { this.innerHTML='Show fewer parts ▲'; }">
+    <button class="series-expand-btn" onclick="this.previousElementSibling.classList.toggle('series-expanded'); this.classList.toggle('series-expanded-btn'); if(this.classList.contains('series-expanded-btn')) { this.innerHTML='Show fewer parts ▲'; } else { this.innerHTML='Show all {{ $totalItems }} parts ▼'; }">
       Show all {{ $totalItems }} parts ▼
     </button>
     {{- end -}}
