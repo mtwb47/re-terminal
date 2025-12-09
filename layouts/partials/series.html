@@ -14,9 +14,9 @@
 {{- end -}}
 
 {{- if $hasOrder -}}
-  {{- $seriesPages = sort $seriesPages "Params.series_order" "asc" -}}
+  {{- $seriesPages = sort $seriesPages "Params.series_order" "desc" -}}
 {{- else -}}
-  {{- $seriesPages = sort $seriesPages "Date" "asc" -}}
+  {{- $seriesPages = sort $seriesPages "Date" "desc" -}}
 {{- end -}}
 
 {{- if gt (len $seriesPages) 1 -}}
