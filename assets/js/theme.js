@@ -20,7 +20,10 @@ document.addEventListener('DOMContentLoaded', function() {
     'tokyonight': { name: 'Tokyo Night', displayName: 'Tokyo Night' },
     'solarized': { name: 'Solarized', displayName: 'Solarized' },
     'monokai': { name: 'Monokai', displayName: 'Monokai' },
-    'ayu': { name: 'Ayu', displayName: 'Ayu' }
+    'ayu': { name: 'Ayu', displayName: 'Ayu' },
+    'onedark': { name: 'One Dark', displayName: 'One Dark' },
+    'nightowl': { name: 'Night Owl', displayName: 'Night Owl' },
+    'palenight': { name: 'Palenight', displayName: 'Palenight' }
   };
 
   // Function to get random theme
