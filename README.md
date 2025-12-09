@@ -43,9 +43,9 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 
 ## Features
 
-- **6 duotone themes**, depending on your preferences (blue is default, red, orange, green, pink, paper)
-- **Theme switcher** for dynamic theme selection
-- **Multiple post types** including standard posts, links, and images with galleries
+- **15 theme families** with both dark and light variants (30 total themes)
+- **Theme switcher** with random theme option for dynamic theme selection
+- **Multiple post types** including standard posts, links, images, and videos with galleries
 - [**Fira Code**](https://github.com/tonsky/FiraCode) as default monospaced font. It's gorgeous!
 - **Really nice duotone**, custom syntax highlighting based on [**PrismJS**](https://prismjs.com)
 - **Fully responsive** design with mobile menu support
@@ -67,9 +67,14 @@ re-Terminal before v2.1.0 may work with versions of HUGO less than v0.128.0 belo
 This fork includes extensive improvements and new features compared to the original Terminal theme:
 
 ### Design & Theming
-- **Migrated from SCSS to CSS Native Variables** - brings super easy color customization via `style.css`
+- **15 theme families** with dark and light variants (30 total themes):
+  - Gruvbox, One Dark, Night Owl, Material Palenight, Everforest
+  - Catppuccin, Nord, Rose Pine, Tokyo Night, Solarized
+  - High Contrast, Oxocarbon, Dracula, Monokai, Ayu
+- **Random theme option** - automatically select a random theme on each page load
 - **Theme switcher functionality** - dynamically change between color themes
-- **Light theme support** - including the "paper" theme for light mode enthusiasts
+- **Light/dark mode toggle** - all themes support both variants
+- **Migrated from SCSS to CSS Native Variables** - brings super easy color customization via `style.css`
 - **Custom scrollbar** and selection background styling
 - **Logo animations** with customizable fonts and styling
 - **Improved responsive design** with enhanced mobile menu
@@ -131,15 +136,27 @@ You can find all of them in the browser's page inspector, but here is the list w
   }
 ```
 
-### Theme Colors
+### Theme Configuration
 
-Available theme colors: `blue` (default), `orange`, `red`, `green`, `pink`, `paper` (light theme)
+The theme switcher is built into the header and allows dynamic theme selection. Available themes:
 
-Set your preferred theme in the config:
+**Theme Families** (all with dark and light variants):
+- gruvbox, onedark, nightowl, palenight, everforest
+- catppuccin, high-contrast, oxocarbon, dracula, nord
+- rosepine, tokyonight, solarized, monokai, ayu
+
+**Random Theme Option**: Select "🎲 random" to automatically randomize the theme on each page load while respecting your light/dark preference.
+
+**Series Navigation Configuration**:
 
 ```toml
 [params]
-  themeColor = "orange"
+  # Set to false to have series navigation collapsed by default
+  seriesOpenByDefault = true
+
+  # Limit number of series items shown (0 = show all, default)
+  # Example: seriesMaxItems = 6 shows only the 6 most recent posts
+  seriesMaxItems = 0
 ```
 
 ## Built-in shortcodes

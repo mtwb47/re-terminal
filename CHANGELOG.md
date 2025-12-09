@@ -2,6 +2,40 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [3.4.0] - 2025-12-09
+
+### Added
+- **5 new theme families** with dark and light variants:
+  - One Dark (dark) + Atom One Light (light) - Classic Atom editor theme
+  - Night Owl (dark) + Light Owl (light) - Sarah Drasner's popular theme
+  - Material Palenight (dark + light) - Material Design theme with purple tones
+- **Random theme option** (🎲 random) - randomizes theme selection on each page load while respecting light/dark preference
+  - Toggle between random and fixed theme modes
+  - Stores preference in localStorage
+  - Displays "random" in theme switcher when active
+- **Series navigation improvements**:
+  - Configurable default open/closed state via `seriesOpenByDefault` parameter (defaults to true)
+  - Optional series item limit via `seriesMaxItems` parameter (0 = show all)
+  - Show/hide button for truncated series lists ("Show all X parts" / "Show fewer parts")
+  - Series now display newest-to-oldest by default (reversed from oldest-to-newest)
+  - Compact series navigation (approximately 50% smaller vertical space)
+- Camera emoji (📷) now appears on image post single pages (previously only in feeds)
+
+### Changed
+- Theme count increased from 12 to 15 families (30 total variants with light/dark)
+- Series navigation spacing and sizing reduced for more compact display:
+  - Container padding reduced from 1.5rem to 1rem
+  - Title font size reduced from 1.5rem to 1.1rem
+  - Item spacing and padding reduced by ~40%
+  - Border width on current item reduced from 2px to 1px
+- Series list button width now matches container width exactly
+- Updated Gruvbox light theme colors to official palette (bright orange #fb6a16, bright green #aab01e)
+- Updated Everforest light theme colors to official palette (green #8da101, aqua #35a77c, yellow #dfa000)
+
+### Fixed
+- Series expand button alignment corrected to match container width
+- Series navigation properly shows most recent items when truncated (not oldest)
+
 ## [3.3.2] - 2025-11-17
 
 ### Added
