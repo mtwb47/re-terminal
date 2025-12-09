@@ -23,8 +23,24 @@ document.addEventListener('DOMContentLoaded', function() {
     'ayu': { name: 'Ayu', displayName: 'Ayu' }
   };
 
-  const currentThemeFamily = localStorage.getItem('themeFamily') || 'gruvbox';
+  // Function to get random theme
+  function getRandomTheme(currentTheme) {
+    const themeKeys = Object.keys(themes);
+    const availableThemes = themeKeys.filter(key => key !== currentTheme);
+    const randomIndex = Math.floor(Math.random() * availableThemes.length);
+    return availableThemes[randomIndex];
+  }
+
+  // Check if random mode is enabled
+  const isRandomMode = localStorage.getItem('randomTheme') === 'true';
+  let currentThemeFamily = localStorage.getItem('themeFamily') || 'gruvbox';
   const currentThemeVariant = localStorage.getItem('themeVariant') || 'dark';
+
+  // If random mode is enabled, select a random theme on page load
+  if (isRandomMode) {
+    currentThemeFamily = getRandomTheme(currentThemeFamily);
+    localStorage.setItem('themeFamily', currentThemeFamily);
+  }
 
   function updateLogo(variant) {
     if (logoImg) {
@@ -44,13 +60,21 @@ document.addEventListener('DOMContentLoaded', function() {
     localStorage.setItem('themeFamily', family);
     localStorage.setItem('themeVariant', variant);
 
-    if (currentThemeName && themes[family]) {
-      currentThemeName.textContent = family;
+    if (currentThemeName) {
+      const isRandom = localStorage.getItem('randomTheme') === 'true';
+      if (isRandom) {
+        currentThemeName.textContent = 'random';
+      } else if (themes[family]) {
+        currentThemeName.textContent = family;
+      }
     }
 
     themeOptions.forEach(option => {
       option.classList.remove('active');
-      if (option.dataset.theme === family) {
+      const isRandom = localStorage.getItem('randomTheme') === 'true';
+      if (isRandom && option.dataset.theme === 'random') {
+        option.classList.add('active');
+      } else if (option.dataset.theme === family && !isRandom) {
         option.classList.add('active');
       }
     });
@@ -116,7 +140,20 @@ document.addEventListener('DOMContentLoaded', function() {
     option.addEventListener('click', function() {
       const selectedFamily = this.dataset.theme;
       const currentVariant = localStorage.getItem('themeVariant') || 'dark';
-      applyTheme(selectedFamily, currentVariant);
+
+      // Handle random theme selection
+      if (selectedFamily === 'random') {
+        localStorage.setItem('randomTheme', 'true');
+        const randomFamily = getRandomTheme(localStorage.getItem('themeFamily'));
+        applyTheme(randomFamily, currentVariant);
+        if (currentThemeName) {
+          currentThemeName.textContent = 'random';
+        }
+      } else {
+        localStorage.setItem('randomTheme', 'false');
+        applyTheme(selectedFamily, currentVariant);
+      }
+
       themeSwitcher.classList.remove('open');
     });
   });
