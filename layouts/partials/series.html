@@ -21,16 +21,27 @@
 
 {{- if gt (len $seriesPages) 1 -}}
 {{- $seriesOpenDefault := .Site.Params.seriesOpenByDefault | default true -}}
+{{- $seriesMaxItems := .Site.Params.seriesMaxItems | default 0 -}}
+{{- $totalItems := len $seriesPages -}}
+{{- $showExpandButton := and (gt $seriesMaxItems 0) (gt $totalItems $seriesMaxItems) -}}
+
 <div class="series-container">
   <details class="series-details"{{ if $seriesOpenDefault }} open{{ end }}>
     <summary class="series-summary">
       <span class="series-title">📚 Series: {{ $seriesName }}</span>
-      <span class="series-count">{{ len $seriesPages }} part{{ if gt (len $seriesPages) 1 }}s{{ end }} in this series</span>
+      <span class="series-count">{{ $totalItems }} part{{ if gt $totalItems 1 }}s{{ end }} in this series</span>
     </summary>
 
-    <ol class="series-list">
+    <ol class="series-list" {{ if $showExpandButton }}data-full-count="{{ $totalItems }}"{{ end }}>
       {{- range $index, $page := $seriesPages -}}
-      <li class="series-item{{ if eq $page.Permalink $currentPage.Permalink }} series-current{{ end }}">
+      {{- $itemClass := "series-item" -}}
+      {{- if eq $page.Permalink $currentPage.Permalink -}}
+        {{- $itemClass = "series-item series-current" -}}
+      {{- end -}}
+      {{- if and $showExpandButton (ge $index $seriesMaxItems) -}}
+        {{- $itemClass = printf "%s series-hidden" $itemClass -}}
+      {{- end -}}
+      <li class="{{ $itemClass }}">
         {{- if eq $page.Permalink $currentPage.Permalink -}}
           <span class="series-link-current">
             <span class="series-indicator">➤</span> {{ $page.Title }}
@@ -44,6 +55,12 @@
       </li>
       {{- end -}}
     </ol>
+
+    {{- if $showExpandButton -}}
+    <button class="series-expand-btn" onclick="this.previousElementSibling.classList.toggle('series-expanded'); this.classList.toggle('series-collapsed'); if(this.classList.contains('series-collapsed')) { this.innerHTML='Show all {{ $totalItems }} parts ▼'; } else { this.innerHTML='Show fewer parts ▲'; }">
+      Show all {{ $totalItems }} parts ▼
+    </button>
+    {{- end -}}
   </details>
 </div>
 {{- end -}}
