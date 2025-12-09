@@ -38,7 +38,7 @@
       {{- if eq $page.Permalink $currentPage.Permalink -}}
         {{- $itemClass = "series-item series-current" -}}
       {{- end -}}
-      {{- if and $showExpandButton (lt $index (sub $totalItems $seriesMaxItems)) -}}
+      {{- if and $showExpandButton (ge $index $seriesMaxItems) -}}
         {{- $itemClass = printf "%s series-hidden" $itemClass -}}
       {{- end -}}
       <li class="{{ $itemClass }}">
