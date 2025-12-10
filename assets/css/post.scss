@@ -89,10 +89,15 @@
 
   &-content {
     margin-top: 30px;
-    
+
     & a {
       color: var(--article-link-color);
     }
+  }
+
+  // Read more button alignment for all posts
+  & > div:has(.read-more) {
+    text-align: right;
   }
 
   &-cover {
