@@ -78,18 +78,26 @@ a.button {
 }
 
 a.read-more.button {
-  display: inline;
-  color: var(--accent);
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  text-decoration: none;
+  display: inline-block !important;
+  color: var(--accent) !important;
+  background: none !important;
+  border: none !important;
+  padding: 5px 10px !important;
+  margin: 0 !important;
+  text-decoration: none !important;
   font-weight: normal;
   cursor: pointer;
+  box-shadow: none !important;
 
   &:hover {
-    text-decoration: underline;
+    color: var(--accent) !important;
+    text-decoration: underline !important;
+    background: none !important;
+  }
+
+  &:active {
+    color: var(--accent) !important;
+    background: none !important;
   }
 }
 
