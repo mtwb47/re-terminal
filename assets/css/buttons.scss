@@ -77,18 +77,29 @@ a.button {
   }
 }
 
-a.read-more,
-a.read-more:hover,
-a.read-more:active {
+a.read-more {
   display: inline-flex;
-  border: none;
-  color: var(--accent);
-  background: none;
-  box-shadow: none;
-  padding: 0;
-  margin: 20px 0;
-  max-width: 100%;
-  text-align: right;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 18px;
+  margin: 5px 0;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 8px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-contrast-color);
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover {
+    background: color-mix(in srgb, var(--accent), transparent 10%);
+  }
+
+  @media (max-width: $phone) {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
 }
 
 .code-toolbar {
