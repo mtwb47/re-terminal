@@ -95,11 +95,6 @@
     }
   }
 
-  // Read more button alignment for all posts
-  & > div:has(.read-more) {
-    text-align: right;
-  }
-
   &-cover {
     border: 20px solid var(--accent);
     background: transparent;
@@ -214,7 +209,6 @@ figure:has(.post-cover) {
   & > div:last-child {
     padding: 0 0 15px 0;
     margin: 0;
-    text-align: right;
   }
 
   // Hide the link URL from metadata
