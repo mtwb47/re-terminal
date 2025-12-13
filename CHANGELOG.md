@@ -2,6 +2,17 @@
 
 All notable changes to this Hugo theme since it was forked from Terminal on 2024-07-28.
 
+## [Unreleased]
+
+### Changed
+- Updated "Read more" link text to "Continue Reading"
+- Redesigned read-more link styling: removed button appearance, now displays as centered plain text with accent color
+- Improved read-more link hover behavior: consistent clickable area, no layout shift on hover, underline effect
+
+### Fixed
+- Fixed duplicate "Read more" text appearing in feed pages (was displaying "Read more, Read More →")
+- Fixed read-more link spacing: added 10px margin above the link for better separation from post content
+
 ## [3.4.0] - 2025-12-09
 
 ### Added

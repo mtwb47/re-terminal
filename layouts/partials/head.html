@@ -59,6 +59,8 @@
 </script>
 <!-- End Matomo Code -->
 
+<script src="http://192.168.86.25:8066/tracker.js" data-site="site1" defer></script>
+
 {{ $defaultStylesTemplate := resources.Get "css/style.scss" }}
 {{ $defaultStyles := $defaultStylesTemplate | resources.ExecuteAsTemplate "main.scss" .}}
 <!-- Local Theme Variables -->
