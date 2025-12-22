@@ -43,7 +43,8 @@
 
 {{ template "_internal/google_analytics.html" . }}
 
-<script async defer data-website-id="1" src="http://192.168.86.25:5173/tracker.js"></script>
+<script async defer data-website-id="2" src="https://stats.thelinuxcast.org/tracker.js"></script>
+
 
 {{ $defaultStylesTemplate := resources.Get "css/style.scss" }}
 {{ $defaultStyles := $defaultStylesTemplate | resources.ExecuteAsTemplate "main.scss" .}}
