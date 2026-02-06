@@ -45,6 +45,16 @@
 
 <script async defer data-website-id="2" src="https://stats.thelinuxcast.org/js/script.js?v=2"></script>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-74P4W1P59L"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'G-74P4W1P59L');
+</script>
+
 {{ $defaultStylesTemplate := resources.Get "css/style.scss" }}
 {{ $defaultStyles := $defaultStylesTemplate | resources.ExecuteAsTemplate "main.scss" .}}
 <!-- Local Theme Variables -->
