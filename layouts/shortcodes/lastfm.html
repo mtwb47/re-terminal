@@ -128,7 +128,7 @@
         {{- range $recentDays -}}
           {{- $count := index $dayCounts . | default 0 -}}
           {{- $pct := mul (div (float $count) (float $maxCount)) 100 -}}
-          {{- $dt := time.Parse "2006-01-02" . -}}
+          {{- $dt := time . -}}
           {{- $dayName := index $dayNames (int $dt.Weekday) -}}
           <div class="lfm-day">
             <div class="lfm-day-bar-container">
