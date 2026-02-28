@@ -102,9 +102,8 @@
       {{- $dateInfo := index . "date" | default dict -}}
       {{- $uts := index $dateInfo "uts" | default "" -}}
       {{- if and $uts (ne $uts "") -}}
-        {{- $ts := int $uts -}}
-        {{- $t := time.Unix $ts -}}
-        {{- $dayKey := $t.Format "2006-01-02" -}}
+        {{- $datetime := time (int $uts) -}}
+        {{- $dayKey := $datetime.Format "2006-01-02" -}}
         {{- $current := index $dayCounts $dayKey | default 0 -}}
         {{- $dayCounts = merge $dayCounts (dict $dayKey (add $current 1)) -}}
       {{- end -}}
@@ -156,9 +155,8 @@
       {{- $dateInfo := index . "date" | default dict -}}
       {{- $uts := index $dateInfo "uts" | default "" -}}
       {{- if and $uts (ne $uts "") -}}
-        {{- $ts := int $uts -}}
-        {{- $t := time.Unix $ts -}}
-        {{- $hour := string $t.Hour -}}
+        {{- $datetime := time (int $uts) -}}
+        {{- $hour := string $datetime.Hour -}}
         {{- $current := index $hourCounts $hour | default 0 -}}
         {{- $hourCounts = merge $hourCounts (dict $hour (add $current 1)) -}}
       {{- end -}}
