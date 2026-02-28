@@ -100,8 +100,8 @@
     {{- $dayNames := slice "Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" -}}
     {{- range $extTracks -}}
       {{- $dateInfo := index . "date" | default dict -}}
-      {{- $uts := index $dateInfo "uts" -}}
-      {{- if $uts -}}
+      {{- $uts := index $dateInfo "uts" | default "" -}}
+      {{- if and $uts (ne $uts "") -}}
         {{- $ts := int $uts -}}
         {{- $t := time.Unix $ts -}}
         {{- $dayKey := $t.Format "2006-01-02" -}}
@@ -154,8 +154,8 @@
     {{- end -}}
     {{- range $extTracks -}}
       {{- $dateInfo := index . "date" | default dict -}}
-      {{- $uts := index $dateInfo "uts" -}}
-      {{- if $uts -}}
+      {{- $uts := index $dateInfo "uts" | default "" -}}
+      {{- if and $uts (ne $uts "") -}}
         {{- $ts := int $uts -}}
         {{- $t := time.Unix $ts -}}
         {{- $hour := string $t.Hour -}}
