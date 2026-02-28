@@ -1,102 +1,479 @@
-{{- $recent      := site.Data.lastfm.recent      | default dict -}}
-{{- $top_overall := site.Data.lastfm.toptracks   | default dict -}}
-{{- $art_overall := site.Data.lastfm.topartists  | default dict -}}
-{{- $top_7day    := site.Data.lastfm.toptracks_7day   | default dict -}}
-{{- $art_7day    := site.Data.lastfm.topartists_7day  | default dict -}}
-{{- $userinfo    := site.Data.lastfm.userinfo    | default dict -}}
+{{- $recent      := site.Data.lastfm.recent          | default dict -}}
+{{- $recent_ext  := site.Data.lastfm.recent_extended | default dict -}}
+{{- $top_tracks  := site.Data.lastfm.toptracks       | default dict -}}
+{{- $top_artists := site.Data.lastfm.topartists      | default dict -}}
+{{- $top_albums  := site.Data.lastfm.topalbums       | default dict -}}
+{{- $tracks_7d   := site.Data.lastfm.toptracks_7day  | default dict -}}
+{{- $artists_7d  := site.Data.lastfm.topartists_7day | default dict -}}
+{{- $albums_7d   := site.Data.lastfm.topalbums_7day  | default dict -}}
+{{- $userinfo    := site.Data.lastfm.userinfo        | default dict -}}
+{{- $loved       := site.Data.lastfm.loved           | default dict -}}
 
-<div class="lastfm">
+<div class="lastfm-dashboard">
 
-  <!-- Most recent scrobble -->
-  <h4>Most recent scrobble</h4>
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NOW PLAYING / LAST PLAYED
+       ═══════════════════════════════════════════════════════════════════════ -->
   {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
   {{- if gt (len $rlist) 0 -}}
     {{- $t := index $rlist 0 -}}
-    {{- $name := index $t "name" -}}
-    {{- $url  := index $t "url" -}}
+    {{- $name   := index $t "name" -}}
+    {{- $url    := index $t "url" -}}
     {{- $artist := index (index $t "artist") "#text" -}}
     {{- $album  := index (index $t "album") "#text" -}}
-    {{- $now := index (index $t "@attr") "nowplaying" -}}
-    {{- $when := index (index $t "date") "#text" -}}
-    <p>
-      <strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
-      — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
-      {{ if eq $now "true" }} · <span class="now">now playing</span>{{ else if $when }} · <span class="when">{{ $when }}</span>{{ end }}
-    </p>
-  {{- else -}}<p>No recent tracks.</p>{{- end }}
-
-  <!-- Top tracks: Overall -->
-  <h4>Top 10 tracks — Overall</h4>
-  {{- $tracks_overall := index (index $top_overall "toptracks" | default dict) "track" | default (slice) -}}
-  {{- if gt (len $tracks_overall) 0 -}}
-    <ol class="lastfm-list">
-      {{- range $tracks_overall -}}
-        {{- $nm := index . "name" -}}
-        {{- $url := index . "url" -}}
-        <li>
-          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
-          — {{ index (index . "artist") "name" }}
-          <span class="badge" title="plays">{{ index . "playcount" }}</span>
-        </li>
+    {{- $now    := index (index $t "@attr") "nowplaying" -}}
+    {{- $when   := index (index $t "date") "#text" -}}
+    {{- $images := index $t "image" | default (slice) -}}
+    {{- $img := "" -}}
+    {{- range $images -}}
+      {{- if eq (index . "size") "extralarge" -}}
+        {{- $img = index . "#text" -}}
+      {{- else if and (eq (index . "size") "large") (eq $img "") -}}
+        {{- $img = index . "#text" -}}
       {{- end -}}
-    </ol>
-  {{- else -}}<p>No top tracks.</p>{{- end }}
+    {{- end -}}
 
-  <!-- Top tracks: Past 7 days (optional) -->
-  {{- $tracks_7 := index (index $top_7day "toptracks" | default dict) "track" | default (slice) -}}
-  {{- if gt (len $tracks_7) 0 -}}
-    <h4>Top 10 tracks — Past 7 days</h4>
-    <ol class="lastfm-list">
-      {{- range $tracks_7 -}}
-        {{- $nm := index . "name" -}}
-        {{- $url := index . "url" -}}
-        <li>
-          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
-          — {{ index (index . "artist") "name" }}
-          <span class="badge" title="plays">{{ index . "playcount" }}</span>
-        </li>
-      {{- end -}}
-    </ol>
+    <section class="lfm-now-playing">
+      <div class="lfm-np-card">
+        {{- if $img -}}
+        <div class="lfm-np-art">
+          <img src="{{ $img }}" alt="{{ $album }}" loading="lazy">
+          {{- if eq $now "true" -}}
+          <span class="lfm-playing-indicator">
+            <span class="lfm-bar"></span>
+            <span class="lfm-bar"></span>
+            <span class="lfm-bar"></span>
+          </span>
+          {{- end -}}
+        </div>
+        {{- end -}}
+        <div class="lfm-np-info">
+          <span class="lfm-np-label">{{ if eq $now "true" }}Now Playing{{ else }}Last Played{{ end }}</span>
+          <h3 class="lfm-np-track">{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</h3>
+          <p class="lfm-np-artist">{{ $artist }}</p>
+          {{- with $album -}}<p class="lfm-np-album">{{ . }}</p>{{- end -}}
+          {{- if and (ne $now "true") $when -}}<time class="lfm-np-time">{{ $when }}</time>{{- end -}}
+        </div>
+      </div>
+    </section>
   {{- end }}
 
-  <!-- Top artists: Overall -->
-  <h4>Top 10 artists — Overall</h4>
-  {{- $artists_overall := index (index $art_overall "topartists" | default dict) "artist" | default (slice) -}}
-  {{- if gt (len $artists_overall) 0 -}}
-    <ol class="lastfm-list">
-      {{- range $artists_overall -}}
-        {{- $nm := index . "name" -}}
-        {{- $url := index . "url" -}}
-        <li>
-          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
-          <span class="badge" title="plays">{{ index . "playcount" }}</span>
-        </li>
-      {{- end -}}
-    </ol>
-  {{- else -}}<p>No top artists.</p>{{- end }}
-
-  <!-- Top artists: Past 7 days (optional) -->
-  {{- $artists_7 := index (index $art_7day "topartists" | default dict) "artist" | default (slice) -}}
-  {{- if gt (len $artists_7) 0 -}}
-    <h4>Top 10 artists — Past 7 days</h4>
-    <ol class="lastfm-list">
-      {{- range $artists_7 -}}
-        {{- $nm := index . "name" -}}
-        {{- $url := index . "url" -}}
-        <li>
-          {{ if $url }}<a href="{{ $url }}">{{ $nm }}</a>{{ else }}{{ $nm }}{{ end }}
-          <span class="badge" title="plays">{{ index . "playcount" }}</span>
-        </li>
-      {{- end -}}
-    </ol>
-  {{- end }}
-
-  <!-- Total scrobbles -->
-  <h4>Total scrobbles</h4>
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       QUICK STATS
+       ═══════════════════════════════════════════════════════════════════════ -->
   {{- $u := index $userinfo "user" | default dict -}}
-  <p>{{ index $u "playcount" | default "0" }}</p>
+  {{- $totalScrobbles := index $u "playcount" | default "0" -}}
+  {{- $tracks7dList := index (index $tracks_7d "toptracks" | default dict) "track" | default (slice) -}}
+  {{- $artists7dList := index (index $artists_7d "topartists" | default dict) "artist" | default (slice) -}}
+  {{- $albums7dList := index (index $albums_7d "topalbums" | default dict) "album" | default (slice) -}}
 
-  <!-- Last updated stamp (build time) -->
-  <p class="lastfm-updated">Updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
+  {{- $scrobbles7d := 0 -}}
+  {{- range $tracks7dList -}}
+    {{- $scrobbles7d = add $scrobbles7d (int (index . "playcount")) -}}
+  {{- end -}}
+
+  <section class="lfm-stats">
+    <div class="lfm-stat-card">
+      <span class="lfm-stat-value">{{ $totalScrobbles | lang.FormatNumber 0 }}</span>
+      <span class="lfm-stat-label">Total Scrobbles</span>
+    </div>
+    <div class="lfm-stat-card">
+      <span class="lfm-stat-value">{{ $scrobbles7d | lang.FormatNumber 0 }}</span>
+      <span class="lfm-stat-label">Scrobbles This Week</span>
+    </div>
+    <div class="lfm-stat-card">
+      <span class="lfm-stat-value">{{ len $artists7dList }}</span>
+      <span class="lfm-stat-label">Artists This Week</span>
+    </div>
+    <div class="lfm-stat-card">
+      <span class="lfm-stat-value">{{ len $albums7dList }}</span>
+      <span class="lfm-stat-label">Albums This Week</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       DAILY ACTIVITY CHART (from extended recent tracks)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $extTracks := index (index $recent_ext "recenttracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $extTracks) 0 -}}
+    {{- $dayCounts := dict -}}
+    {{- $dayNames := slice "Sun" "Mon" "Tue" "Wed" "Thu" "Fri" "Sat" -}}
+    {{- range $extTracks -}}
+      {{- $dateInfo := index . "date" | default dict -}}
+      {{- $uts := index $dateInfo "uts" -}}
+      {{- if $uts -}}
+        {{- $ts := int $uts -}}
+        {{- $t := time.Unix $ts -}}
+        {{- $dayKey := $t.Format "2006-01-02" -}}
+        {{- $current := index $dayCounts $dayKey | default 0 -}}
+        {{- $dayCounts = merge $dayCounts (dict $dayKey (add $current 1)) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $maxCount := 1 -}}
+    {{- range $day, $count := $dayCounts -}}
+      {{- if gt $count $maxCount -}}{{- $maxCount = $count -}}{{- end -}}
+    {{- end -}}
+
+    {{- $sortedDays := slice -}}
+    {{- range $day, $count := $dayCounts -}}
+      {{- $sortedDays = $sortedDays | append $day -}}
+    {{- end -}}
+    {{- $sortedDays = sort $sortedDays -}}
+    {{- $recentDays := last 7 $sortedDays -}}
+
+    {{- if gt (len $recentDays) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Daily Activity</h4>
+      <div class="lfm-daily-chart">
+        {{- range $recentDays -}}
+          {{- $count := index $dayCounts . | default 0 -}}
+          {{- $pct := mul (div (float $count) (float $maxCount)) 100 -}}
+          {{- $dt := time.Parse "2006-01-02" . -}}
+          {{- $dayName := index $dayNames (int $dt.Weekday) -}}
+          <div class="lfm-day">
+            <div class="lfm-day-bar-container">
+              <div class="lfm-day-bar" style="height: {{ $pct }}%;" title="{{ $count }} scrobbles"></div>
+            </div>
+            <span class="lfm-day-label">{{ $dayName }}</span>
+            <span class="lfm-day-count">{{ $count }}</span>
+          </div>
+        {{- end -}}
+      </div>
+    </section>
+    {{- end -}}
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       HOURLY LISTENING CLOCK
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $extTracks) 0 -}}
+    {{- $hourCounts := dict -}}
+    {{- range $i := seq 0 23 -}}
+      {{- $hourCounts = merge $hourCounts (dict (string $i) 0) -}}
+    {{- end -}}
+    {{- range $extTracks -}}
+      {{- $dateInfo := index . "date" | default dict -}}
+      {{- $uts := index $dateInfo "uts" -}}
+      {{- if $uts -}}
+        {{- $ts := int $uts -}}
+        {{- $t := time.Unix $ts -}}
+        {{- $hour := string $t.Hour -}}
+        {{- $current := index $hourCounts $hour | default 0 -}}
+        {{- $hourCounts = merge $hourCounts (dict $hour (add $current 1)) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $maxHour := 1 -}}
+    {{- range $h, $c := $hourCounts -}}
+      {{- if gt $c $maxHour -}}{{- $maxHour = $c -}}{{- end -}}
+    {{- end -}}
+
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Listening Clock</h4>
+      <div class="lfm-hourly-grid">
+        {{- range $i := seq 0 23 -}}
+          {{- $count := index $hourCounts (string $i) | default 0 -}}
+          {{- $intensity := div (float $count) (float $maxHour) -}}
+          {{- $opacity := add 0.1 (mul $intensity 0.9) -}}
+          <div class="lfm-hour" style="opacity: {{ $opacity }};" title="{{ printf "%02d:00 - %d scrobbles" $i $count }}">
+            <span class="lfm-hour-label">{{ printf "%02d" $i }}</span>
+          </div>
+        {{- end -}}
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP TRACKS - OVERALL
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $tracksOverall := index (index $top_tracks "toptracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $tracksOverall) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Tracks — All Time</h4>
+      {{- $first := index $tracksOverall 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-featured-artist">{{ index (index $first "artist") "name" }}</span>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $t := after 1 $tracksOverall -}}
+          {{- $tImages := index $t "image" | default (slice) -}}
+          {{- $tImg := "" -}}
+          {{- range $tImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
+            <a href="{{ index $t "url" }}">{{ index $t "name" }}</a>
+            <span class="lfm-artist">{{ index (index $t "artist") "name" }}</span>
+            <span class="lfm-badge">{{ index $t "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP TRACKS - PAST 7 DAYS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $tracks7dList) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Tracks — Past 7 Days</h4>
+      {{- $first := index $tracks7dList 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-featured-artist">{{ index (index $first "artist") "name" }}</span>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $t := after 1 $tracks7dList -}}
+          {{- $tImages := index $t "image" | default (slice) -}}
+          {{- $tImg := "" -}}
+          {{- range $tImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
+            <a href="{{ index $t "url" }}">{{ index $t "name" }}</a>
+            <span class="lfm-artist">{{ index (index $t "artist") "name" }}</span>
+            <span class="lfm-badge">{{ index $t "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP ARTISTS - OVERALL
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $artistsOverall := index (index $top_artists "topartists" | default dict) "artist" | default (slice) -}}
+  {{- if gt (len $artistsOverall) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Artists — All Time</h4>
+      {{- $first := index $artistsOverall 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art lfm-artist-img" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $a := after 1 $artistsOverall -}}
+          {{- $aImages := index $a "image" | default (slice) -}}
+          {{- $aImg := "" -}}
+          {{- range $aImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $aImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $aImg -}}<img src="{{ $aImg }}" alt="" class="lfm-thumb lfm-thumb-round" loading="lazy">{{- end -}}
+            <a href="{{ index $a "url" }}">{{ index $a "name" }}</a>
+            <span class="lfm-badge">{{ index $a "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP ARTISTS - PAST 7 DAYS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $artists7dList) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Artists — Past 7 Days</h4>
+      {{- $first := index $artists7dList 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art lfm-artist-img" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $a := after 1 $artists7dList -}}
+          {{- $aImages := index $a "image" | default (slice) -}}
+          {{- $aImg := "" -}}
+          {{- range $aImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $aImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $aImg -}}<img src="{{ $aImg }}" alt="" class="lfm-thumb lfm-thumb-round" loading="lazy">{{- end -}}
+            <a href="{{ index $a "url" }}">{{ index $a "name" }}</a>
+            <span class="lfm-badge">{{ index $a "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP ALBUMS - OVERALL
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $albumsOverall := index (index $top_albums "topalbums" | default dict) "album" | default (slice) -}}
+  {{- if gt (len $albumsOverall) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Albums — All Time</h4>
+      {{- $first := index $albumsOverall 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-featured-artist">{{ index (index $first "artist") "name" }}</span>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $al := after 1 $albumsOverall -}}
+          {{- $alImages := index $al "image" | default (slice) -}}
+          {{- $alImg := "" -}}
+          {{- range $alImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $alImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $alImg -}}<img src="{{ $alImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
+            <a href="{{ index $al "url" }}">{{ index $al "name" }}</a>
+            <span class="lfm-artist">{{ index (index $al "artist") "name" }}</span>
+            <span class="lfm-badge">{{ index $al "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP ALBUMS - PAST 7 DAYS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $albums7dList) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Top Albums — Past 7 Days</h4>
+      {{- $first := index $albums7dList 0 -}}
+      {{- $fImages := index $first "image" | default (slice) -}}
+      {{- $fImg := "" -}}
+      {{- range $fImages -}}
+        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- end -}}
+
+      <div class="lfm-featured">
+        {{- if $fImg -}}
+        <img src="{{ $fImg }}" alt="{{ index $first "name" }}" class="lfm-featured-art" loading="lazy">
+        {{- end -}}
+        <div class="lfm-featured-info">
+          <span class="lfm-rank">#1</span>
+          <a href="{{ index $first "url" }}" class="lfm-featured-title">{{ index $first "name" }}</a>
+          <span class="lfm-featured-artist">{{ index (index $first "artist") "name" }}</span>
+          <span class="lfm-badge">{{ index $first "playcount" }} plays</span>
+        </div>
+      </div>
+
+      <ol class="lfm-list" start="2">
+        {{- range $i, $al := after 1 $albums7dList -}}
+          {{- $alImages := index $al "image" | default (slice) -}}
+          {{- $alImg := "" -}}
+          {{- range $alImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $alImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $alImg -}}<img src="{{ $alImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
+            <a href="{{ index $al "url" }}">{{ index $al "name" }}</a>
+            <span class="lfm-artist">{{ index (index $al "artist") "name" }}</span>
+            <span class="lfm-badge">{{ index $al "playcount" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       LOVED TRACKS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $lovedTracks := index (index $loved "lovedtracks" | default dict) "track" | default (slice) -}}
+  {{- if gt (len $lovedTracks) 0 -}}
+    <section class="lfm-section">
+      <h4 class="lfm-section-title">Loved Tracks ♥</h4>
+      <ol class="lfm-list">
+        {{- range $i, $t := $lovedTracks -}}
+          {{- $tImages := index $t "image" | default (slice) -}}
+          {{- $tImg := "" -}}
+          {{- range $tImages -}}
+            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- end -}}
+          <li class="lfm-list-item">
+            {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
+            <a href="{{ index $t "url" }}">{{ index $t "name" }}</a>
+            <span class="lfm-artist">{{ index (index $t "artist") "name" }}</span>
+          </li>
+        {{- end -}}
+      </ol>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <footer class="lfm-footer">
+    <p class="lfm-updated">Data updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
+    {{- $username := index $u "name" -}}
+    {{- if $username -}}
+    <p class="lfm-profile"><a href="https://www.last.fm/user/{{ $username }}">View full profile on Last.fm →</a></p>
+    {{- end -}}
+  </footer>
 
 </div>
