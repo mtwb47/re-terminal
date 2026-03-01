@@ -1469,6 +1469,66 @@ details[open] > *:not(summary) {
   margin-top: 0;
 }
 
+/* Styled Tooltips */
+.lb-tooltip {
+  position: relative;
+  cursor: default;
+}
+
+.lb-tooltip::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.35rem 0.6rem;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  border: 1px solid var(--lb-border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 100;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.lb-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--lb-border);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+  z-index: 101;
+}
+
+.lb-tooltip:hover::after,
+.lb-tooltip:hover::before {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Tooltip positioning for hourly grid (show below on top rows) */
+.lb-hourly-grid .lb-tooltip::after {
+  bottom: auto;
+  top: calc(100% + 6px);
+}
+
+.lb-hourly-grid .lb-tooltip::before {
+  bottom: auto;
+  top: calc(100% + 2px);
+  border-top-color: transparent;
+  border-bottom-color: var(--lb-border);
+}
+
 /* Now Playing Card */
 .lb-now-playing {
   margin-bottom: 1rem;
@@ -1856,8 +1916,30 @@ details[open] > *:not(summary) {
   margin-top: 0.25rem;
 }
 
+/* Override grid for artist cards (no image) */
+.lb-featured-no-art,
+.lb-featured:has(.lb-artist-featured) {
+  grid-template-columns: 1fr;
+}
+
 .lb-artist-featured {
-  padding: 0.25rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.lb-artist-featured .lb-rank {
+  width: 100%;
+}
+
+.lb-artist-featured .lb-featured-title {
+  font-size: 1.15rem;
+}
+
+.lb-artist-featured .lb-badge {
+  margin-left: 0;
 }
 
 .lb-rank {

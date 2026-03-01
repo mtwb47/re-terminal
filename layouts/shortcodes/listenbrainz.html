@@ -148,9 +148,9 @@
               {{- $dayName = index $parts 0 -}}
             {{- end -}}
           {{- end -}}
-          <div class="lb-day">
+          <div class="lb-day lb-tooltip" data-tooltip="{{ $count }} listens">
             <div class="lb-day-bar-container">
-              <div class="lb-day-bar" style="height: {{ $pct }}%;" title="{{ $count }} listens"></div>
+              <div class="lb-day-bar" style="height: {{ $pct }}%;"></div>
             </div>
             <span class="lb-day-label">{{ substr $dayName 0 3 }}</span>
             <span class="lb-day-count">{{ $count }}</span>
@@ -198,7 +198,7 @@
             {{- $intensity = div (float $count) (float $maxHour) -}}
           {{- end -}}
           {{- $opacity := add 0.15 (mul $intensity 0.85) -}}
-          <div class="lb-hour" style="opacity: {{ $opacity }};" title="{{ printf "%02d:00 - %d listens" $i $count }}">
+          <div class="lb-hour lb-tooltip" style="opacity: {{ $opacity }};" data-tooltip="{{ printf "%02d:00 – %d listens" $i $count }}">
             <span class="lb-hour-label">{{ printf "%02d" $i }}</span>
           </div>
         {{- end -}}
@@ -364,7 +364,7 @@
 
         {{- $first := index $artists 0 -}}
 
-        <div class="lb-featured">
+        <div class="lb-featured lb-featured-no-art">
           <div class="lb-featured-info lb-artist-featured">
             <span class="lb-rank">#1</span>
             <span class="lb-featured-title">{{ index $first "artist_name" }}</span>
@@ -468,9 +468,9 @@
           {{- if $timeRange -}}
             {{- $label = substr $timeRange 0 3 -}}
           {{- end -}}
-          <div class="lb-month">
+          <div class="lb-month lb-tooltip" data-tooltip="{{ $count }} listens">
             <div class="lb-month-bar-container">
-              <div class="lb-month-bar" style="height: {{ $pct }}%;" title="{{ $count }} listens"></div>
+              <div class="lb-month-bar" style="height: {{ $pct }}%;"></div>
             </div>
             <span class="lb-month-label">{{ $label }}</span>
           </div>
