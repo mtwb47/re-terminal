@@ -1457,6 +1457,469 @@ details[open] > *:not(summary) {
 .lastfm .lastfm-updated { opacity:.7; font-size:.9em; margin-bottom:.25rem; }
 .lastfm em { opacity:.8; }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LISTENBRAINZ DASHBOARD STYLES
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.lb-dashboard {
+  --lb-accent: var(--accent);
+  --lb-bg-card: color-mix(in srgb, var(--background) 90%, var(--color) 10%);
+  --lb-border: color-mix(in srgb, var(--background) 70%, var(--color) 30%);
+  max-width: 100%;
+}
+
+/* Now Playing Card */
+.lb-now-playing {
+  margin-bottom: 1.5rem;
+}
+
+.lb-np-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+}
+
+.lb-np-art {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.lb-np-art img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.lb-playing-indicator {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: flex;
+  gap: 2px;
+  align-items: flex-end;
+  height: 16px;
+  padding: 3px;
+  background: rgba(0,0,0,0.7);
+  border-radius: 3px;
+}
+
+.lb-bar {
+  width: 3px;
+  background: var(--lb-accent);
+  animation: lb-bounce 0.5s ease-in-out infinite alternate;
+}
+
+.lb-bar:nth-child(1) { height: 60%; animation-delay: 0s; }
+.lb-bar:nth-child(2) { height: 100%; animation-delay: 0.1s; }
+.lb-bar:nth-child(3) { height: 40%; animation-delay: 0.2s; }
+
+@keyframes lb-bounce {
+  0% { transform: scaleY(0.3); }
+  100% { transform: scaleY(1); }
+}
+
+.lb-np-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.lb-np-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+}
+
+.lb-np-track {
+  font-size: 1.25rem;
+  margin: 0 0 0.25rem 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-np-artist {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.lb-np-album {
+  margin: 0.25rem 0 0 0;
+  font-size: 0.875rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.lb-np-time {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  margin-top: 0.5rem;
+}
+
+/* Quick Stats Grid */
+.lb-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.lb-stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0.5rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.lb-stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1;
+  color: var(--lb-accent);
+}
+
+.lb-stat-label {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Section Styles */
+.lb-section {
+  margin-bottom: 2rem;
+}
+
+.lb-section-title {
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--lb-border);
+}
+
+/* Daily Activity Bar Chart */
+.lb-daily-chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 120px;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+}
+
+.lb-day {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.lb-day-bar-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.lb-day-bar {
+  width: 80%;
+  max-width: 40px;
+  background: var(--lb-accent);
+  border-radius: 3px 3px 0 0;
+  min-height: 4px;
+  transition: height 0.3s ease;
+}
+
+.lb-day-label {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+.lb-day-count {
+  font-size: 0.65rem;
+  opacity: 0.5;
+}
+
+/* Yearly Activity Chart */
+.lb-yearly-chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100px;
+  gap: 0.25rem;
+  padding: 0.5rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+
+.lb-month {
+  flex: 1;
+  min-width: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.lb-month-bar-container {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.lb-month-bar {
+  width: 90%;
+  background: var(--lb-accent);
+  border-radius: 2px 2px 0 0;
+  min-height: 2px;
+}
+
+.lb-month-label {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  margin-top: 0.3rem;
+}
+
+/* Hourly Listening Clock */
+.lb-hourly-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 3px;
+  padding: 0.5rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+}
+
+.lb-hour {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--lb-accent);
+  border-radius: 3px;
+  font-size: 0.65rem;
+  cursor: default;
+}
+
+.lb-hour-label {
+  color: var(--background);
+  font-weight: bold;
+}
+
+.lb-chart-note {
+  font-size: 0.7rem;
+  opacity: 0.5;
+  margin: 0.5rem 0 0 0;
+  text-align: center;
+}
+
+/* Featured Item (Top #1) */
+.lb-featured {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  background: var(--lb-bg-card);
+  border: 1px solid var(--lb-border);
+  border-radius: 8px;
+}
+
+.lb-featured-art {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.lb-featured-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.lb-artist-featured {
+  padding: 0.5rem 0;
+}
+
+.lb-rank {
+  font-size: 0.7rem;
+  font-weight: bold;
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.lb-featured-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-featured-artist {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* List Items (#2-10) */
+.lb-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: lb-counter 1;
+}
+
+.lb-list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--lb-border);
+  counter-increment: lb-counter;
+}
+
+.lb-list-item::before {
+  content: counter(lb-counter);
+  font-size: 0.75rem;
+  opacity: 0.5;
+  min-width: 1.5em;
+  text-align: right;
+}
+
+.lb-list-item:last-child {
+  border-bottom: none;
+}
+
+.lb-thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.lb-track-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lb-artist {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.lb-badge {
+  font-size: 0.75rem;
+  padding: 0.15em 0.5em;
+  background: var(--lb-accent);
+  color: var(--background);
+  border-radius: 1em;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+/* Footer */
+.lb-footer {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--lb-border);
+  text-align: center;
+}
+
+.lb-updated {
+  font-size: 0.75rem;
+  opacity: 0.5;
+  margin: 0;
+}
+
+.lb-profile {
+  font-size: 0.85rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.lb-profile a {
+  color: var(--lb-accent);
+  text-decoration: none;
+  border: none;
+}
+
+.lb-profile a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .lb-np-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lb-np-art img {
+    width: 160px;
+    height: 160px;
+  }
+
+  .lb-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .lb-hourly-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .lb-featured {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .lb-featured-art {
+    width: 120px;
+    height: 120px;
+  }
+
+  .lb-artist {
+    display: none;
+  }
+
+  .lb-yearly-chart {
+    height: 80px;
+  }
+}
+
 a.read-more,
 a.read-more:hover,
 a.read-more:active {

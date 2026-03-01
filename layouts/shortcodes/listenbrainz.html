@@ -1,0 +1,409 @@
+{{- /* ListenBrainz Dashboard Shortcode */ -}}
+{{- $listen_count := site.Data.listenbrainz.listen_count | default dict -}}
+{{- $recent := site.Data.listenbrainz.recent | default dict -}}
+
+{{- $top_artists_alltime := site.Data.listenbrainz.top_artists_alltime | default dict -}}
+{{- $top_artists_week := site.Data.listenbrainz.top_artists_week | default dict -}}
+{{- $top_artists_month := site.Data.listenbrainz.top_artists_month | default dict -}}
+{{- $top_artists_year := site.Data.listenbrainz.top_artists_year | default dict -}}
+
+{{- $top_recordings_alltime := site.Data.listenbrainz.top_recordings_alltime | default dict -}}
+{{- $top_recordings_week := site.Data.listenbrainz.top_recordings_week | default dict -}}
+{{- $top_recordings_month := site.Data.listenbrainz.top_recordings_month | default dict -}}
+{{- $top_recordings_year := site.Data.listenbrainz.top_recordings_year | default dict -}}
+
+{{- $top_releases_alltime := site.Data.listenbrainz.top_releases_alltime | default dict -}}
+{{- $top_releases_week := site.Data.listenbrainz.top_releases_week | default dict -}}
+{{- $top_releases_month := site.Data.listenbrainz.top_releases_month | default dict -}}
+{{- $top_releases_year := site.Data.listenbrainz.top_releases_year | default dict -}}
+
+{{- $listening_activity_week := site.Data.listenbrainz.listening_activity_week | default dict -}}
+{{- $daily_activity_week := site.Data.listenbrainz.daily_activity_week | default dict -}}
+{{- $listening_activity_year := site.Data.listenbrainz.listening_activity_year | default dict -}}
+
+{{- /* Helper: Build Cover Art Archive URL */ -}}
+{{- define "partials/caa-image" -}}
+  {{- $mbid := .mbid -}}
+  {{- $size := .size | default "250" -}}
+  {{- if $mbid -}}
+    https://coverartarchive.org/release/{{ $mbid }}/front-{{ $size }}
+  {{- end -}}
+{{- end -}}
+
+<div class="lb-dashboard">
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       NOW PLAYING / LAST PLAYED
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $payload := index $recent "payload" | default dict -}}
+  {{- $listens := index $payload "listens" | default slice -}}
+  {{- if gt (len $listens) 0 -}}
+    {{- $listen := index $listens 0 -}}
+    {{- $track := index $listen "track_metadata" | default dict -}}
+    {{- $name := index $track "track_name" -}}
+    {{- $artist := index $track "artist_name" -}}
+    {{- $release := index $track "release_name" -}}
+    {{- $info := index $track "additional_info" | default dict -}}
+    {{- $releaseMbid := index $info "release_mbid" -}}
+    {{- $listenedAt := index $listen "listened_at" -}}
+    {{- $playing := index $listen "playing_now" | default false -}}
+
+    {{- $imgUrl := "" -}}
+    {{- if $releaseMbid -}}
+      {{- $imgUrl = printf "https://coverartarchive.org/release/%s/front-500" $releaseMbid -}}
+    {{- end -}}
+
+    <section class="lb-now-playing">
+      <div class="lb-np-card">
+        {{- if $imgUrl -}}
+        <div class="lb-np-art">
+          <img src="{{ $imgUrl }}" alt="{{ $release }}" loading="lazy" onerror="this.style.display='none'">
+          {{- if $playing -}}
+          <span class="lb-playing-indicator">
+            <span class="lb-bar"></span>
+            <span class="lb-bar"></span>
+            <span class="lb-bar"></span>
+          </span>
+          {{- end -}}
+        </div>
+        {{- end -}}
+        <div class="lb-np-info">
+          <span class="lb-np-label">{{ if $playing }}Now Playing{{ else }}Last Played{{ end }}</span>
+          <h3 class="lb-np-track">{{ $name }}</h3>
+          <p class="lb-np-artist">{{ $artist }}</p>
+          {{- with $release -}}<p class="lb-np-album">{{ . }}</p>{{- end -}}
+          {{- if and (not $playing) $listenedAt -}}
+            {{- $t := time (int $listenedAt) -}}
+            <time class="lb-np-time">{{ $t.Format "Jan 2, 2006 3:04 PM" }}</time>
+          {{- end -}}
+        </div>
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       QUICK STATS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $totalListens := index (index $listen_count "payload") "count" | default 0 -}}
+
+  {{- /* Calculate week/month/year totals from listening activity */ -}}
+  {{- $weekActivity := index (index $listening_activity_week "payload") "listening_activity" | default slice -}}
+  {{- $weekTotal := 0 -}}
+  {{- range $weekActivity -}}
+    {{- $weekTotal = add $weekTotal (index . "listen_count" | default 0) -}}
+  {{- end -}}
+
+  {{- $yearActivity := index (index $listening_activity_year "payload") "listening_activity" | default slice -}}
+  {{- $yearTotal := 0 -}}
+  {{- range $yearActivity -}}
+    {{- $yearTotal = add $yearTotal (index . "listen_count" | default 0) -}}
+  {{- end -}}
+
+  {{- $weekArtists := len (index (index $top_artists_week "payload") "artists" | default slice) -}}
+  {{- $weekReleases := len (index (index $top_releases_week "payload") "releases" | default slice) -}}
+
+  <section class="lb-stats">
+    <div class="lb-stat-card">
+      <span class="lb-stat-value">{{ $totalListens | lang.FormatNumber 0 }}</span>
+      <span class="lb-stat-label">Total Listens</span>
+    </div>
+    <div class="lb-stat-card">
+      <span class="lb-stat-value">{{ $yearTotal | lang.FormatNumber 0 }}</span>
+      <span class="lb-stat-label">This Year</span>
+    </div>
+    <div class="lb-stat-card">
+      <span class="lb-stat-value">{{ $weekTotal | lang.FormatNumber 0 }}</span>
+      <span class="lb-stat-label">This Week</span>
+    </div>
+    <div class="lb-stat-card">
+      <span class="lb-stat-value">{{ $weekArtists }}</span>
+      <span class="lb-stat-label">Artists This Week</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       DAILY ACTIVITY CHART
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $weekActivity) 0 -}}
+    {{- $maxDay := 1 -}}
+    {{- range $weekActivity -}}
+      {{- $c := index . "listen_count" | default 0 -}}
+      {{- if gt $c $maxDay -}}{{- $maxDay = $c -}}{{- end -}}
+    {{- end -}}
+
+    <section class="lb-section">
+      <h4 class="lb-section-title">Daily Activity</h4>
+      <div class="lb-daily-chart">
+        {{- range $weekActivity -}}
+          {{- $count := index . "listen_count" | default 0 -}}
+          {{- $pct := 0.0 -}}
+          {{- if gt $maxDay 0 -}}
+            {{- $pct = mul (div (float $count) (float $maxDay)) 100 -}}
+          {{- end -}}
+          {{- $timeRange := index . "time_range" | default "" -}}
+          {{- $dayName := "" -}}
+          {{- if $timeRange -}}
+            {{- $parts := split $timeRange " " -}}
+            {{- if gt (len $parts) 0 -}}
+              {{- $dayName = index $parts 0 -}}
+            {{- end -}}
+          {{- end -}}
+          <div class="lb-day">
+            <div class="lb-day-bar-container">
+              <div class="lb-day-bar" style="height: {{ $pct }}%;" title="{{ $count }} listens"></div>
+            </div>
+            <span class="lb-day-label">{{ substr $dayName 0 3 }}</span>
+            <span class="lb-day-count">{{ $count }}</span>
+          </div>
+        {{- end -}}
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       LISTENING CLOCK (Hourly Heatmap)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $dailyPayload := index $daily_activity_week "payload" | default dict -}}
+  {{- $dailyActivity := index $dailyPayload "daily_activity" | default dict -}}
+  {{- if $dailyActivity -}}
+    {{- /* Sum hours across all days */ -}}
+    {{- $hourTotals := dict -}}
+    {{- range $i := seq 0 23 -}}
+      {{- $hourTotals = merge $hourTotals (dict (string $i) 0) -}}
+    {{- end -}}
+
+    {{- $days := slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday" -}}
+    {{- range $days -}}
+      {{- $dayData := index $dailyActivity . | default slice -}}
+      {{- range $dayData -}}
+        {{- $hour := string (index . "hour") -}}
+        {{- $count := index . "listen_count" | default 0 -}}
+        {{- $current := index $hourTotals $hour | default 0 -}}
+        {{- $hourTotals = merge $hourTotals (dict $hour (add $current $count)) -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $maxHour := 1 -}}
+    {{- range $h, $c := $hourTotals -}}
+      {{- if gt $c $maxHour -}}{{- $maxHour = $c -}}{{- end -}}
+    {{- end -}}
+
+    <section class="lb-section">
+      <h4 class="lb-section-title">Listening Clock</h4>
+      <div class="lb-hourly-grid">
+        {{- range $i := seq 0 23 -}}
+          {{- $count := index $hourTotals (string $i) | default 0 -}}
+          {{- $intensity := 0.0 -}}
+          {{- if gt $maxHour 0 -}}
+            {{- $intensity = div (float $count) (float $maxHour) -}}
+          {{- end -}}
+          {{- $opacity := add 0.15 (mul $intensity 0.85) -}}
+          <div class="lb-hour" style="opacity: {{ $opacity }};" title="{{ printf "%02d:00 - %d listens" $i $count }}">
+            <span class="lb-hour-label">{{ printf "%02d" $i }}</span>
+          </div>
+        {{- end -}}
+      </div>
+      <p class="lb-chart-note">Brighter = more listens at that hour</p>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP RECORDINGS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $periods := slice
+    (dict "name" "All Time" "data" $top_recordings_alltime)
+    (dict "name" "This Year" "data" $top_recordings_year)
+    (dict "name" "This Month" "data" $top_recordings_month)
+    (dict "name" "This Week" "data" $top_recordings_week)
+  -}}
+
+  {{- range $periods -}}
+    {{- $periodName := .name -}}
+    {{- $recordings := index (index .data "payload" | default dict) "recordings" | default slice -}}
+    {{- if gt (len $recordings) 0 -}}
+      <section class="lb-section">
+        <h4 class="lb-section-title">Top Tracks — {{ $periodName }}</h4>
+
+        {{- $first := index $recordings 0 -}}
+        {{- $fMbid := index $first "caa_release_mbid" | default (index $first "release_mbid") -}}
+        {{- $fImg := "" -}}
+        {{- if $fMbid -}}
+          {{- $fImg = printf "https://coverartarchive.org/release/%s/front-500" $fMbid -}}
+        {{- end -}}
+
+        <div class="lb-featured">
+          {{- if $fImg -}}
+          <img src="{{ $fImg }}" alt="{{ index $first "release_name" }}" class="lb-featured-art" loading="lazy" onerror="this.style.display='none'">
+          {{- end -}}
+          <div class="lb-featured-info">
+            <span class="lb-rank">#1</span>
+            <span class="lb-featured-title">{{ index $first "track_name" }}</span>
+            <span class="lb-featured-artist">{{ index $first "artist_name" }}</span>
+            <span class="lb-badge">{{ index $first "listen_count" }} plays</span>
+          </div>
+        </div>
+
+        {{- if gt (len $recordings) 1 -}}
+        <ol class="lb-list" start="2">
+          {{- range $i, $r := after 1 $recordings -}}
+            {{- $rMbid := index $r "caa_release_mbid" | default (index $r "release_mbid") -}}
+            {{- $rImg := "" -}}
+            {{- if $rMbid -}}
+              {{- $rImg = printf "https://coverartarchive.org/release/%s/front-250" $rMbid -}}
+            {{- end -}}
+            <li class="lb-list-item">
+              {{- if $rImg -}}<img src="{{ $rImg }}" alt="" class="lb-thumb" loading="lazy" onerror="this.style.display='none'">{{- end -}}
+              <span class="lb-track-name">{{ index $r "track_name" }}</span>
+              <span class="lb-artist">{{ index $r "artist_name" }}</span>
+              <span class="lb-badge">{{ index $r "listen_count" }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+        {{- end -}}
+      </section>
+    {{- end -}}
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP ARTISTS
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $artistPeriods := slice
+    (dict "name" "All Time" "data" $top_artists_alltime)
+    (dict "name" "This Year" "data" $top_artists_year)
+    (dict "name" "This Month" "data" $top_artists_month)
+    (dict "name" "This Week" "data" $top_artists_week)
+  -}}
+
+  {{- range $artistPeriods -}}
+    {{- $periodName := .name -}}
+    {{- $artists := index (index .data "payload" | default dict) "artists" | default slice -}}
+    {{- if gt (len $artists) 0 -}}
+      <section class="lb-section">
+        <h4 class="lb-section-title">Top Artists — {{ $periodName }}</h4>
+
+        {{- $first := index $artists 0 -}}
+
+        <div class="lb-featured">
+          <div class="lb-featured-info lb-artist-featured">
+            <span class="lb-rank">#1</span>
+            <span class="lb-featured-title">{{ index $first "artist_name" }}</span>
+            <span class="lb-badge">{{ index $first "listen_count" }} plays</span>
+          </div>
+        </div>
+
+        {{- if gt (len $artists) 1 -}}
+        <ol class="lb-list" start="2">
+          {{- range $i, $a := after 1 $artists -}}
+            <li class="lb-list-item">
+              <span class="lb-track-name">{{ index $a "artist_name" }}</span>
+              <span class="lb-badge">{{ index $a "listen_count" }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+        {{- end -}}
+      </section>
+    {{- end -}}
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       TOP RELEASES (ALBUMS)
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- $releasePeriods := slice
+    (dict "name" "All Time" "data" $top_releases_alltime)
+    (dict "name" "This Year" "data" $top_releases_year)
+    (dict "name" "This Month" "data" $top_releases_month)
+    (dict "name" "This Week" "data" $top_releases_week)
+  -}}
+
+  {{- range $releasePeriods -}}
+    {{- $periodName := .name -}}
+    {{- $releases := index (index .data "payload" | default dict) "releases" | default slice -}}
+    {{- if gt (len $releases) 0 -}}
+      <section class="lb-section">
+        <h4 class="lb-section-title">Top Albums — {{ $periodName }}</h4>
+
+        {{- $first := index $releases 0 -}}
+        {{- $fMbid := index $first "caa_release_mbid" | default (index $first "release_mbid") -}}
+        {{- $fImg := "" -}}
+        {{- if $fMbid -}}
+          {{- $fImg = printf "https://coverartarchive.org/release/%s/front-500" $fMbid -}}
+        {{- end -}}
+
+        <div class="lb-featured">
+          {{- if $fImg -}}
+          <img src="{{ $fImg }}" alt="{{ index $first "release_name" }}" class="lb-featured-art" loading="lazy" onerror="this.style.display='none'">
+          {{- end -}}
+          <div class="lb-featured-info">
+            <span class="lb-rank">#1</span>
+            <span class="lb-featured-title">{{ index $first "release_name" }}</span>
+            <span class="lb-featured-artist">{{ index $first "artist_name" }}</span>
+            <span class="lb-badge">{{ index $first "listen_count" }} plays</span>
+          </div>
+        </div>
+
+        {{- if gt (len $releases) 1 -}}
+        <ol class="lb-list" start="2">
+          {{- range $i, $rel := after 1 $releases -}}
+            {{- $relMbid := index $rel "caa_release_mbid" | default (index $rel "release_mbid") -}}
+            {{- $relImg := "" -}}
+            {{- if $relMbid -}}
+              {{- $relImg = printf "https://coverartarchive.org/release/%s/front-250" $relMbid -}}
+            {{- end -}}
+            <li class="lb-list-item">
+              {{- if $relImg -}}<img src="{{ $relImg }}" alt="" class="lb-thumb" loading="lazy" onerror="this.style.display='none'">{{- end -}}
+              <span class="lb-track-name">{{ index $rel "release_name" }}</span>
+              <span class="lb-artist">{{ index $rel "artist_name" }}</span>
+              <span class="lb-badge">{{ index $rel "listen_count" }}</span>
+            </li>
+          {{- end -}}
+        </ol>
+        {{- end -}}
+      </section>
+    {{- end -}}
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       YEARLY ACTIVITY CHART
+       ═══════════════════════════════════════════════════════════════════════ -->
+  {{- if gt (len $yearActivity) 0 -}}
+    {{- $maxMonth := 1 -}}
+    {{- range $yearActivity -}}
+      {{- $c := index . "listen_count" | default 0 -}}
+      {{- if gt $c $maxMonth -}}{{- $maxMonth = $c -}}{{- end -}}
+    {{- end -}}
+
+    <section class="lb-section">
+      <h4 class="lb-section-title">Listening Activity — This Year</h4>
+      <div class="lb-yearly-chart">
+        {{- range $yearActivity -}}
+          {{- $count := index . "listen_count" | default 0 -}}
+          {{- $pct := 0.0 -}}
+          {{- if gt $maxMonth 0 -}}
+            {{- $pct = mul (div (float $count) (float $maxMonth)) 100 -}}
+          {{- end -}}
+          {{- $timeRange := index . "time_range" | default "" -}}
+          {{- /* Extract month abbreviation */ -}}
+          {{- $label := "" -}}
+          {{- if $timeRange -}}
+            {{- $label = substr $timeRange 0 3 -}}
+          {{- end -}}
+          <div class="lb-month">
+            <div class="lb-month-bar-container">
+              <div class="lb-month-bar" style="height: {{ $pct }}%;" title="{{ $count }} listens"></div>
+            </div>
+            <span class="lb-month-label">{{ $label }}</span>
+          </div>
+        {{- end -}}
+      </div>
+    </section>
+  {{- end }}
+
+  <!-- ═══════════════════════════════════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════════════════════════════════ -->
+  <footer class="lb-footer">
+    <p class="lb-updated">Data updated {{ now.Format "Jan 2, 2006 15:04 MST" }}</p>
+    <p class="lb-profile"><a href="https://listenbrainz.org/user/mtwb/">View full profile on ListenBrainz →</a></p>
+  </footer>
+
+</div>
