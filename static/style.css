@@ -1919,27 +1919,21 @@ details[open] > *:not(summary) {
 /* Override grid for artist cards (no image) */
 .lb-featured-no-art,
 .lb-featured:has(.lb-artist-featured) {
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr auto;
+  align-items: center;
 }
 
 .lb-artist-featured {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0;
-}
-
-.lb-artist-featured .lb-rank {
-  width: 100%;
+  padding: 0.35rem 0;
 }
 
 .lb-artist-featured .lb-featured-title {
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
-.lb-artist-featured .lb-badge {
-  margin-left: 0;
+.lb-featured-no-art .lb-badge {
+  align-self: center;
+  margin: 0;
 }
 
 .lb-rank {

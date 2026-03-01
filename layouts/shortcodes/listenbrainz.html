@@ -368,8 +368,8 @@
           <div class="lb-featured-info lb-artist-featured">
             <span class="lb-rank">#1</span>
             <span class="lb-featured-title">{{ index $first "artist_name" }}</span>
-            <span class="lb-badge">{{ index $first "listen_count" }} plays</span>
           </div>
+          <span class="lb-badge">{{ index $first "listen_count" }} plays</span>
         </div>
 
         {{- if gt (len $artists) 1 -}}
