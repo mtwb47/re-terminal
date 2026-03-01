@@ -198,7 +198,7 @@
             {{- $intensity = div (float $count) (float $maxHour) -}}
           {{- end -}}
           {{- $opacity := add 0.15 (mul $intensity 0.85) -}}
-          <div class="lb-hour lb-tooltip" style="opacity: {{ $opacity }};" data-tooltip="{{ printf "%02d:00 – %d listens" $i $count }}">
+          <div class="lb-hour lb-tooltip" style="--hour-opacity: {{ $opacity }};" data-tooltip="{{ printf "%02d:00 – %d listens" $i (int $count) }}">
             <span class="lb-hour-label">{{ printf "%02d" $i }}</span>
           </div>
         {{- end -}}

@@ -1516,10 +1516,11 @@ details[open] > *:not(summary) {
   visibility: visible;
 }
 
-/* Tooltip positioning for hourly grid (show below on top rows) */
+/* Tooltip positioning for hourly grid (show below) */
 .lb-hourly-grid .lb-tooltip::after {
   bottom: auto;
   top: calc(100% + 6px);
+  z-index: 200;
 }
 
 .lb-hourly-grid .lb-tooltip::before {
@@ -1527,6 +1528,7 @@ details[open] > *:not(summary) {
   top: calc(100% + 2px);
   border-top-color: transparent;
   border-bottom-color: var(--lb-border);
+  z-index: 201;
 }
 
 /* Now Playing Card */
@@ -1536,8 +1538,8 @@ details[open] > *:not(summary) {
 
 .lb-np-card {
   display: flex;
-  gap: 0.75rem;
-  padding: 0.75rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
   background: var(--lb-bg-card);
   border: 1px solid var(--lb-border);
   border-radius: 6px;
@@ -1549,8 +1551,8 @@ details[open] > *:not(summary) {
 }
 
 .lb-np-art img {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 4px;
 }
@@ -1591,38 +1593,38 @@ details[open] > *:not(summary) {
 }
 
 .lb-np-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  opacity: 0.7;
-  margin-bottom: 0.25rem;
+  opacity: 0.6;
 }
 
 .lb-np-track {
-  font-size: 1.25rem;
-  margin: 0 0 0.25rem 0;
+  font-size: 1.1rem;
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.3;
 }
 
 .lb-np-artist {
   margin: 0;
-  font-size: 1rem;
-  opacity: 0.9;
+  font-size: 0.9rem;
+  opacity: 0.85;
 }
 
 .lb-np-album {
-  margin: 0.25rem 0 0 0;
-  font-size: 0.875rem;
-  opacity: 0.7;
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.65;
   font-style: italic;
 }
 
 .lb-np-time {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   opacity: 0.5;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
 }
 
 /* Quick Stats Grid */
@@ -1637,7 +1639,7 @@ details[open] > *:not(summary) {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.75rem 0.5rem;
+  padding: 0.5rem 0.35rem;
   background: var(--lb-bg-card);
   border: 1px solid var(--lb-border);
   border-radius: 6px;
@@ -1645,16 +1647,16 @@ details[open] > *:not(summary) {
 }
 
 .lb-stat-value {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   line-height: 1;
   color: var(--lb-accent);
 }
 
 .lb-stat-label {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  margin-top: 0.5rem;
+  font-size: 0.65rem;
+  opacity: 0.6;
+  margin-top: 0.3rem;
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -1780,15 +1782,28 @@ details[open] > *:not(summary) {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--lb-accent);
   border-radius: 3px;
   font-size: 0.65rem;
   cursor: default;
+  position: relative;
+}
+
+.lb-hour::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--lb-accent);
+  border-radius: 3px;
+  opacity: var(--hour-opacity, 1);
+  z-index: 0;
 }
 
 .lb-hour-label {
-  color: var(--background);
+  color: var(--bg-primary);
   font-weight: bold;
+  position: relative;
+  z-index: 1;
+  opacity: calc(0.3 + var(--hour-opacity, 1) * 0.7);
 }
 
 .lb-chart-note {
@@ -1886,19 +1901,19 @@ details[open] > *:not(summary) {
 /* Featured Item (Top #1) */
 .lb-featured {
   display: grid;
-  grid-template-columns: 64px 1fr auto;
+  grid-template-columns: 48px 1fr auto;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.75rem;
-  padding: 0.5rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding: 0.35rem;
   background: var(--lb-bg-card);
   border: 1px solid var(--lb-border);
   border-radius: 6px;
 }
 
 .lb-featured-art {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   object-fit: cover;
   border-radius: 4px;
   flex-shrink: 0;
@@ -1924,20 +1939,21 @@ details[open] > *:not(summary) {
 }
 
 .lb-artist-featured {
-  padding: 0.35rem 0;
+  padding: 0.25rem 0;
 }
 
 .lb-artist-featured .lb-featured-title {
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .lb-featured-no-art .lb-badge {
   align-self: center;
   margin: 0;
+  justify-self: end;
 }
 
 .lb-rank {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   font-weight: bold;
   color: var(--lb-accent);
   text-transform: uppercase;
@@ -1945,16 +1961,16 @@ details[open] > *:not(summary) {
 }
 
 .lb-featured-title {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.3;
+  line-height: 1.2;
 }
 
 .lb-featured-artist {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   opacity: 0.7;
   white-space: nowrap;
   overflow: hidden;
@@ -2062,8 +2078,8 @@ details[open] > *:not(summary) {
   }
 
   .lb-np-art img {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
   }
 
   .lb-stats {
@@ -2075,24 +2091,13 @@ details[open] > *:not(summary) {
   }
 
   .lb-featured {
-    grid-template-columns: 56px 1fr;
-    gap: 0.5rem;
+    grid-template-columns: 40px 1fr auto;
+    gap: 0.35rem;
   }
 
   .lb-featured-art {
-    width: 56px;
-    height: 56px;
-  }
-
-  .lb-featured-info .lb-badge {
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .lb-featured {
-    position: relative;
+    width: 40px;
+    height: 40px;
   }
 
   .lb-artist {
@@ -2108,7 +2113,7 @@ details[open] > *:not(summary) {
   }
 
   .lb-insight-card {
-    padding: 0.5rem;
+    padding: 0.4rem;
   }
 }
 
