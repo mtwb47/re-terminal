@@ -205,6 +205,87 @@
       </div>
       <p class="lb-chart-note">Brighter = more listens at that hour</p>
     </section>
+
+    <!-- Day of Week Breakdown -->
+    {{- $dayTotals := dict -}}
+    {{- range $days -}}
+      {{- $dayData := index $dailyActivity . | default slice -}}
+      {{- $daySum := 0 -}}
+      {{- range $dayData -}}
+        {{- $daySum = add $daySum (index . "listen_count" | default 0) -}}
+      {{- end -}}
+      {{- $dayTotals = merge $dayTotals (dict . $daySum) -}}
+    {{- end -}}
+
+    {{- $maxDayTotal := 1 -}}
+    {{- $peakDay := "" -}}
+    {{- $peakDayCount := 0 -}}
+    {{- range $d, $c := $dayTotals -}}
+      {{- if gt $c $maxDayTotal -}}
+        {{- $maxDayTotal = $c -}}
+        {{- $peakDay = $d -}}
+        {{- $peakDayCount = $c -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- $peakHour := 0 -}}
+    {{- $peakHourCount := 0 -}}
+    {{- range $h, $c := $hourTotals -}}
+      {{- if gt $c $peakHourCount -}}
+        {{- $peakHour = int $h -}}
+        {{- $peakHourCount = $c -}}
+      {{- end -}}
+    {{- end -}}
+
+    <section class="lb-section">
+      <h4 class="lb-section-title">Day of Week</h4>
+      <div class="lb-dow-chart">
+        {{- range $days -}}
+          {{- $count := index $dayTotals . | default 0 -}}
+          {{- $pct := 0.0 -}}
+          {{- if gt $maxDayTotal 0 -}}
+            {{- $pct = mul (div (float $count) (float $maxDayTotal)) 100 -}}
+          {{- end -}}
+          <div class="lb-dow-row">
+            <span class="lb-dow-label">{{ substr . 0 3 }}</span>
+            <div class="lb-dow-bar-container">
+              <div class="lb-dow-bar" style="width: {{ $pct }}%;"></div>
+            </div>
+            <span class="lb-dow-count">{{ $count }}</span>
+          </div>
+        {{- end -}}
+      </div>
+    </section>
+
+    <!-- Peak Insights -->
+    <section class="lb-section">
+      <h4 class="lb-section-title">Peak Listening</h4>
+      <div class="lb-insights">
+        <div class="lb-insight-card">
+          <span class="lb-insight-icon">📅</span>
+          <div class="lb-insight-info">
+            <span class="lb-insight-value">{{ $peakDay }}</span>
+            <span class="lb-insight-label">Most Active Day</span>
+          </div>
+        </div>
+        <div class="lb-insight-card">
+          <span class="lb-insight-icon">🕐</span>
+          <div class="lb-insight-info">
+            <span class="lb-insight-value">{{ printf "%02d:00" $peakHour }}</span>
+            <span class="lb-insight-label">Peak Hour</span>
+          </div>
+        </div>
+        {{- if gt $weekTotal 0 -}}
+        <div class="lb-insight-card">
+          <span class="lb-insight-icon">📊</span>
+          <div class="lb-insight-info">
+            <span class="lb-insight-value">{{ div $weekTotal 7 | lang.FormatNumber 0 }}</span>
+            <span class="lb-insight-label">Daily Average</span>
+          </div>
+        </div>
+        {{- end -}}
+      </div>
+    </section>
   {{- end }}
 
   <!-- ═══════════════════════════════════════════════════════════════════════
