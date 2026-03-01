@@ -25,11 +25,16 @@
     {{- $when   := index (index $t "date") "#text" -}}
     {{- $images := index $t "image" | default (slice) -}}
     {{- $img := "" -}}
-    {{- range $images -}}
-      {{- if eq (index . "size") "extralarge" -}}
-        {{- $img = index . "#text" -}}
-      {{- else if and (eq (index . "size") "large") (eq $img "") -}}
-        {{- $img = index . "#text" -}}
+    {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+    {{- range $sizes -}}
+      {{- $targetSize := . -}}
+      {{- if eq $img "" -}}
+        {{- range $images -}}
+          {{- $url := index . "#text" | default "" -}}
+          {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+            {{- $img = $url -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
     {{- end -}}
 
@@ -192,8 +197,17 @@
       {{- $first := index $tracksOverall 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -212,8 +226,17 @@
         {{- range $i, $t := after 1 $tracksOverall -}}
           {{- $tImages := index $t "image" | default (slice) -}}
           {{- $tImg := "" -}}
-          {{- range $tImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $tImg "" -}}
+              {{- range $tImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $tImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
@@ -235,8 +258,17 @@
       {{- $first := index $tracks7dList 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -255,8 +287,17 @@
         {{- range $i, $t := after 1 $tracks7dList -}}
           {{- $tImages := index $t "image" | default (slice) -}}
           {{- $tImg := "" -}}
-          {{- range $tImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $tImg "" -}}
+              {{- range $tImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $tImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
@@ -279,8 +320,17 @@
       {{- $first := index $artistsOverall 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -298,8 +348,17 @@
         {{- range $i, $a := after 1 $artistsOverall -}}
           {{- $aImages := index $a "image" | default (slice) -}}
           {{- $aImg := "" -}}
-          {{- range $aImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $aImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $aImg "" -}}
+              {{- range $aImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $aImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $aImg -}}<img src="{{ $aImg }}" alt="" class="lfm-thumb lfm-thumb-round" loading="lazy">{{- end -}}
@@ -320,8 +379,17 @@
       {{- $first := index $artists7dList 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -339,8 +407,17 @@
         {{- range $i, $a := after 1 $artists7dList -}}
           {{- $aImages := index $a "image" | default (slice) -}}
           {{- $aImg := "" -}}
-          {{- range $aImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $aImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $aImg "" -}}
+              {{- range $aImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $aImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $aImg -}}<img src="{{ $aImg }}" alt="" class="lfm-thumb lfm-thumb-round" loading="lazy">{{- end -}}
@@ -362,8 +439,17 @@
       {{- $first := index $albumsOverall 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -382,8 +468,17 @@
         {{- range $i, $al := after 1 $albumsOverall -}}
           {{- $alImages := index $al "image" | default (slice) -}}
           {{- $alImg := "" -}}
-          {{- range $alImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $alImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $alImg "" -}}
+              {{- range $alImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $alImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $alImg -}}<img src="{{ $alImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
@@ -405,8 +500,17 @@
       {{- $first := index $albums7dList 0 -}}
       {{- $fImages := index $first "image" | default (slice) -}}
       {{- $fImg := "" -}}
-      {{- range $fImages -}}
-        {{- if eq (index . "size") "extralarge" -}}{{- $fImg = index . "#text" -}}{{- end -}}
+      {{- $sizes := slice "extralarge" "large" "medium" "small" -}}
+      {{- range $sizes -}}
+        {{- $targetSize := . -}}
+        {{- if eq $fImg "" -}}
+          {{- range $fImages -}}
+            {{- $url := index . "#text" | default "" -}}
+            {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+              {{- $fImg = $url -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
       {{- end -}}
 
       <div class="lfm-featured">
@@ -425,8 +529,17 @@
         {{- range $i, $al := after 1 $albums7dList -}}
           {{- $alImages := index $al "image" | default (slice) -}}
           {{- $alImg := "" -}}
-          {{- range $alImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $alImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $alImg "" -}}
+              {{- range $alImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $alImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $alImg -}}<img src="{{ $alImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
@@ -450,8 +563,17 @@
         {{- range $i, $t := $lovedTracks -}}
           {{- $tImages := index $t "image" | default (slice) -}}
           {{- $tImg := "" -}}
-          {{- range $tImages -}}
-            {{- if eq (index . "size") "small" -}}{{- $tImg = index . "#text" -}}{{- end -}}
+          {{- $sizes := slice "small" "medium" "large" -}}
+          {{- range $sizes -}}
+            {{- $targetSize := . -}}
+            {{- if eq $tImg "" -}}
+              {{- range $tImages -}}
+                {{- $url := index . "#text" | default "" -}}
+                {{- if and (eq (index . "size") $targetSize) (ne $url "") (not (strings.Contains $url "2a96cbd8b46e442fc41c2b86b821562f")) -}}
+                  {{- $tImg = $url -}}
+                {{- end -}}
+              {{- end -}}
+            {{- end -}}
           {{- end -}}
           <li class="lfm-list-item">
             {{- if $tImg -}}<img src="{{ $tImg }}" alt="" class="lfm-thumb" loading="lazy">{{- end -}}
