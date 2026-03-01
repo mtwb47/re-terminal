@@ -1521,6 +1521,7 @@ details[open] > *:not(summary) {
   bottom: auto;
   top: calc(100% + 6px);
   z-index: 200;
+  filter: none;
 }
 
 .lb-hourly-grid .lb-tooltip::before {
@@ -1529,6 +1530,12 @@ details[open] > *:not(summary) {
   border-top-color: transparent;
   border-bottom-color: var(--lb-border);
   z-index: 201;
+  filter: none;
+}
+
+/* Reset filter on hover so tooltip is fully visible */
+.lb-hour:hover {
+  filter: opacity(1);
 }
 
 /* Now Playing Card */
@@ -1590,6 +1597,12 @@ details[open] > *:not(summary) {
   flex-direction: column;
   justify-content: center;
   min-width: 0;
+  gap: 0;
+}
+
+.lb-np-info > * {
+  margin: 0;
+  padding: 0;
 }
 
 .lb-np-label {
@@ -1597,11 +1610,12 @@ details[open] > *:not(summary) {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   opacity: 0.6;
+  line-height: 1.2;
 }
 
 .lb-np-track {
   font-size: 1.1rem;
-  margin: 0;
+  font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1609,22 +1623,22 @@ details[open] > *:not(summary) {
 }
 
 .lb-np-artist {
-  margin: 0;
   font-size: 0.9rem;
   opacity: 0.85;
+  line-height: 1.2;
 }
 
 .lb-np-album {
-  margin: 0;
   font-size: 0.8rem;
   opacity: 0.65;
   font-style: italic;
+  line-height: 1.2;
 }
 
 .lb-np-time {
   font-size: 0.7rem;
   opacity: 0.5;
-  margin-top: 0.25rem;
+  line-height: 1.2;
 }
 
 /* Quick Stats Grid */
@@ -1782,28 +1796,17 @@ details[open] > *:not(summary) {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: var(--lb-accent);
   border-radius: 3px;
   font-size: 0.65rem;
   cursor: default;
   position: relative;
-}
-
-.lb-hour::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--lb-accent);
-  border-radius: 3px;
-  opacity: var(--hour-opacity, 1);
-  z-index: 0;
+  filter: opacity(var(--hour-opacity, 1));
 }
 
 .lb-hour-label {
   color: var(--bg-primary);
   font-weight: bold;
-  position: relative;
-  z-index: 1;
-  opacity: calc(0.3 + var(--hour-opacity, 1) * 0.7);
 }
 
 .lb-chart-note {

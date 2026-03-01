@@ -69,9 +69,9 @@
         {{- end -}}
         <div class="lb-np-info">
           <span class="lb-np-label">{{ if $playing }}Now Playing{{ else }}Last Played{{ end }}</span>
-          <h3 class="lb-np-track">{{ $name }}</h3>
-          <p class="lb-np-artist">{{ $artist }}</p>
-          {{- with $release -}}<p class="lb-np-album">{{ . }}</p>{{- end -}}
+          <span class="lb-np-track">{{ $name }}</span>
+          <span class="lb-np-artist">{{ $artist }}</span>
+          {{- with $release -}}<span class="lb-np-album">{{ . }}</span>{{- end -}}
           {{- if and (not $playing) $listenedAt -}}
             {{- $t := time (int $listenedAt) -}}
             <time class="lb-np-time">{{ $t.Format "Jan 2, 2006 3:04 PM" }}</time>
