@@ -43,8 +43,17 @@
     {{- $name := index $track "track_name" -}}
     {{- $artist := index $track "artist_name" -}}
     {{- $release := index $track "release_name" -}}
+    {{- /* release_mbid is usually missing from additional_info - most clients,
+           navidrome included, never submit it, and the MBID only turns up in
+           ListenBrainz's own mbid_mapping. Prefer caa_release_mbid there, since
+           that is the release Cover Art Archive actually holds art for. Reading
+           only additional_info meant this card never showed art. Same lookup as
+           the `recent` shortcode. */ -}}
     {{- $info := index $track "additional_info" | default dict -}}
-    {{- $releaseMbid := index $info "release_mbid" -}}
+    {{- $mapping := index $track "mbid_mapping" | default dict -}}
+    {{- $releaseMbid := index $info "release_mbid"
+                          | default (index $mapping "caa_release_mbid")
+                          | default (index $mapping "release_mbid") -}}
     {{- $listenedAt := index $listen "listened_at" -}}
     {{- $playing := index $listen "playing_now" | default false -}}
 
