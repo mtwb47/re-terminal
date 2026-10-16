@@ -1,27 +1,69 @@
-{{- $recent      := site.Data.lastfm.recent      | default dict -}}
-{{- $top_overall := site.Data.lastfm.toptracks   | default dict -}}
-{{- $art_overall := site.Data.lastfm.topartists  | default dict -}}
-{{- $top_7day    := site.Data.lastfm.toptracks_7day   | default dict -}}
-{{- $art_7day    := site.Data.lastfm.topartists_7day  | default dict -}}
-{{- $userinfo    := site.Data.lastfm.userinfo    | default dict -}}
+{{- /* Compact now-playing block, used by the site's /now page.
 
-<div class="lastfm">
+       Reads data/listenbrainz/recent.json, written by ci/fetch-listenbrainz.sh
+       in the site repo. This previously read site.Data.lastfm.*, which stopped
+       existing when the pipeline moved to ListenBrainz. Because every lookup
+       ends in `| default dict`, the shortcode kept rendering "No recent tracks."
+       rather than failing the build, so the breakage was silent.
 
-  <!-- Most recent scrobble -->
+       Shares the .lb-np-* styles with the full `listenbrainz` dashboard
+       shortcode. The .lb-dashboard wrapper is what scopes the --lb-* custom
+       properties, so the card loses its background and border without it. */ -}}
+
+{{- $recent  := site.Data.listenbrainz.recent | default dict -}}
+{{- $listens := index (index $recent "payload" | default dict) "listens" | default slice -}}
+
+<div class="lb-dashboard">
+
   <h5>What I'm Listening to</h5>
-  {{- $rlist := index (index $recent "recenttracks" | default dict) "track" | default (slice) -}}
-  {{- if gt (len $rlist) 0 -}}
-    {{- $t := index $rlist 0 -}}
-    {{- $name := index $t "name" -}}
-    {{- $url  := index $t "url" -}}
-    {{- $artist := index (index $t "artist") "#text" -}}
-    {{- $album  := index (index $t "album") "#text" -}}
-    {{- $now := index (index $t "@attr") "nowplaying" -}}
-    {{- $when := index (index $t "date") "#text" -}}
-    <p>
-      <strong>{{ if $url }}<a href="{{ $url }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}</strong>
-      — {{ $artist }}{{ with $album }} <em>({{ . }})</em>{{ end }}
-      {{ if eq $now "true" }} · <span class="now">now playing</span>{{ else if $when }} · <span class="when">{{ $when }}</span>{{ end }}
-    </p>
-  {{- else -}}<p>No recent tracks.</p>{{- end }}
 
+  {{- if gt (len $listens) 0 -}}
+    {{- $listen  := index $listens 0 -}}
+    {{- $track   := index $listen "track_metadata" | default dict -}}
+    {{- $name    := index $track "track_name" -}}
+    {{- $artist  := index $track "artist_name" -}}
+    {{- $release := index $track "release_name" -}}
+    {{- /* Cover art: a submitting client may put release_mbid in
+           additional_info, but navidrome (and most others) do not - the MBID
+           only turns up in ListenBrainz's own mbid_mapping. Prefer
+           caa_release_mbid there, since that is the release Cover Art Archive
+           actually holds art for. */ -}}
+    {{- $info    := index $track "additional_info" | default dict -}}
+    {{- $mapping := index $track "mbid_mapping" | default dict -}}
+    {{- $mbid    := index $info "release_mbid"
+                      | default (index $mapping "caa_release_mbid")
+                      | default (index $mapping "release_mbid") -}}
+    {{- $at      := index $listen "listened_at" -}}
+    {{- $playing := index $listen "playing_now" | default false -}}
+
+    <section class="lb-now-playing">
+      <div class="lb-np-card">
+        {{- with $mbid -}}
+        <div class="lb-np-art">
+          <img src="https://coverartarchive.org/release/{{ . }}/front-500" alt="{{ $release }}" loading="lazy" onerror="this.style.display='none'">
+          {{- if $playing -}}
+          <span class="lb-playing-indicator">
+            <span class="lb-bar"></span>
+            <span class="lb-bar"></span>
+            <span class="lb-bar"></span>
+          </span>
+          {{- end -}}
+        </div>
+        {{- end -}}
+        <div class="lb-np-info">
+          <span class="lb-np-label">{{ if $playing }}Now Playing{{ else }}Last Played{{ end }}</span>
+          <span class="lb-np-track">{{ $name }}</span>
+          <span class="lb-np-artist">{{ $artist }}</span>
+          {{- with $release -}}<span class="lb-np-album">{{ . }}</span>{{- end -}}
+          {{- if and (not $playing) $at -}}
+            {{- $t := time (int $at) -}}
+            <time class="lb-np-time">{{ $t.Format "Jan 2, 2006 3:04 PM" }}</time>
+          {{- end -}}
+        </div>
+      </div>
+    </section>
+  {{- else -}}
+    <p>No recent tracks.</p>
+  {{- end }}
+
+</div>
