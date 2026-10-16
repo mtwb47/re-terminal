@@ -23,11 +23,17 @@
 
 {{ $bundle := slice $menu $theme $prism | resources.Concat "bundle.js" | resources.Minify }}
 
+<!-- Content-hash in production, same reason as styles.css in head.html:
+     Pages pins static assets to max-age=14400 and a stable /bundle.js name
+     kept stale JS alive for hours after a deploy. -->
+{{ if hugo.IsProduction }}{{ $bundle = $bundle | fingerprint }}{{ end }}
+
 <script type="text/javascript" src="{{ $bundle.RelPermalink }}"></script>
 
 <!-- Banner JS if it enabled -->
 {{ if .Site.Params.Banner }}
   {{ $banner := resources.Get "js/banner.js" | js.Build | resources.Minify }}
+  {{ if hugo.IsProduction }}{{ $banner = $banner | fingerprint }}{{ end }}
 
   <script type="text/javascript" src="{{ $banner.RelPermalink }}"></script>
 {{ end }}

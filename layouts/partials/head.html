@@ -71,6 +71,7 @@
   {{ $localCss := slice $localColorCss $defaultStyles | resources.Concat (printf "css/%s-local.scss" .Params.color) }}
   {{ $options := (dict "transpiler" "libsass") }}
   {{ $localColorStyles := $localCss | css.Sass $options }}
+  {{ if hugo.IsProduction }}{{ $localColorStyles = $localColorStyles | fingerprint }}{{ end }}
   <link rel="stylesheet" href="{{ $localColorStyles.Permalink }}">
 {{ else }}
   <!-- Theme Variables -->
@@ -78,10 +79,26 @@
   {{ $css := slice $colorCss $defaultStyles | resources.Concat "css/base.scss" }}
   {{ $options := (dict "transpiler" "libsass" "targetPath" "styles.css" "outputStyle" "compressed" "enableSourceMap" true "precision" 6 "includePaths" (slice "node_modules")) }}
   {{ $styles := $css | css.Sass $options }}
+  <!-- Content-hash the filename in production. GitLab Pages serves static
+       assets with a hard-coded Cache-Control: max-age=14400 (4 hours) that
+       cannot be overridden on gitlab.com, and Cloudflare caches on top of
+       that. A stable /styles.css name meant CSS edits stayed invisible for
+       hours; a hashed name is a new URL, so changes appear immediately. -->
+  {{ if hugo.IsProduction }}{{ $styles = $styles | fingerprint }}{{ end }}
   <link rel="stylesheet" href="{{ $styles.Permalink }}">
 {{ end }}
 
-<!-- Custom CSS to override theme properties (/static/style.css) -->
+<!-- Theme's own override sheet. Lives in assets/ rather than static/ so it
+     goes through the pipeline and can be content-hashed; files in static/ are
+     copied verbatim and keep a stable URL forever, which meant edits to this
+     66 KB sheet were invisible for hours behind Pages' max-age=14400. -->
+{{ with resources.Get "css/custom.css" }}
+  {{ $custom := . }}
+  {{ if hugo.IsProduction }}{{ $custom = $custom | fingerprint }}{{ end }}
+  <link rel="stylesheet" href="{{ $custom.Permalink }}">
+{{ end }}
+
+<!-- Site-level override hook (/static/style.css in the site, not the theme) -->
 {{ if (fileExists "static/style.css") -}}
   <link rel="stylesheet" href="{{ "style.css" | absURL }}">
 {{- end }}
