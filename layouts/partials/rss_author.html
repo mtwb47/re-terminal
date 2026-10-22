@@ -1,0 +1,30 @@
+{{- /* Resolves the site author for RSS feeds. Returns a dict with "name" and
+       "email" keys; either may be empty.
+
+       Hugo removed .Site.Author in v0.156, which hard-failed every rss.xml in
+       this theme. Its replacement is the user-defined params.author, which by
+       convention appears in two shapes:
+
+         [params]
+           author = "Matt"          # bare string, name only
+
+         [params.author]            # map
+           name  = "Matt"
+           email = "matt@example.com"
+
+       Both are handled here, as is params.author being absent entirely, so the
+       feeds build on a site that never configured an author. Callers should
+       emit <managingEditor>/<webMaster>/<author> only when .email is non-empty,
+       since RSS expects an email address in those elements. */ -}}
+
+{{- $name := "" -}}
+{{- $email := "" -}}
+{{- with site.Params.author -}}
+  {{- if reflect.IsMap . -}}
+    {{- $name = index . "name" | default "" -}}
+    {{- $email = index . "email" | default "" -}}
+  {{- else -}}
+    {{- $name = printf "%v" . -}}
+  {{- end -}}
+{{- end -}}
+{{- return dict "name" $name "email" $email -}}
