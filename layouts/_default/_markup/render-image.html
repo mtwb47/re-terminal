@@ -1,0 +1,29 @@
+{{- /* Makes every markdown image in content clickable to enlarge.
+
+       Content images render as a plain <img> by default, so adding
+       .lightbox-trigger here covers every existing post without editing a
+       single markdown file. lightbox.js picks them up by delegation.
+
+       Deliberately NOT wrapped in <figure>: a markdown image usually sits
+       inside a paragraph and <figure> is block-level, so wrapping would emit
+       <p><figure>...</figure></p>, which browsers repair by splitting the
+       paragraph - shifting the layout of every post with an inline image. The
+       caption instead rides on the title attribute that ![alt](src "title")
+       already produces, and which lightbox.js reads as its fallback.
+
+       Page resources resolve first so page-bundle-relative paths keep working,
+       then assets; anything else (remote URLs, and site-absolute paths served
+       out of static/) is used exactly as written. */ -}}
+
+{{- $src := .Destination -}}
+{{- $remote := or (hasPrefix $src "http://") (hasPrefix $src "https://") (hasPrefix $src "//") (hasPrefix $src "data:") -}}
+{{- if not $remote -}}
+  {{- with .Page.Resources.GetMatch $src -}}
+    {{- $src = .RelPermalink -}}
+  {{- else -}}
+    {{- with resources.Get $src -}}
+      {{- $src = .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .Text | plainify }}"{{ with .Title }} title="{{ . }}"{{ end }} class="lightbox-trigger" tabindex="0">

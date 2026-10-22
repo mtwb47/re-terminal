@@ -20,8 +20,9 @@
 {{ $menu := resources.Get "js/menu.js" | js.Build }}
 {{ $theme := resources.Get "js/theme.js" | js.Build }}
 {{ $prism := resources.Get "js/prism.js" | js.Build }}
+{{ $lightbox := resources.Get "js/lightbox.js" | js.Build }}
 
-{{ $bundle := slice $menu $theme $prism | resources.Concat "bundle.js" | resources.Minify }}
+{{ $bundle := slice $menu $theme $prism $lightbox | resources.Concat "bundle.js" | resources.Minify }}
 
 <!-- Content-hash in production, same reason as styles.css in head.html:
      Pages pins static assets to max-age=14400 and a stable /bundle.js name

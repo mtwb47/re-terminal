@@ -1,0 +1,14 @@
+{{- /* The single lightbox overlay, emitted once per page by baseof.html.
+
+       This markup plus an inline <script> used to live in
+       layouts/images/single.html, so click-to-enlarge worked only on /images
+       posts. The behaviour now lives in assets/js/lightbox.js and binds by
+       delegation, so anything with .lightbox-trigger opens it - markdown
+       images in posts get that class from the render-image hook.
+
+       Only one of these may exist per page: the JS looks the overlay up by id. */ -}}
+<div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Enlarged image">
+  <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+  <img class="lightbox-content" id="lightbox-img" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>

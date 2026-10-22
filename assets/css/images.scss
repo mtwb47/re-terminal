@@ -216,6 +216,30 @@
   max-width: 80%;
 }
 
+// Any image wired up to the lightbox, including markdown images in posts via
+// the render-image hook. Signals the click target before the click.
+.lightbox-trigger {
+  cursor: zoom-in;
+
+  // Triggers are focusable so the lightbox is reachable without a mouse; make
+  // that focus visible, but only for keyboard users.
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+// The close control is a real <button> rather than a <span> so it can be
+// focused and activated from the keyboard. Strip the UA chrome so it still
+// renders as the bare glyph the original markup used.
+button.lightbox-close {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 1;
+  font-family: inherit;
+}
+
 // Dark mode adjustments
 @media (prefers-color-scheme: dark) {
   .images-grid {
